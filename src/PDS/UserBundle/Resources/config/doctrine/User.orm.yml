@@ -1,0 +1,47 @@
+PDS\UserBundle\Entity\User:
+  type: entity
+  repositoryClass: PDS\UserBundle\Entity\UserRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    username:
+      type: string
+      unique: true
+      nullable: false
+    email:
+      type: string
+      nullable: false
+    password:
+      type: string
+      nullable: false
+    salt:
+      type: string
+      nullable: false
+    created_at:
+      type: datetime
+      nullable: false
+  oneToMany:
+    Stories:
+      targetEntity: PDS\StoryBundle\Entity\Story
+      mappedBy: User
+    Votes:
+      targetEntity: PDS\StoryBundle\Entity\Vote
+      mappedBy: User
+    Comments:
+      targetEntity: PDS\StoryBundle\Entity\Comment
+      mappedBy: User
+  manyToMany:
+    Roles:
+      targetEntity: Role
+      inversedBy: Users
+      joinTable:
+        name: UserRole
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          role_id:
+            referencedColumnName: id

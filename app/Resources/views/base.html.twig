@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/docs.css') }}" type="text/css" media="all"/>
+    {% endblock %}
+    <title>{% block title %}PDS{% endblock %}</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="{{ path('homepage')}}">PDS</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="">
+                        <a href="{{ path('story')}}">Stories</a>
+                    </li>
+                    <li class="divider-vertical"></li>
+                    {% if app.user %}
+                    <li class="">
+                        <a href="{{ path('logout')}}">Sign out</a>
+                    </li>
+                    {% else %}
+                    <li class="">
+                        <a href="{{ path('signup')}}">Sign up</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ path('login')}}">Sign in</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% if app.session.flash('notice') %}
+    <div class="flash-message">
+        <em>Notice</em>: {{ app.session.flash('notice') }}
+    </div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends 'PDSStoryBundle:Story:story.html.twig' %}
+{% block story %}
+<h1>Story creation</h1>
+
+<form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('story') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

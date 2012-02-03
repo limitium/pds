@@ -1,0 +1,208 @@
+<?php
+
+namespace PDS\StoryBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PDS\StoryBundle\Entity\User
+ */
+class User
+{
+    /**
+     * @var integer $id
+     */
+    private $id;
+
+    /**
+     * @var string $username
+     */
+    private $username;
+
+    /**
+     * @var string $password
+     */
+    private $password;
+
+    /**
+     * @var string $salt
+     */
+    private $salt;
+
+    /**
+     * @var datetime $created_at
+     */
+    private $created_at;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Story
+     */
+    private $Stories;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Vote
+     */
+    private $Votes;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Comment
+     */
+    private $Comments;
+
+    public function __construct()
+    {
+        $this->Stories = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->Votes = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->Comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param datetime $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return datetime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Add Stories
+     *
+     * @param PDS\StoryBundle\Entity\Story $stories
+     */
+    public function addStory(\PDS\StoryBundle\Entity\Story $stories)
+    {
+        $this->Stories[] = $stories;
+    }
+
+    /**
+     * Get Stories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getStories()
+    {
+        return $this->Stories;
+    }
+
+    /**
+     * Add Votes
+     *
+     * @param PDS\StoryBundle\Entity\Vote $votes
+     */
+    public function addVote(\PDS\StoryBundle\Entity\Vote $votes)
+    {
+        $this->Votes[] = $votes;
+    }
+
+    /**
+     * Get Votes
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getVotes()
+    {
+        return $this->Votes;
+    }
+
+    /**
+     * Add Comments
+     *
+     * @param PDS\StoryBundle\Entity\Comment $comments
+     */
+    public function addComment(\PDS\StoryBundle\Entity\Comment $comments)
+    {
+        $this->Comments[] = $comments;
+    }
+
+    /**
+     * Get Comments
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->Comments;
+    }
+}

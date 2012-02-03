@@ -1,0 +1,11 @@
+.idea
+.idea/
+.idea/*
+app/cache
+app/cache/
+app/cache/*
+app/logs
+app/logs/*
+vendor
+vendor/*
+*.php~

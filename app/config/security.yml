@@ -1,0 +1,43 @@
+security:
+    encoders:
+        PDS\UserBundle\Entity\User:
+            id: pds_encoder
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        main:
+            entity:
+                class: PDSUserBundle:User
+
+    firewalls:
+        data:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        free:
+            pattern:  ^/(story/)$
+            security: false
+
+        login:
+            pattern:  ^/(login|signup|user/new)$
+            security: false
+
+
+
+        secured_area:
+            pattern:    ^/
+            form_login:
+                check_path: /login_check
+                login_path: /login
+                username_parameter: username
+                password_parameter: password
+            logout:
+                path:   /logout
+                target: /login
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

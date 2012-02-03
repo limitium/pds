@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<orm-designer version="1.4.7.491">
+
+  <module import-format="DoctrineYml" import-path="C:\Documents and Settings\Администратор\Мои документы\config\doctrine\schema.yml" name="Default Project" visBkColor="15989236" visSizeX="0" visSizeX2="529" visSizeY="0" visSizeY2="446">
+    <table name="Story" visPositionX="17" visPositionY="154" visSizeX="0" visSizeX2="125" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="text" required="true" type="string"/>
+      <column name="created_at" type="timestamp"/>
+    </table>
+    <table name="Vote" visPositionX="29" visPositionY="323" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="value" type="integer"/>
+      <column name="story_id" type="integer"/>
+    </table>
+    <table name="Comment" visPositionX="12" visPositionY="20" visSizeX="0" visSizeX2="124" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="message" required="true" size="2000" type="string"/>
+      <column name="story_id" type="integer"/>
+      <column name="created_at" required="true" type="date"/>
+    </table>
+    <foreign-key caption="Story Vote" from="Vote" name="FK_Vote_Story_id" to="Story">
+      <foreign-key-column from="story_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Story Comment" from="Comment" name="FK_Comment_Story_id" to="Story">
+      <foreign-key-column from="story_id" to="id"/>
+    </foreign-key>
+  </module>
+
+</orm-designer>

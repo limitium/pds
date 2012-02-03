@@ -1,0 +1,28 @@
+PDS\StoryBundle\Entity\Story:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    body:
+      type: text
+      nullable: false
+    created_at:
+      type: datetime
+      nullable: false
+  oneToMany:
+    Votes:
+      targetEntity: PDS\StoryBundle\Entity\Vote
+      mappedBy: Story
+    Comments:
+      targetEntity: PDS\StoryBundle\Entity\Comment
+      mappedBy: Story
+  manyToOne:
+    User:
+      targetEntity: PDS\UserBundle\Entity\User
+      inversedBy: Stories
+      joinColumns:
+        user_id:
+          referencedColumnName: id

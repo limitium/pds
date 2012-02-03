@@ -1,0 +1,24 @@
+PDS\StoryBundle\Entity\Vote:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    value:
+      type: integer
+      nullable: false
+  manyToOne:
+    Story:
+      targetEntity: PDS\StoryBundle\Entity\Story
+      inversedBy: Votes
+      joinColumns:
+        story_id:
+          referencedColumnName: id
+    User:
+      targetEntity: PDS\UserBundle\Entity\User
+      inversedBy: Votes
+      joinColumns:
+        user_id:
+          referencedColumnName: id
