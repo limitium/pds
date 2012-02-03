@@ -64,8 +64,5 @@
 
 [ORMBundle]
     git=http://github.com/limitium/ORMBundle.git
-    target=/bundles/Limitium/Bundle/ORMBundle
+    target=/bundles/Limitium/ORMBundle
 
-[FOSUserBundle]
-    git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
-    target=bundles/FOS/UserBundle
