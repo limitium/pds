@@ -1,42 +1,35 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
-<h1>Story list</h1>
+<div class="well row">
+    <h1>All stories</h1>
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Body</th>
-            <th>Created_at</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('story_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.body }}</td>
-            <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('story_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('story_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+    {% for story in entities %}
+    <div class="row">
+        <h3 class="span12"><a href="{{ path('story_show', { 'id': story.id }) }}">story 1</a> <span class="label label-success">New</span></h3>
+
+        <div class="span9">{{ story.getBody() }}</div>
+        <ul class="span2 nav nav-list">
+            <li>
+                <i class="icon-star"></i>{{ story.getRating }}
+            </li>
+            <li>
+                <i class="icon-comment"></i>{{ story.getComments().count() }}
+            </li>
+            <li>
+                <i class="icon-time"></i>{% if story.createdat %}{{ story.createdat|date('Y.m.d') }}{% endif%}
+            </li>
+            <li>
+                <a><i class="icon-pencil"></i>{{ story.getUser().getUsername() }}</a>
+            </li>
+            {% if app.user %}
+            {% if app.user == story.getUser() %}
+            <li>
+                <a href="{{ path('story_edit', { 'id': story.id }) }}"><i class="icon-edit"></i>Edit</a>
+            </li>
+            {% endif %}
+            {% endif %}
+        </ul>
+    </div>
     {% endfor %}
-    </tbody>
-</table>
-
-<ul>
-    <li>
-        <a href="{{ path('story_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
-{% endblock %}
+</div>
+        {% endblock %}

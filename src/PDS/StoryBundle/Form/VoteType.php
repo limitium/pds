@@ -5,17 +5,19 @@ namespace PDS\StoryBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-class StoryType extends AbstractType
+class VoteType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('body')
+            ->add('value')
+            ->add('Story')
+            ->add('User')
         ;
     }
 
     public function getName()
     {
-        return 'story';
+        return 'vote';
     }
 }

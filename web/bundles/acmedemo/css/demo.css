@@ -271,10 +271,11 @@ input[type=text], input[type=password]
     color: red;
 }
 
-label
+#login label, #contact_form label
 {
-    display: inline-block;
-    width: 120px;
+    display: block;
+    float: left;
+    width: 90px;
 }
 
 ul#menu
@@ -289,9 +290,4 @@ ul#menu
     padding-left: 0;
     margin-right: 10px;
     display: inline;
-}
-
-.embedded>div{
-    display: block;
-    padding-left: 30px;
 }

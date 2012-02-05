@@ -138,9 +138,9 @@ class Story
     /**
      * Set User
      *
-     * @param PDS\StoryBundle\Entity\User $user
+     * @param PDS\UserBundle\Entity\User $user
      */
-    public function setUser(\PDS\StoryBundle\Entity\User $user)
+    public function setUser(\PDS\UserBundle\Entity\User $user)
     {
         $this->User = $user;
     }
@@ -148,10 +148,22 @@ class Story
     /**
      * Get User
      *
-     * @return PDS\StoryBundle\Entity\User 
+     * @return PDS\UserBundle\Entity\User
      */
     public function getUser()
     {
         return $this->User;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getRating(){
+        $total=0;
+        foreach($this->getVotes() as $vote){
+            $total += $vote->getValue();
+        }
+        return number_format(sizeof($this->Votes)?($total/sizeof($this->Votes)):0,2,'.','');
     }
 }

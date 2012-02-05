@@ -1,37 +1,52 @@
-<h1>Story</h1>
+{% extends 'PDSStoryBundle:Story:story.html.twig' %}
+{% block story %}
+<div class="well row">
+    <h1>Story 1</h1>
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Body</th>
-            <td>{{ entity.body }}</td>
-        </tr>
-        <tr>
-            <th>Created_at</th>
-            <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('story') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('story_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('story_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
+    <div class="body">
+        {{ story.body }}
+    </div>
+    <div class="meta offset2">
+        <ul class="story">
+            <li>
+                <i class="icon-star"></i>{{ story.getRating }}
+            </li>
+            <li>
+                <i class="icon-comment"></i>{{ story.getComments().count() }}
+            </li>
+            <li>
+                <i class="icon-time"></i>{% if story.createdat %}{{ story.createdat|date('Y.m.d') }}{% endif%}
+            </li>
+            <li>
+                <a><i class="icon-pencil"></i>{{ story.getUser().getUsername() }}</a>
+            </li>
+            {% if app.user %}
+            {% if app.user == story.getUser() %}
+            <li>
+                <a href="{{ path('story_edit', { 'id': story.id }) }}"><i class="icon-edit"></i>Edit</a>
+            </li>
+            {% endif %}
+            {% endif %}
+        </ul>
+    </div>
+    <div class="starRate">
+        <div>Currently rated: 3 stars<b></b></div>
+        <ul>
+            <li><a href="#"><span>Give it 5 stars</span></a></li>
+            <li><a href="#"><span>Give it 4 stars</span></a></li>
+            <li><a href="#"><span>Give it 3 stars</span><b></b></a></li>
+            <li><a href="#"><span>Give it 2 stars</span></a></li>
+            <li><a href="#"><span>Give it 1 star</span></a></li>
+        </ul>
+    </div>
+    <div class="form-actions">
+        <span><i class="icon-comment"></i>Comments</span>
+        <form action="{{ path('comment_create') }}" method="post" {{ form_enctype(form) }}>
+            {{ form_widget(form) }}
+            <p>
+                <button class="btn btn-small" type="submit"><i class="icon-comment"></i>Add</button>
+            </p>
         </form>
-    </li>
-</ul>
+    </div>
+</div>
+        {% endblock %}

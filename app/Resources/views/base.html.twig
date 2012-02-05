@@ -5,6 +5,8 @@
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" media="all"/>
     <link rel="stylesheet" href="{{ asset('css/docs.css') }}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/pds.css') }}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/rating.css') }}" type="text/css" media="all"/>
     {% endblock %}
     <title>{% block title %}PDS{% endblock %}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
@@ -19,12 +21,25 @@
                 <span class="icon-bar"></span>
             </a>
             <a class="brand" href="{{ path('homepage')}}">PDS</a>
+
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="">
                         <a href="{{ path('story')}}">Stories</a>
                     </li>
-                    <li class="divider-vertical"></li>
+                    {% if app.user %}
+                    <li class="">
+                        <a href="{{ path('story_new') }}"><i class="icon-plus icon-white"></i>Add story</a>
+                    </li>
+
+                    {% endif %}
+
+
+                </ul>
+                <form class="navbar-search pull-left">
+                    <input type="text" class="search-query" placeholder="Search">
+                </form>
+                <ul class="nav pull-right">
                     {% if app.user %}
                     <li class="">
                         <a href="{{ path('logout')}}">Sign out</a>
@@ -37,6 +52,7 @@
                         <a href="{{ path('login')}}">Sign in</a>
                     </li>
                     {% endif %}
+                    <li class="divider-vertical"></li>
                 </ul>
             </div>
         </div>

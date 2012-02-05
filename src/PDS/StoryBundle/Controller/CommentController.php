@@ -6,70 +6,64 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use PDS\StoryBundle\Entity\Story;
-use PDS\StoryBundle\Form\StoryType;
 use PDS\StoryBundle\Entity\Comment;
 use PDS\StoryBundle\Form\CommentType;
 
 /**
- * Story controller.
+ * Comment controller.
  *
- * @Route("/story")
+ * @Route("/comment")
  */
-class StoryController extends Controller
+class CommentController extends Controller
 {
     /**
-     * Lists all Story entities.
+     * Lists all Comment entities.
      *
-     * @Route("/", name="story")
+     * @Route("/", name="comment")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $entities = $em->getRepository('PDSStoryBundle:Comment')->findAll();
 
         return array('entities' => $entities);
     }
 
     /**
-     * Finds and displays a Story entity.
+     * Finds and displays a Comment entity.
      *
-     * @Route("/{id}/show", name="story_show")
+     * @Route("/{id}/show", name="comment_show")
      * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
+        $entity = $em->getRepository('PDSStoryBundle:Comment')->find($id);
 
-        if (!$story) {
-            throw $this->createNotFoundException('Unable to find Story entity.');
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Comment entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        $comment = new Comment();
-        $form   = $this->createForm(new CommentType(), $comment);
-
         return array(
-            'story'      => $story,
-            'form'   => $form->createView(),
+            'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        );
     }
 
     /**
-     * Displays a form to create a new Story entity.
+     * Displays a form to create a new Comment entity.
      *
-     * @Route("/new", name="story_new")
+     * @Route("/new", name="comment_new")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Story();
-        $form   = $this->createForm(new StoryType(), $entity);
+        $entity = new Comment();
+        $form   = $this->createForm(new CommentType(), $entity);
 
         return array(
             'entity' => $entity,
@@ -78,29 +72,27 @@ class StoryController extends Controller
     }
 
     /**
-     * Creates a new Story entity.
+     * Creates a new Comment entity.
      *
-     * @Route("/create", name="story_create")
+     * @Route("/create", name="comment_create")
      * @Method("post")
-     * @Template("PDSStoryBundle:Story:new.html.twig")
+     * @Template("PDSStoryBundle:Comment:new.html.twig")
      */
     public function createAction()
     {
-        $entity  = new Story();
+        $entity  = new Comment();
         $request = $this->getRequest();
-        $form    = $this->createForm(new StoryType(), $entity);
+        $form    = $this->createForm(new CommentType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $entity->setCreatedAt(new \DateTime("now"));
+            $em = $this->getDoctrine()->getEntityManager();
             $user = $this->container->get('security.context')->getToken()->getUser();
             $entity->setUser($user);
-
-            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('story_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('comment_show', array('id' => $entity->getId())));
             
         }
 
@@ -111,22 +103,22 @@ class StoryController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Story entity.
+     * Displays a form to edit an existing Comment entity.
      *
-     * @Route("/{id}/edit", name="story_edit")
+     * @Route("/{id}/edit", name="comment_edit")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
+        $entity = $em->getRepository('PDSStoryBundle:Comment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Story entity.');
+            throw $this->createNotFoundException('Unable to find Comment entity.');
         }
 
-        $editForm = $this->createForm(new StoryType(), $entity);
+        $editForm = $this->createForm(new CommentType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -137,34 +129,33 @@ class StoryController extends Controller
     }
 
     /**
-     * Edits an existing Story entity.
+     * Edits an existing Comment entity.
      *
-     * @Route("/{id}/update", name="story_update")
+     * @Route("/{id}/update", name="comment_update")
      * @Method("post")
-     * @Template("PDSStoryBundle:Story:edit.html.twig")
+     * @Template("PDSStoryBundle:Comment:edit.html.twig")
      */
     public function updateAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
+        $entity = $em->getRepository('PDSStoryBundle:Comment')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Story entity.');
+            throw $this->createNotFoundException('Unable to find Comment entity.');
         }
 
-        $editForm   = $this->createForm(new StoryType(), $entity);
+        $editForm   = $this->createForm(new CommentType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
 
         $editForm->bindRequest($request);
-
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('story_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('comment_edit', array('id' => $id)));
         }
 
         return array(
@@ -175,9 +166,9 @@ class StoryController extends Controller
     }
 
     /**
-     * Deletes a Story entity.
+     * Deletes a Comment entity.
      *
-     * @Route("/{id}/delete", name="story_delete")
+     * @Route("/{id}/delete", name="comment_delete")
      * @Method("post")
      */
     public function deleteAction($id)
@@ -189,17 +180,17 @@ class StoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
+            $entity = $em->getRepository('PDSStoryBundle:Comment')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Story entity.');
+                throw $this->createNotFoundException('Unable to find Comment entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('story'));
+        return $this->redirect($this->generateUrl('comment'));
     }
 
     private function createDeleteForm($id)
