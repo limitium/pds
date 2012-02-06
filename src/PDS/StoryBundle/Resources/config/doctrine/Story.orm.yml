@@ -6,6 +6,9 @@ PDS\StoryBundle\Entity\Story:
       type: integer
       generator:
         strategy: AUTO
+    title:
+      type: string
+      nullable: false
     body:
       type: text
       nullable: false

@@ -166,4 +166,29 @@ class Story
         }
         return number_format(sizeof($this->Votes)?($total/sizeof($this->Votes)):0,2,'.','');
     }
+    /**
+     * @var string $title
+     */
+    private $title;
+
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 }

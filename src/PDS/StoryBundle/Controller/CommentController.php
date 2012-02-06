@@ -76,7 +76,7 @@ class CommentController extends Controller
      *
      * @Route("/create", name="comment_create")
      * @Method("post")
-     * @Template("PDSStoryBundle:Comment:new.html.twig")
+     * @Template("PDSStoryBundle:Comment:show.html.twig")
      */
     public function createAction()
     {
@@ -86,18 +86,17 @@ class CommentController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $entity->setCreatedAt(new \DateTime("now"));
             $user = $this->container->get('security.context')->getToken()->getUser();
             $entity->setUser($user);
+
+            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('comment_show', array('id' => $entity->getId())));
-            
         }
 
         return array(
-            'entity' => $entity,
+            'comment' => $entity,
             'form'   => $form->createView()
         );
     }

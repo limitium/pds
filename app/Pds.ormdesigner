@@ -9,6 +9,7 @@
   <module description="all about stories" import-format="Doctrine2Yml" import-path="..\src\PDS\StoryBundle\Resources\config\doctrine\" name="StoryBundle" visBkColor="16643574" visSizeX="0" visSizeX2="335" visSizeY="0" visSizeY2="491">
     <table name="Story" visPositionX="136" visPositionY="196" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="title" required="true" type="string"/>
       <column name="body" required="true" type="text"/>
       <column name="created_at" required="true" type="datetime"/>
       <column name="user_id" type="integer"/>
@@ -29,7 +30,7 @@
     <foreign-key caption="User Story" from="Story" inverse-alias="User" name="FK_Story_User_id" owning-alias="Stories" to="User">
       <foreign-key-column from="user_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Story Vote" from="Vote" inverse-alias="Story" name="FK_Vote_Story_id" owning-alias="Votes" to="Story">
+    <foreign-key caption="Story Vote" from="Vote" inverse-alias="Story" name="FK_Vote_Story_id" owning-alias="Votes" to="Story" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="2">
       <foreign-key-column from="story_id" to="id"/>
     </foreign-key>
     <foreign-key caption="User Vote" from="Vote" inverse-alias="User" name="FK_Vote_User_id" owning-alias="Votes" to="User">

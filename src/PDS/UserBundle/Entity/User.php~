@@ -267,4 +267,19 @@ class User implements UserInterface {
     {
         return $this->email;
     }
+    /**
+     * @var PDS\UserBundle\Entity\Role
+     */
+    private $Roles;
+
+
+    /**
+     * Add Roles
+     *
+     * @param PDS\UserBundle\Entity\Role $roles
+     */
+    public function addRole(\PDS\UserBundle\Entity\Role $roles)
+    {
+        $this->Roles[] = $roles;
+    }
 }

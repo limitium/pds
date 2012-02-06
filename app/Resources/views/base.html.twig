@@ -67,6 +67,10 @@
     {% block content %}
     {% endblock %}
 </div>
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/pds.js') }}"></script>
+{% endblock %}
 </body>
 </html>

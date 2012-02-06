@@ -10,6 +10,8 @@ use PDS\StoryBundle\Entity\Story;
 use PDS\StoryBundle\Form\StoryType;
 use PDS\StoryBundle\Entity\Comment;
 use PDS\StoryBundle\Form\CommentType;
+use PDS\StoryBundle\Entity\Vote;
+use PDS\StoryBundle\Form\VoteType;
 
 /**
  * Story controller.
@@ -52,11 +54,17 @@ class StoryController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         $comment = new Comment();
-        $form   = $this->createForm(new CommentType(), $comment);
+        $comment->setStory($story);
+        $formComment   = $this->createForm(new CommentType(), $comment);
+
+        $vote = new Vote();
+        $vote->setStory($story);
+        $formVote   = $this->createForm(new VoteType(), $vote);
 
         return array(
             'story'      => $story,
-            'form'   => $form->createView(),
+            'form_comment'   => $formComment->createView(),
+            'form_vote'   => $formVote->createView(),
             'delete_form' => $deleteForm->createView(),        );
     }
 

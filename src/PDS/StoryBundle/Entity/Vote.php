@@ -83,9 +83,9 @@ class Vote
     /**
      * Set User
      *
-     * @param PDS\StoryBundle\Entity\User $user
+     * @param PDS\UserBundle\Entity\User $user
      */
-    public function setUser(\PDS\StoryBundle\Entity\User $user)
+    public function setUser(\PDS\UserBundle\Entity\User $user)
     {
         $this->User = $user;
     }
@@ -93,7 +93,7 @@ class Vote
     /**
      * Get User
      *
-     * @return PDS\StoryBundle\Entity\User 
+     * @return PDS\UserBundle\Entity\User
      */
     public function getUser()
     {

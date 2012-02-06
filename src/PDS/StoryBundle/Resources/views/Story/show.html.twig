@@ -1,18 +1,28 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
 <div class="well row">
-    <h1>Story 1</h1>
+    <h1>{{ story.getTitle() }}</h1>
 
     <div class="body">
         {{ story.body }}
     </div>
-    <div class="meta offset2">
-        <ul class="story">
+    <div class="meta row offset1">
+
+        <ul class="story span5">
             <li>
-                <i class="icon-star"></i>{{ story.getRating }}
+                <ul class='star-rating'>
+                    <li><a href='#' title='Rate this 1 star out of 5' class='one-star'>1</a></li>
+                    <li><a href='#' title='Rate this 2 stars out of 5' class='two-stars'>2</a></li>
+                    <li><a href='#' title='Rate this 3 stars out of 5' class='three-stars'>3</a></li>
+                    <li><a href='#' title='Rate this 4 stars out of 5' class='four-stars'>4</a></li>
+                    <li><a href='#' title='Rate this 5 stars out of 5' class='five-stars'>5</a></li>
+                </ul>
+                <form class="hidden" action="{{ path('vote_create') }}" method="post">
+                    {{ form_rest(form_vote) }}
+                </form>
             </li>
-            <li>
-                <i class="icon-comment"></i>{{ story.getComments().count() }}
+            <li class="rating-value">
+                {{ story.getRating }}
             </li>
             <li>
                 <i class="icon-time"></i>{% if story.createdat %}{{ story.createdat|date('Y.m.d') }}{% endif%}
@@ -29,22 +39,17 @@
             {% endif %}
         </ul>
     </div>
-    <div class="starRate">
-        <div>Currently rated: 3 stars<b></b></div>
-        <ul>
-            <li><a href="#"><span>Give it 5 stars</span></a></li>
-            <li><a href="#"><span>Give it 4 stars</span></a></li>
-            <li><a href="#"><span>Give it 3 stars</span><b></b></a></li>
-            <li><a href="#"><span>Give it 2 stars</span></a></li>
-            <li><a href="#"><span>Give it 1 star</span></a></li>
-        </ul>
-    </div>
-    <div class="form-actions">
-        <span><i class="icon-comment"></i>Comments</span>
-        <form action="{{ path('comment_create') }}" method="post" {{ form_enctype(form) }}>
-            {{ form_widget(form) }}
+    <div id="comments" class="row">
+        <span class="span12"><i class="icon-comment"></i>Comments</span>
+        {% for comment in story.getComments() %}
+            {% include 'PDSStoryBundle:Comment:show.html.twig' with {'comment': comment} %}
+        {% endfor %}
+        <form id="form_comment" class="span12" action="{{ path('comment_create') }}" method="post">
+            {{ form_widget(form_comment.message) }}
+            {{ form_rest(form_comment) }}
             <p>
                 <button class="btn btn-small" type="submit"><i class="icon-comment"></i>Add</button>
+                <i class="ajax-loader"></i>
             </p>
         </form>
     </div>

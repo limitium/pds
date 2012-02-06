@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Limitium\ORMBundle\ORMBundle(),
+            new Gregwar\FormBundle\GregwarFormBundle(),
 
             new PDS\StoryBundle\PDSStoryBundle(),
             new PDS\UserBundle\PDSUserBundle(),

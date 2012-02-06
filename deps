@@ -66,3 +66,7 @@
     git=http://github.com/limitium/ORMBundle.git
     target=/bundles/Limitium/ORMBundle
 
+[FormBundle]
+    git=http://github.com/Gregwar/FormBundle.git
+    target=/bundles/Gregwar/FormBundle
+

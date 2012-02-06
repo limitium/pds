@@ -100,7 +100,7 @@ class Comment
         return $this->Story;
     }
     /**
-     * @var PDS\StoryBundle\Entity\User
+     * @var PDS\UserBundle\Entity\User
      */
     private $User;
 
@@ -108,9 +108,9 @@ class Comment
     /**
      * Set User
      *
-     * @param PDS\StoryBundle\Entity\User $user
+     * @param PDS\UserBundle\Entity\User $user
      */
-    public function setUser(\PDS\StoryBundle\Entity\User $user)
+    public function setUser(\PDS\UserBundle\Entity\User $user)
     {
         $this->User = $user;
     }
@@ -118,7 +118,7 @@ class Comment
     /**
      * Get User
      *
-     * @return PDS\StoryBundle\Entity\User 
+     * @return PDS\UserBundle\Entity\User
      */
     public function getUser()
     {
