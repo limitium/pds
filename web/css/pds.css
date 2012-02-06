@@ -10,6 +10,7 @@
 }
 .star-rating{
     margin-bottom: -3px !important;
+    display: inline-block;
 }
 .form-actions{
     background-color: #F9F9F9;

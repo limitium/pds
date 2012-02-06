@@ -21,7 +21,7 @@ class VoteController extends Controller {
      *
      * @Route("/create", name="vote_create")
      * @Method("post")
-     * @Template("PDSStoryBundle:Vote:new.html.twig")
+     * @Template("PDSStoryBundle:Vote:show.html.twig")
      */
     public function createAction() {
         $entity = new Vote();
@@ -30,7 +30,6 @@ class VoteController extends Controller {
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $entity->setCreatedAt(new \DateTime("now"));
             $user = $this->container->get('security.context')->getToken()->getUser();
             $entity->setUser($user);
 
@@ -41,8 +40,7 @@ class VoteController extends Controller {
         }
 
         return array(
-            'entity' => $entity,
-            'form' => $form->createView()
+            'vote' => $entity,
         );
     }
 }

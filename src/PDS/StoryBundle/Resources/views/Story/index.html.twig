@@ -5,9 +5,13 @@
 
     {% for story in entities %}
     <div class="row">
-        <h3 class="span12"><a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a> <span class="label label-success">New</span></h3>
+        <h3 class="span12"><a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a> <span
+                class="label label-success">New</span></h3>
 
-        <div class="span9">{{ story.getBody() }}</div>
+        <div class="span9">
+            <pre>{{ story.getBody() }}
+        </pre>
+        </div>
         <ul class="span2 nav nav-list">
             <li>
                 <i class="icon-star"></i>{{ story.getRating }}

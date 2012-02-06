@@ -1,6 +1,7 @@
 <?php
 
 namespace PDS\StoryBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,6 +17,8 @@ class Vote
 
     /**
      * @var integer $value
+     * @Assert\Max(limit = 5, message = "lolwhat?")
+     * @Assert\Min(limit = 1, message = "lolwhat?")
      */
     private $value;
 

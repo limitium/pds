@@ -1,18 +1,16 @@
 $(document).ready(function () {
-    $(".star-rating li a").click(function () {
-        console.log($(this).html());
-        $.post("/vote/create", {
 
-        }, function () {
-            console.log(arguments)
-        });
-        return false;
-    });
+    /**
+     * story format
+     */
 
     var story = $('.story .body');
     var pages = story.html().split("[pagebreak]");
     story.html(pages.join("<br><br>"));
 
+    /**
+     * comments
+     */
 
     var commenting = false;
     $("#form_comment").submit(function () {
@@ -37,4 +35,31 @@ $(document).ready(function () {
         }
         return false;
     })
+
+    /***
+     * ratings
+     */
+    var voting = false;
+    $(".star-rating li a").click(function () {
+        if (!voting) {
+            voting = true;
+            var loader = $(".meta .ajax-loader");
+            var form = $("#form_vote");
+            var values = {};
+            loader.css("visibility", "visible");
+            $.each(form.serializeArray(), function (i, field) {
+                values[field.name] = field.value;
+            });
+
+            values["vote[value]"] = $(this).html();
+
+            $.post(form.attr("action"), values, function (rating) {
+                voting = false;
+                loader.css("visibility", "hidden");
+                $(".rating-value").html(rating);
+            });
+        }
+        return false;
+    });
+
 });

@@ -62,3 +62,7 @@ jms_security_extra:
 services:
     pds_encoder:
         class: PDS\UserBundle\Service\Encoder
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }

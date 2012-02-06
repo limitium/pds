@@ -1,5 +1,5 @@
-<div class="span12 comment">
-    <div class="span9">{{ comment.getMessage() }}</div>
+<div class="span10 offset1 comment">
+    <div class="span7">{{ comment.getMessage() }}</div>
     <ul class="span2 nav nav-list">
         <li>
             <i class="icon-time"></i>{% if comment.createdat %}{{ comment.createdat|date('Y.m.d H:i') }}{% endif%}
