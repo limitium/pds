@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilder;
 class StoryType extends AbstractType {
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
+            ->add('title')
             ->add('body');
     }
 

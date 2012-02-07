@@ -4,9 +4,34 @@ $(document).ready(function () {
      * story format
      */
 
-    var story = $('.story .body');
+    var story = $('.story .book');
     var pages = story.html().split("[pagebreak]");
-    story.html(pages.join("<br><br>"));
+    console.log(pages);
+    var book = "<div id='mybook'>" +
+        "<div class='b-load'>" +
+        "<div>" +
+        pages.join("</div><div>") +
+        "</div>" +
+        "</div>" +
+        "</div>";
+    console.log(book);
+    story.html(book);
+
+    $('#mybook').booklet({
+        width:"100%",
+        height:620,
+//        speed: 150,
+        keyboard:true,
+        manual:false,
+        overlays:true,
+        hovers:false,
+        shadowTopFwdWidth:1, // shadow width for top forward anim
+        shadowTopBackWidth:1, // shadow width for top back anim
+        shadowBtmWidth:5,
+//    ,arrows: true,
+//        arrowsHide: true,
+        cursor:'crosshair'
+    });
 
     /**
      * comments

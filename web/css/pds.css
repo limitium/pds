@@ -1,5 +1,39 @@
+#page{
+    padding-top: 5em;
+}
+
 .meta{
     padding-top: 10px;
+}
+.book{
+    margin: 50px auto 0;
+    width: 900px;
+    height: 640px;
+    padding: 0 31px 0;
+    background: url(../img/bg-book.png) no-repeat top center;
+}
+#mybook {
+    margin: 0 auto;
+    width: 900px;
+    height: 620px;
+    position: relative;
+}
+.booklet .b-wrap-left,.booklet .b-wrap-right{
+    background: transparent;
+}
+.booklet .b-wrap-right{
+    background: url(../img/bg-book-right.png) no-repeat 0 0px;
+    padding: 10px 0px 10px 20px;
+}
+.booklet .b-wrap-left {
+    background: url(../img/bg-book-left.png) no-repeat -33px 0px;
+
+    padding: 10px 20px 10px 10px;
+}
+
+.booklet .b-wrap-right .b-counter,.booklet .b-wrap-left .b-counter {
+    left: 200px;
+    bottom: 5px;
 }
 .story .meta .story>li{
     display: inline-block;

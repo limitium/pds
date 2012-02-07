@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" media="all"/>
-    <link rel="stylesheet" href="{{ asset('css/docs.css') }}" type="text/css" media="all"/>
+    <link rel="stylesheet" href="{{ asset('css/jquery.booklet.1.2.0.css') }}" type="text/css" media="all"/>
     <link rel="stylesheet" href="{{ asset('css/pds.css') }}" type="text/css" media="all"/>
     <link rel="stylesheet" href="{{ asset('css/rating.css') }}" type="text/css" media="all"/>
     {% endblock %}
@@ -58,7 +58,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+<div id="page" class="container">
     {% if app.session.flash('notice') %}
     <div class="flash-message">
         <em>Notice</em>: {{ app.session.flash('notice') }}
@@ -69,6 +69,9 @@
 </div>
 {% block javascripts %}
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js') }}"></script>
+<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
+<script src="{{ asset('js/jquery.booklet.1.2.0.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 <script src="{{ asset('js/pds.js') }}"></script>
 {% endblock %}
