@@ -1,39 +1,122 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
-<div class="well row">
-    <h1>All stories</h1>
-
-    {% for story in entities %}
-    <div class="row">
-        <h3 class="span12"><a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a> <span
-                class="label label-success">New</span></h3>
-
-        <div class="span9">
-            <pre>{{ story.getBody() }}
-        </pre>
+<div class="row">
+    <div class="span10">
+        <div class="row">
+            <div class="span4 tag-name">Location</div>
+            <div class="span4 offset1 tag-name">Time</div>
         </div>
-        <ul class="span2 nav nav-list">
-            <li>
-                <i class="icon-star"></i>{{ story.getRating }}
-            </li>
-            <li>
-                <i class="icon-comment"></i>{{ story.getComments().count() }}
-            </li>
-            <li>
-                <i class="icon-time"></i>{% if story.createdat %}{{ story.createdat|date('Y.m.d') }}{% endif%}
-            </li>
-            <li>
-                <a><i class="icon-pencil"></i>{{ story.getUser().getUsername() }}</a>
-            </li>
-            {% if app.user %}
-            {% if app.user == story.getUser() %}
-            <li>
-                <a href="{{ path('story_edit', { 'id': story.id }) }}"><i class="icon-edit"></i>Edit</a>
-            </li>
-            {% endif %}
-            {% endif %}
-        </ul>
+        <div class="row">
+            <div class="span4 well tags">
+                <a class="size1">90s</a>
+                                <a class="size11">france</a>
+                                <a class="size1">france</a>
+                                <a class="size3">france</a>
+                                <a class="size4">france</a>
+                                <a class="size1">england</a>
+                                <a class="size6">90s</a>
+                                <a class="size1">90s</a>
+                                <a class="size7">spain</a>
+                                <a class="size3">spain</a>
+                                <a class="size1">90s</a>
+                                <a class="size1">finland</a>
+                                <a class="size12">england</a>
+                                <a class="size1">italy</a>
+                                <a class="size4">england</a>
+                                <a class="size1">spain</a>
+                                <a class="size1">spain</a>
+                                <a class="size3">italy</a>
+                                <a class="size4">england</a>
+                                <a class="size1">90s</a>
+                                <a class="size1">finland</a>
+                                <a class="size6">italy</a>
+                                <a class="size3">england</a>
+                                <a class="size1">90s</a>
+                                <a class="size12">90s</a>
+                                <a class="size1">finland</a>
+                                <a class="size1">finland</a>
+                                <a class="size10">finland</a>
+                                <a class="size2">italy</a>
+                                <a class="size3">finland</a>
+                                <a class="size1">finland</a>
+                                <a class="size1">finland</a>
+                                <a class="size4">spain</a>
+                                <a class="size1">spain</a>
+                                <a class="size7">spain</a>
+            </div>
+            <div class="span4 well tags">
+                <a class="size1">90s</a>
+                <a class="size11">90s</a>
+                <a class="size1">90s</a>
+                <a class="size3">90s</a>
+                <a class="size4">90s</a>
+                <a class="size1">90s</a>
+                <a class="size6">90s</a>
+                <a class="size1">90s</a>
+                <a class="size7">90s</a>
+                <a class="size3">90s</a>
+                <a class="size1">90s</a>
+                <a class="size1">90s</a>
+                <a class="size12">90s</a>
+                <a class="size1">90s</a>
+                <a class="size4">90s</a>
+                <a class="size1">90s</a>
+                <a class="size1">90s</a>
+                <a class="size3">90s</a>
+                <a class="size4">90s</a>
+                <a class="size1">90s</a>
+                <a class="size1">90s</a>
+                <a class="size6">90s</a>
+                <a class="size3">90s</a>
+                <a class="size1">90s</a>
+                <a class="size12">90s</a>
+                <a class="size1">90s</a>
+                <a class="size1">90s</a>
+                <a class="size10">90s</a>
+                <a class="size2">90s</a>
+                <a class="size3">90s</a>
+                <a class="size1">90s</a>
+                <a class="size1">90s</a>
+                <a class="size4">90s</a>
+                <a class="size1">90s</a>
+                <a class="size7">90s</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4 tag-name">Topic</div>
+            <div class="span4 offset1 tag-name">Teller</div>
+        </div>
+        <div class="row">
+            <div class="span4 well tags">
+
+            </div>
+            <div class="span4 well tags">
+
+            </div>
+        </div>
     </div>
-    {% endfor %}
+    <div class="span2">
+        {% for story in entities %}
+        <div class="row">
+            <h3 class=""><a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a></h3>
+            <span class="label label-success">New</span>
+            <div class="meta">
+                <ul class="nav nav-list">
+                    <li>
+                        <i class="icon-star"></i>{{ story.getRating }}
+                    </li>
+                    <li>
+                        <a><i class="icon-pencil"></i>{{ story.getUser().getUsername() }}</a>
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 </div>
+
+
         {% endblock %}

@@ -25,9 +25,7 @@ $(document).ready(function () {
         manual:false,
         overlays:true,
         hovers:false,
-        shadowTopFwdWidth:1, // shadow width for top forward anim
-        shadowTopBackWidth:1, // shadow width for top back anim
-        shadowBtmWidth:5,
+
 //    ,arrows: true,
 //        arrowsHide: true,
         cursor:'crosshair'
