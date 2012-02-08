@@ -13,26 +13,101 @@ use PDS\StoryBundle\Form\CommentType;
 use PDS\StoryBundle\Entity\Vote;
 use PDS\StoryBundle\Form\VoteType;
 
+use PDS\StoryBundle\Entity\Time;
+
 /**
  * Story controller.
  *
  * @Route("/story")
  */
-class StoryController extends Controller
-{
+class StoryController extends Controller {
+    /**
+     * Lists all Story entities.
+     *
+     * @Route("/location/{id}", name="story_location")
+     * @Template()
+     */
+    public function locationAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+
+        $location = $em->getRepository('PDSStoryBundle:Country')->find($id);
+
+        if (!$location) {
+            throw $this->createNotFoundException('Unable to find Locatin entity.');
+        }
+
+        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+
+        return array('stories' => $stories
+        );
+    }
+
+    /**
+     * Lists all Story entities.
+     *
+     * @Route("/time/{id}", name="story_time")
+     * @Template()
+     */
+    public function timeAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+
+        $time = $em->getRepository('PDSStoryBundle:Time')->find($id);
+
+        if (!$time) {
+            throw $this->createNotFoundException('Unable to find Time entity.');
+        }
+
+        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+
+        return array('stories' => $stories
+        );
+    }
+
+    /**
+     * Lists all Story entities.
+     *
+     * @Route("/teller/{id}", name="story_teller")
+     * @Template()
+     */
+    public function tellerAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+
+        $teller = $em->getRepository('PDSUserBundle:User')->find($id);
+
+        if (!$teller) {
+            throw $this->createNotFoundException('Unable to find Teller entity.');
+        }
+
+        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+
+        return array('stories' => $stories
+        );
+    }
+
     /**
      * Lists all Story entities.
      *
      * @Route("/", name="story")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $locations = $em->getRepository('PDSStoryBundle:Country')->findAll();
+        $times = $em->getRepository('PDSStoryBundle:Time')->findAll();
+        $topics = $em->getRepository('PDSStoryBundle:Topic')->findAll();
+        $tellers = $em->getRepository('PDSUserBundle:User')->findAll();
 
-        return array('entities' => $entities);
+
+        return array('stories' => $stories,
+            'locations' => $locations,
+            'times' => $times,
+            'topics' => $topics,
+            'tellers' => $tellers);
     }
 
     /**
@@ -41,9 +116,9 @@ class StoryController extends Controller
      * @Route("/{id}/show", name="story_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
+
 
         $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
 
@@ -55,17 +130,17 @@ class StoryController extends Controller
 
         $comment = new Comment();
         $comment->setStory($story);
-        $formComment   = $this->createForm(new CommentType(), $comment);
+        $formComment = $this->createForm(new CommentType(), $comment);
 
         $vote = new Vote();
         $vote->setStory($story);
-        $formVote   = $this->createForm(new VoteType(), $vote);
+        $formVote = $this->createForm(new VoteType(), $vote);
 
         return array(
-            'story'      => $story,
-            'form_comment'   => $formComment->createView(),
-            'form_vote'   => $formVote->createView(),
-            'delete_form' => $deleteForm->createView(),        );
+            'story' => $story,
+            'form_comment' => $formComment->createView(),
+            'form_vote' => $formVote->createView(),
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -74,14 +149,13 @@ class StoryController extends Controller
      * @Route("/new", name="story_new")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Story();
-        $form   = $this->createForm(new StoryType(), $entity);
+        $form = $this->createForm(new StoryType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -92,11 +166,10 @@ class StoryController extends Controller
      * @Method("post")
      * @Template("PDSStoryBundle:Story:new.html.twig")
      */
-    public function createAction()
-    {
-        $entity  = new Story();
+    public function createAction() {
+        $entity = new Story();
         $request = $this->getRequest();
-        $form    = $this->createForm(new StoryType(), $entity);
+        $form = $this->createForm(new StoryType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -109,12 +182,12 @@ class StoryController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('story_show', array('id' => $entity->getId())));
-            
+
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -124,8 +197,7 @@ class StoryController extends Controller
      * @Route("/{id}/edit", name="story_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
@@ -138,8 +210,8 @@ class StoryController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -151,8 +223,7 @@ class StoryController extends Controller
      * @Method("post")
      * @Template("PDSStoryBundle:Story:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
@@ -161,7 +232,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Story entity.');
         }
 
-        $editForm   = $this->createForm(new StoryType(), $entity);
+        $editForm = $this->createForm(new StoryType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -176,8 +247,8 @@ class StoryController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -188,8 +259,7 @@ class StoryController extends Controller
      * @Route("/{id}/delete", name="story_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -210,11 +280,9 @@ class StoryController extends Controller
         return $this->redirect($this->generateUrl('story'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

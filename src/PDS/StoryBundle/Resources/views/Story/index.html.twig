@@ -4,109 +4,50 @@
     <div class="span10">
         <div class="row">
             <div class="span4 tag-name">Location</div>
-            <div class="span4 offset1 tag-name">Time</div>
+            <div class="span4 tag-name">Time</div>
         </div>
         <div class="row">
             <div class="span4 well tags">
-                <a class="size1">90s</a>
-                                <a class="size11">france</a>
-                                <a class="size1">france</a>
-                                <a class="size3">france</a>
-                                <a class="size4">france</a>
-                                <a class="size1">england</a>
-                                <a class="size6">90s</a>
-                                <a class="size1">90s</a>
-                                <a class="size7">spain</a>
-                                <a class="size3">spain</a>
-                                <a class="size1">90s</a>
-                                <a class="size1">finland</a>
-                                <a class="size12">england</a>
-                                <a class="size1">italy</a>
-                                <a class="size4">england</a>
-                                <a class="size1">spain</a>
-                                <a class="size1">spain</a>
-                                <a class="size3">italy</a>
-                                <a class="size4">england</a>
-                                <a class="size1">90s</a>
-                                <a class="size1">finland</a>
-                                <a class="size6">italy</a>
-                                <a class="size3">england</a>
-                                <a class="size1">90s</a>
-                                <a class="size12">90s</a>
-                                <a class="size1">finland</a>
-                                <a class="size1">finland</a>
-                                <a class="size10">finland</a>
-                                <a class="size2">italy</a>
-                                <a class="size3">finland</a>
-                                <a class="size1">finland</a>
-                                <a class="size1">finland</a>
-                                <a class="size4">spain</a>
-                                <a class="size1">spain</a>
-                                <a class="size7">spain</a>
+                {% for location in locations %}
+                <a href="{{ path('story_location', { 'id': location.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ location }}</a>
+                {% endfor %}
             </div>
             <div class="span4 well tags">
-                <a class="size1">90s</a>
-                <a class="size11">90s</a>
-                <a class="size1">90s</a>
-                <a class="size3">90s</a>
-                <a class="size4">90s</a>
-                <a class="size1">90s</a>
-                <a class="size6">90s</a>
-                <a class="size1">90s</a>
-                <a class="size7">90s</a>
-                <a class="size3">90s</a>
-                <a class="size1">90s</a>
-                <a class="size1">90s</a>
-                <a class="size12">90s</a>
-                <a class="size1">90s</a>
-                <a class="size4">90s</a>
-                <a class="size1">90s</a>
-                <a class="size1">90s</a>
-                <a class="size3">90s</a>
-                <a class="size4">90s</a>
-                <a class="size1">90s</a>
-                <a class="size1">90s</a>
-                <a class="size6">90s</a>
-                <a class="size3">90s</a>
-                <a class="size1">90s</a>
-                <a class="size12">90s</a>
-                <a class="size1">90s</a>
-                <a class="size1">90s</a>
-                <a class="size10">90s</a>
-                <a class="size2">90s</a>
-                <a class="size3">90s</a>
-                <a class="size1">90s</a>
-                <a class="size1">90s</a>
-                <a class="size4">90s</a>
-                <a class="size1">90s</a>
-                <a class="size7">90s</a>
+                {% for time in times %}
+                <a href="{{ path('story_time', { 'id': time.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ time }}</a>
+                {% endfor %}
             </div>
         </div>
         <div class="row">
             <div class="span4 tag-name">Topic</div>
-            <div class="span4 offset1 tag-name">Teller</div>
+            <div class="span4 tag-name">Teller</div>
         </div>
         <div class="row">
             <div class="span4 well tags">
-
+                {% for topic in topics%}
+                <a class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ topic}}</a>
+                {% endfor %}
             </div>
             <div class="span4 well tags">
-
+                {% for teller in tellers%}
+                <a href="{{ path('story_teller', { 'id': teller.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ teller }}</a>
+                {% endfor %}
             </div>
         </div>
     </div>
-    <div class="span2">
-        {% for story in entities %}
+    <div class="span2 top">
+        {% for story in stories %}
         <div class="row">
             <h3 class=""><a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a></h3>
             <span class="label label-success">New</span>
+
             <div class="meta">
                 <ul class="nav nav-list">
                     <li>
                         <i class="icon-star"></i>{{ story.getRating }}
                     </li>
                     <li>
-                        <a><i class="icon-pencil"></i>{{ story.getUser().getUsername() }}</a>
+                        <a href="{{ path('story_teller', { 'id': story.getUser().getId() }) }}"><i class="icon-pencil"></i>{{ story.getUser() }}</a>
                     </li>
                     <li>
                     </li>

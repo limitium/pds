@@ -5,14 +5,17 @@ body {
 #page {
     padding-top: 5em;
 }
-
+.top{
+    padding-top: 70px;
+}
 .tag-name {
     color: rgba(0, 0, 0, 0.5);
     text-shadow: 0 1px 0 white;
-    font-weight: 200;
-    font-size: 24px;
+    font-weight: 900;
+    font-size: 30px;
     line-height: 36px;
     text-align: center;
+    padding: 19px;
 }
 
 .tags {
@@ -56,51 +59,55 @@ body {
 }
 
 .size5 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 500;
     color: #0057B7;
 }
 
 .size6 {
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: 600;
     color: #0053B3;
 }
 
 .size7 {
-    font-size: 1.6em;
+    font-size: 1.3em;
     font-weight: 700;
     color: #004AAA;
 }
 
 .size8 {
-    font-size: 1.8em;
+    font-size: 1.4em;
     font-weight: 800;
     color: #0046A6;
 }
 
 .size9 {
-    font-size: 2.2em;
+    font-size: 1.5em;
     font-weight: 900;
     color: #0043A3;
 }
 
 .size10 {
-    font-size: 2.5em;
+    font-size: 1.6em;
     font-weight: 900;
     color: #0040A0;
 }
 
 .size11 {
-    font-size: 2.7em;
+    font-size: 1.7em;
     font-weight: 900;
     color: #003F9F;
 }
 
 .size12 {
-    font-size: 2.9em;
+    font-size: 1.8em;
     font-weight: 900;
     color: #003393;
+}
+
+.story h1{
+    text-align: center;
 }
 
 .meta {
@@ -174,7 +181,48 @@ body {
     margin-top: 30px;
     border-top: 1px solid #DDD;
 }
-#comments textarea{
-    width: 410px;
+
+#comments textarea {
     height: 150px;
+    width: 540px;
+}
+
+@media (max-width: 480px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+    #comments textarea {
+        width: 414px;
+    }
+}
+
+@media (max-width: 980px) {
+
+}
+
+@media (min-width: 980px) {
+}
+
+@media (min-width: 1200px) {
+    #comments textarea {
+        width: 670px;
+    }
+}
+#story_title{
+    width: 430px;
+}
+#story_body{
+    width: 430px;
+    height: 600px;
+}
+#story_date_year{
+    width: 65px;
+}
+#story_date_month,#story_date_day{
+    width: 48px;
 }

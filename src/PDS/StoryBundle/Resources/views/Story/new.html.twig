@@ -1,19 +1,39 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
-<h1>Story creation</h1>
+<div class="row offset2">
+    <h1>Create a new story</h1>
 
-<form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button class="btn btn-primary" type="submit">Create</button>
-    </p>
-</form>
+    <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
+        <div class="row">
+            <div class="span12">
+                {{ form_label(form.title)}}
+                {{ form_widget(form.title) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="span5">
+                {{ form_label(form.body)}}
+                {{ form_widget(form.body) }}
+            </div>
+            <div class="span2">
+                {{ form_label(form.Country)}}
+                {{ form_widget(form.Country) }}
+                {{ form_label(form.date)}}
+                {{ form_widget(form.date) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+        <p>
+            <button class="btn btn-small" type="submit"><i class="icon-pencil"></i>Create</button>
+        </p>
+    </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('story') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
-{% endblock %}
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('story') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+</div>
+        {% endblock %}

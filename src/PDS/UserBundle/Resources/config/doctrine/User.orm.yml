@@ -23,6 +23,12 @@ PDS\UserBundle\Entity\User:
     created_at:
       type: datetime
       nullable: false
+    first_name:
+      type: string
+      nullable: true
+    last_name:
+      type: string
+      nullable: true
   oneToMany:
     Stories:
       targetEntity: PDS\StoryBundle\Entity\Story

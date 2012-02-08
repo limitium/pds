@@ -9,10 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Story
 {
+   
     /**
      * @var integer $id
      */
     private $id;
+
+    /**
+     * @var string $title
+     */
+    private $title;
 
     /**
      * @var text $body
@@ -25,6 +31,11 @@ class Story
     private $created_at;
 
     /**
+     * @var date $date
+     */
+    private $date;
+
+    /**
      * @var PDS\StoryBundle\Entity\Vote
      */
     private $Votes;
@@ -34,10 +45,26 @@ class Story
      */
     private $Comments;
 
+    /**
+     * @var PDS\UserBundle\Entity\User
+     */
+    private $User;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Country
+     */
+    private $Country;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Topic
+     */
+    private $Topics;
+
     public function __construct()
     {
         $this->Votes = new \Doctrine\Common\Collections\ArrayCollection();
     $this->Comments = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->Topics = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -48,6 +75,26 @@ class Story
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -91,6 +138,26 @@ class Story
     }
 
     /**
+     * Set date
+     *
+     * @param date $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * Get date
+     *
+     * @return date 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
      * Add Votes
      *
      * @param PDS\StoryBundle\Entity\Vote $votes
@@ -129,11 +196,6 @@ class Story
     {
         return $this->Comments;
     }
-    /**
-     * @var PDS\StoryBundle\Entity\User
-     */
-    private $User;
-
 
     /**
      * Set User
@@ -148,11 +210,51 @@ class Story
     /**
      * Get User
      *
-     * @return PDS\UserBundle\Entity\User
+     * @return PDS\UserBundle\Entity\User 
      */
     public function getUser()
     {
         return $this->User;
+    }
+
+    /**
+     * Set Country
+     *
+     * @param PDS\StoryBundle\Entity\Country $country
+     */
+    public function setCountry(\PDS\StoryBundle\Entity\Country $country)
+    {
+        $this->Country = $country;
+    }
+
+    /**
+     * Get Country
+     *
+     * @return PDS\StoryBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->Country;
+    }
+
+    /**
+     * Add Topics
+     *
+     * @param PDS\StoryBundle\Entity\Topic $topics
+     */
+    public function addTopic(\PDS\StoryBundle\Entity\Topic $topics)
+    {
+        $this->Topics[] = $topics;
+    }
+
+    /**
+     * Get Topics
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTopics()
+    {
+        return $this->Topics;
     }
 
 

@@ -9,6 +9,11 @@ PDS\StoryBundle\Entity\Vote:
     value:
       type: integer
       nullable: false
+  uniqueConstraints:
+    unqiue_pair:
+      columns:
+        - user_id
+        - story_id
   manyToOne:
     Story:
       targetEntity: PDS\StoryBundle\Entity\Story

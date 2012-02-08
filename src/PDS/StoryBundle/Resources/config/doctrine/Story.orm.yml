@@ -15,6 +15,9 @@ PDS\StoryBundle\Entity\Story:
     created_at:
       type: datetime
       nullable: false
+    date:
+      type: date
+      nullable: true
   oneToMany:
     Votes:
       targetEntity: PDS\StoryBundle\Entity\Vote
@@ -29,3 +32,27 @@ PDS\StoryBundle\Entity\Story:
       joinColumns:
         user_id:
           referencedColumnName: id
+    Country:
+      targetEntity: PDS\StoryBundle\Entity\Country
+      inversedBy: Storeis
+      joinColumns:
+        country_id:
+          referencedColumnName: id
+    Time:
+      targetEntity: PDS\StoryBundle\Entity\Time
+      inversedBy: Stories
+      joinColumns:
+        time_id:
+          referencedColumnName: id
+  manyToMany:
+    Topics:
+      targetEntity: Topic
+      inversedBy: Stories
+      joinTable:
+        name: StoryTopic
+        joinColumns:
+          story_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          topic_id:
+            referencedColumnName: id

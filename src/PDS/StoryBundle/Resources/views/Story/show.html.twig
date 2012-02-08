@@ -10,7 +10,7 @@
     </div>
     <div class="meta row offset1">
 
-        <ul class="story span6">
+        <ul class="story offset2 span6">
             <li>
                 <i class="ajax-loader"></i>
                 <ul class='star-rating'>
@@ -31,7 +31,7 @@
                 <i class="icon-time"></i>{% if story.createdat %}{{ story.createdat|date('Y.m.d') }}{% endif%}
             </li>
             <li>
-                <a><i class="icon-pencil"></i>{{ story.getUser().getUsername() }}</a>
+                <a href="{{ path('story_teller', { 'id': story.getUser().getId() }) }}"><i class="icon-pencil"></i>{{ story.getUser() }}</a>
             </li>
             {% if app.user %}
             {% if app.user == story.getUser() %}
@@ -40,6 +40,36 @@
             </li>
             {% endif %}
             {% endif %}
+        </ul>
+
+        <ul class="story span10">
+            <li>
+                <i class="icon-tags"></i>
+                <a href="{{ path('story_location', { 'id': story.getCountry().getId() }) }}">{{ story.getCountry() }}</a>
+            </li>
+            <li>
+                <a href="{{ path('story_time', { 'id': story.getTime().getId() }) }}">{{ story.getTime()}}</a>
+            </li>
+            {% for topic in story.getTopics() %}
+            <li>
+                <a>{{ topic }}</a>
+            </li>
+            <li>
+                <a>{{ topic }}</a>
+            </li>
+            <li>
+                <a>{{ topic }}</a>
+            </li>
+            <li>
+                <a>{{ topic }}</a>
+            </li>
+            <li>
+                <a>{{ topic }}</a>
+            </li>
+            <li>
+                <a>{{ topic }}</a>
+            </li>
+            {% endfor %}
         </ul>
     </div>
 </div>

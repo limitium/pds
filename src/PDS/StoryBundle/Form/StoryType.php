@@ -9,6 +9,9 @@ class StoryType extends AbstractType {
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
             ->add('title')
+            ->add('Country')
+            ->add('date')
+//            ->add('Topics')
             ->add('body');
     }
 

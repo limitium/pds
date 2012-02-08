@@ -5,7 +5,7 @@
             <i class="icon-time"></i>{% if comment.createdat %}{{ comment.createdat|date('Y.m.d') }}{% endif%}
         </li>
         <li>
-            <a><i class="icon-pencil"></i>{{ comment.getUser().getUsername() }}</a>
+            <a><i class="icon-pencil"></i>{{ comment.getUser() }}</a>
         </li>
     </ul>
 </div>
