@@ -13,3 +13,6 @@ PDS\StoryBundle\Entity\Country:
     Storeis:
       targetEntity: PDS\StoryBundle\Entity\Story
       mappedBy: Country
+    Users:
+      targetEntity: PDS\UserBundle\Entity\User
+      mappedBy: Country

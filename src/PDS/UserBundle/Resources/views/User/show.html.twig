@@ -1,45 +1,49 @@
-<h1>User</h1>
+{% extends 'PDSUserBundle:User:user.html.twig' %}
+{% block user %}
+<div class="show row">
+    <div class="span3">
+        <ul class="thumbnails">
+            <li>
+                <img class="userpic thumbnail" src="{% if user.photo %}/pds/web/userpics/{{ user.photo }}{% else %}http://placehold.it/150&text=Photo{% endif %}" alt="{{ user }}">
+            </li>
+        </ul>
+    </div>
+    <div class="span7">
+        <ul class="meta">
+            <li>
+                <span class="mark">Storyteller:</span><span class="data">{{ user.firstName }} <i>{{ user.username }}</i> {{ user.lastName }}</span>
+            </li>
+            <li>
+                <span class="mark">From:</span><span class="data">{{ user.country.name }} {% if user.city %}({{ user.city }}){% endif %}</span>
+            </li>
+            {% if user.institution %}
+            <li>
+                <span class="mark">Graduated:</span><span class="data">{{ user.institution }}</span>
+            </li>
+            {% endif %}
+            {% if user.birth %}
+            <li>
+                <span class="mark">Born in:</span><span class="data">{{ user.birth | date('Y.m.d')}}</span>
+            </li>
+            {% endif %}
+            <li>
+                <span class="mark">Join:</span><span class="data">{{ user.createdAt| date('Y.m.d')}}</span>
+            </li>
+        </ul>
+    </div>
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Username</th>
-            <td>{{ entity.username }}</td>
-        </tr>
-        <tr>
-            <th>Password</th>
-            <td>{{ entity.password }}</td>
-        </tr>
-        <tr>
-            <th>Salt</th>
-            <td>{{ entity.salt }}</td>
-        </tr>
-        <tr>
-            <th>Created_at</th>
-            <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
-        </tr>
-    </tbody>
-</table>
+    <div class="span2 pull-right">
+    {% if app.user and app.user == user%}
+        <a class="btn btn-small" href="{{ path('user_edit',{ 'id': user.id }) }}"><i class="icon-edit"></i> Edit</a>
+    {% endif %}
+        {#<button class="btn btn-small" type="button"><i class="icon-remove-circle"></i> Disable</button>#}
+        {#<button class="btn btn-small" type="button"><i class="icon-ok-circle"></i> Enable</button>#}
+    </div>
+    <div class="span12">
+        <h4>Biography:</h4>
+        <div class="biography">{{ user.biography }}</div>
+    </div>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('user_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+
+</div>
+        {% endblock %}

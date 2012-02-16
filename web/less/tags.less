@@ -1,0 +1,83 @@
+
+.tag-name {
+    color: rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 0 white;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+    padding: 19px;
+}
+
+@tag-font-size: 0.7em;
+@tag-font-color: #0088CC;
+@tag-font-weight: 100;
+
+.tag-style(@size) when (@size < 10){
+    font-weight: @tag-font-weight + @size*100;
+}
+.tag-style(@size) when (@size >= 10){
+    font-weight: 900;
+}
+.tag-style(@size){
+    font-size: @tag-font-size + @size/10;
+    color: @tag-font-color - @size*5;
+}
+.tag-style(@size){
+    font-size: @tag-font-size + @size/10;
+    color: @tag-font-color - @size*5;
+}
+
+.tags-cloud{
+
+    height: 250px;
+    line-height: 3em;
+    text-align: center;
+    overflow: hidden;
+
+    a{
+        white-space: nowrap;
+        text-decoration: none;
+        line-height: 1.6;
+        padding: 1px 3px;
+        margin: 5px 5px 5px 0;
+        display: inline;
+
+        &.size1{
+            .tag-style(1)
+        }
+        &.size2{
+            .tag-style(2)
+        }
+        &.size3{
+            .tag-style(3)
+        }
+        &.size4{
+            .tag-style(4)
+        }
+        &.size5{
+            .tag-style(5)
+        }
+        &.size6{
+            .tag-style(6)
+        }
+        &.size7{
+            .tag-style(7)
+        }
+        &.size8{
+            .tag-style(8)
+        }
+        &.size9{
+            .tag-style(9)
+        }
+        &.size10{
+            .tag-style(10)
+        }
+        &.size11{
+            .tag-style(11)
+        }
+        &.size12{
+            .tag-style(12)
+        }
+    }
+}

@@ -1,0 +1,42 @@
+@date-width: 71px;
+
+.user{
+    .show{
+       .userpic{
+           width: 150px;
+           height: 150px;
+       }
+       ul.meta{
+          list-style: none;
+          margin-left: -25px;
+
+          li{
+              line-height: 20px;
+               .mark{
+                   display: inline-block;
+                   font-weight: bold;
+                   width: 100px;
+               }
+               .data{
+                   padding-left: 10px;
+               }
+          }
+       }
+    }
+
+    .edit{
+        #pds_userbundle_usertype_birth_year{
+            width:@date-width;
+        }
+        #pds_userbundle_usertype_birth_month{
+            width:@date-width;
+        }
+        #pds_userbundle_usertype_birth_day{
+            width:@date-width;
+        }
+        #pds_userbundle_usertype_biography{
+            width: 610px;
+            height: 150px;
+        }
+    }
+}

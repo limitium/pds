@@ -1,16 +1,14 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
-<div class="row">
+<div class="show row">
     <h1>{{ story.getTitle() }}</h1>
 
-    <div class="body">
-        <div class="book">
+    <div class="projector">
             {{ story.body | raw }}
-        </div>
     </div>
     <div class="meta row offset1">
 
-        <ul class="story offset2 span6">
+        <ul class="info offset2 span7">
             <li>
                 <i class="ajax-loader"></i>
                 <ul class='star-rating'>
@@ -31,7 +29,7 @@
                 <i class="icon-time"></i>{% if story.createdat %}{{ story.createdat|date('Y.m.d') }}{% endif%}
             </li>
             <li>
-                <a href="{{ path('story_teller', { 'id': story.getUser().getId() }) }}"><i class="icon-pencil"></i>{{ story.getUser() }}</a>
+                <a href="{{ path('user_show', { 'id': story.getUser().getId() }) }}"><i class="icon-pencil"></i>{{ story.getUser() }}</a>
             </li>
             {% if app.user %}
             {% if app.user == story.getUser() %}
@@ -42,7 +40,7 @@
             {% endif %}
         </ul>
 
-        <ul class="story span10">
+        <ul class="tags span10">
             <li>
                 <i class="icon-tags"></i>
                 <a href="{{ path('story_location', { 'id': story.getCountry().getId() }) }}">{{ story.getCountry() }}</a>

@@ -2,12 +2,13 @@
 
 namespace PDS\UserBundle\Entity;
 
+use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * PDS\UserBundle\Entity\Role
  */
-class Role
+class Role implements RoleInterface
 {
     /**
      * @var integer $id
@@ -78,4 +79,22 @@ class Role
     {
         return $this->Users;
     }
+
+
+    /**
+     * Returns the role.
+     *
+     * This method returns a string representation whenever possible.
+     *
+     * When the role cannot be represented with sufficient precision by a
+     * string, it should return null.
+     *
+     * @return string|null A string representation of the role, or null
+     */
+    function getRole() {
+        return $this->getName();
+    }
+
+
+
 }

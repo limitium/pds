@@ -1,6 +1,6 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
-<div class="row offset2">
+<div class="edit row offset2">
     <h1>Create a new story</h1>
 
     <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>

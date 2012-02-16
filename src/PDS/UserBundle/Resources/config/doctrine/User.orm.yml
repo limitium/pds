@@ -29,6 +29,21 @@ PDS\UserBundle\Entity\User:
     last_name:
       type: string
       nullable: true
+    biography:
+      type: text
+      nullable: true
+    city:
+      type: string
+      nullable: true
+    photo:
+      type: string
+      nullable: true
+    institution:
+      type: string
+      nullable: true
+    birth:
+      type: datetime
+      nullable: true
   oneToMany:
     Stories:
       targetEntity: PDS\StoryBundle\Entity\Story
@@ -39,6 +54,13 @@ PDS\UserBundle\Entity\User:
     Comments:
       targetEntity: PDS\StoryBundle\Entity\Comment
       mappedBy: User
+  manyToOne:
+    Country:
+      targetEntity: PDS\StoryBundle\Entity\Country
+      inversedBy: Users
+      joinColumns:
+        country_id:
+          referencedColumnName: id
   manyToMany:
     Roles:
       targetEntity: Role

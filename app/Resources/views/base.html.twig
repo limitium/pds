@@ -3,9 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" type="text/css" media="all"/>
-    <link rel="stylesheet" href="{{ asset('css/jquery.booklet.1.2.0.css') }}" type="text/css" media="all"/>
-    <link rel="stylesheet" href="{{ asset('css/pds.css') }}" type="text/css" media="all"/>
     <link rel="stylesheet" href="{{ asset('css/rating.css') }}" type="text/css" media="all"/>
     {% endblock %}
     <title>{% block title %}PDS{% endblock %}</title>
@@ -53,6 +50,11 @@
                     </li>
                     {% endif %}
                     <li class="divider-vertical"></li>
+                    {% if app.user %}
+                    <li class="">
+                        <a href="{{  path('user_show', { 'id': app.user.id }) }}">{{ app.user }}</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -68,12 +70,15 @@
     {% endblock %}
 </div>
 {% block javascripts %}
+<link rel="stylesheet/less" type="text/css" href="{{ asset('less/bs/bootstrap.less') }}">
+<link rel="stylesheet/less" type="text/css" href="{{ asset('less/pds.less') }}">
+<script src="{{ asset('js/less-1.2.1.min.js') }}"></script>
+
 <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js') }}"></script>
-<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ asset('js/jquery.booklet.1.2.0.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
-<script src="{{ asset('js/pds.js') }}"></script>
+
+<script type="text/coffeescript" src="{{ asset('coffee/pds.coffee') }}"></script>
+<script src="{{ asset('js/coffee-script.js') }}"></script>
 {% endblock %}
 </body>
 </html>

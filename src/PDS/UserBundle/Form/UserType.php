@@ -8,13 +8,21 @@ use Symfony\Component\Form\FormBuilder;
 class UserType extends AbstractType {
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
-            ->add('username', 'text')
-            ->add('email', 'email')
-            ->add('password','repeated', array(
-            'type' => 'password',
-            'invalid_message' => 'The password fields must match.',
-            'options' => array('label' => 'Confirm password')
-        ));
+            ->add('first_name','text',array('required'=>false))
+            ->add('last_name','text',array('required'=>false))
+            ->add('file','file',array(
+                    "label" => "Userpic",
+                    "required" => FALSE,
+                    "attr" => array(
+                        "accept" => "image/*",
+                    )
+                ))
+            ->add('Country')
+            ->add('city','text',array('required'=>false))
+            ->add('institution','text',array('required'=>false))
+            ->add('birth','date',array('required'=>false))
+            ->add('biography')
+        ;
 
     }
 

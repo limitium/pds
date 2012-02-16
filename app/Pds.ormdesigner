@@ -93,6 +93,12 @@
       <column name="created_at" required="true" type="datetime"/>
       <column name="first_name" type="string"/>
       <column name="last_name" type="string"/>
+      <column name="biography" type="text"/>
+      <column name="country_id" required="true" type="integer"/>
+      <column name="city" type="string"/>
+      <column name="photo" type="string"/>
+      <column name="institution" type="string"/>
+      <column name="birth" type="datetime"/>
       <orm-properties>
         <attribute name="repository-class">PDS\UserBundle\Entity\UserRepository</attribute>
       </orm-properties>
@@ -109,6 +115,9 @@
         <index-column name="user_id"/>
       </index>
     </table>
+    <foreign-key caption="Country User" from="User" inverse-alias="Country" name="FK_User_Country_id" owning-alias="Users" to="Country" visCaption1X="-14" visCaption1Y="-6" visCenterX="0" visCenterY="0">
+      <foreign-key-column from="country_id" to="id"/>
+    </foreign-key>
     <foreign-key caption="User UserRole" from="UserRole" name="FK_UserRole_User_id" to="User">
       <foreign-key-column from="user_id" to="id"/>
     </foreign-key>

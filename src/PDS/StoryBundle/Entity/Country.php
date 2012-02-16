@@ -82,4 +82,44 @@ class Country
     public function __toString() {
         return $this->getName();
     }
+    /**
+     * @var PDS\UserBundle\Entity\User
+     */
+    private $Country;
+
+
+    /**
+     * Add Country
+     *
+     * @param PDS\UserBundle\Entity\User $country
+     */
+    public function addUser(\PDS\UserBundle\Entity\User $country)
+    {
+        $this->Country[] = $country;
+    }
+
+    /**
+     * Get Country
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCountry()
+    {
+        return $this->Country;
+    }
+    /**
+     * @var PDS\UserBundle\Entity\User
+     */
+    private $Users;
+
+
+    /**
+     * Get Users
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->Users;
+    }
 }

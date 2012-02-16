@@ -39,7 +39,7 @@ class StoryController extends Controller {
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
 
-        return array('stories' => $stories
+        return array('stories' => $stories,'location'=>$location
         );
     }
 
@@ -61,7 +61,7 @@ class StoryController extends Controller {
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
 
-        return array('stories' => $stories
+        return array('stories' => $stories,'time'=>$time
         );
     }
 
@@ -83,7 +83,7 @@ class StoryController extends Controller {
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
 
-        return array('stories' => $stories
+        return array('stories' => $stories,'teller'=>$teller
         );
     }
 
@@ -192,11 +192,11 @@ class StoryController extends Controller {
     }
 
     /**
-     * Displays a form to edit an existing Story entity.
-     *
-     * @Route("/{id}/edit", name="story_edit")
-     * @Template()
-     */
+ * Displays a form to edit an existing Story entity.
+ *
+ * @Route("/{id}/edit", name="story_edit")
+ * @Template()
+ */
     public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 

@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
+
 /**
  * PDS\UserBundle\Entity\User
  * @UniqueEntity("email")
@@ -336,5 +337,199 @@ class User implements UserInterface {
     public function __toString() {
         $name =  $this->getFirstName()." ".$this->getLastName();
         return $name!=" "?$name:$this->getUsername();
+    }
+    /**
+     * @var text $biography
+     */
+    private $biography;
+
+    /**
+     * @var string $city
+     */
+    private $city;
+
+    private $photo;
+
+    /**
+     * @var string $institution
+     */
+    private $institution;
+
+    /**
+     * @var datetime $birth
+     */
+    private $birth;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Country
+     */
+    private $Country;
+
+
+    /**
+     * Set biography
+     *
+     * @param text $biography
+     */
+    public function setBiography($biography)
+    {
+        $this->biography = $biography;
+    }
+
+    /**
+     * Get biography
+     *
+     * @return text 
+     */
+    public function getBiography()
+    {
+        return $this->biography;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set institution
+     *
+     * @param string $institution
+     */
+    public function setInstitution($institution)
+    {
+        $this->institution = $institution;
+    }
+
+    /**
+     * Get institution
+     *
+     * @return string 
+     */
+    public function getInstitution()
+    {
+        return $this->institution;
+    }
+
+    /**
+     * Set birth
+     *
+     * @param datetime $birth
+     */
+    public function setBirth($birth)
+    {
+        $this->birth = $birth;
+    }
+
+    /**
+     * Get birth
+     *
+     * @return datetime 
+     */
+    public function getBirth()
+    {
+        return $this->birth;
+    }
+
+    /**
+     * Set Country
+     *
+     * @param PDS\StoryBundle\Entity\Country $country
+     */
+    public function setCountry(\PDS\StoryBundle\Entity\Country $country)
+    {
+        $this->Country = $country;
+    }
+
+    /**
+     * Get Country
+     *
+     * @return PDS\StoryBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->Country;
+    }
+
+    public function __sleep(){
+        return array('username','id','first_name','last_name','email'); // add your own fields
+    }
+
+    /**
+     * change to Image
+     * @Assert\File(maxSize="2M")
+     */
+    public $file;
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        // you must throw an exception here if the file cannot be moved
+        // so that the entity is not persisted to the database
+        // which the UploadedFile move() method does
+        $this->file->move($this->getUploadRootDir(), $this->id.'.jpg'/*.$this->file->guessExtension()*/);
+
+        $this->photo =$this->id.'.jpg';
+
+        unset($this->file);
+    }
+
+    private function getAbsolutePath()
+    {
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->id.'.jpg';
+    }
+
+    private function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    private function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'userpics';
     }
 }

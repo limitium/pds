@@ -268,4 +268,29 @@ class Story
         }
         return number_format(sizeof($this->Votes)?($total/sizeof($this->Votes)):0,2,'.','');
     }
+    /**
+     * @var PDS\StoryBundle\Entity\Time
+     */
+    private $Time;
+
+
+    /**
+     * Set Time
+     *
+     * @param PDS\StoryBundle\Entity\Time $time
+     */
+    public function setTime(\PDS\StoryBundle\Entity\Time $time)
+    {
+        $this->Time = $time;
+    }
+
+    /**
+     * Get Time
+     *
+     * @return PDS\StoryBundle\Entity\Time 
+     */
+    public function getTime()
+    {
+        return $this->Time;
+    }
 }

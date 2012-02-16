@@ -7,12 +7,12 @@
             <div class="span4 tag-name">Time</div>
         </div>
         <div class="row">
-            <div class="span4 well tags">
+            <div class="span4 well tags-cloud">
                 {% for location in locations %}
                 <a href="{{ path('story_location', { 'id': location.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ location }}</a>
                 {% endfor %}
             </div>
-            <div class="span4 well tags">
+            <div class="span4 well tags-cloud">
                 {% for time in times %}
                 <a href="{{ path('story_time', { 'id': time.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ time }}</a>
                 {% endfor %}
@@ -23,12 +23,12 @@
             <div class="span4 tag-name">Teller</div>
         </div>
         <div class="row">
-            <div class="span4 well tags">
+            <div class="span4 well tags-cloud">
                 {% for topic in topics%}
                 <a class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ topic}}</a>
                 {% endfor %}
             </div>
-            <div class="span4 well tags">
+            <div class="span4 well tags-cloud">
                 {% for teller in tellers%}
                 <a href="{{ path('story_teller', { 'id': teller.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ teller }}</a>
                 {% endfor %}
@@ -36,25 +36,7 @@
         </div>
     </div>
     <div class="span2 top">
-        {% for story in stories %}
-        <div class="row">
-            <h3 class=""><a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a></h3>
-            <span class="label label-success">New</span>
-
-            <div class="meta">
-                <ul class="nav nav-list">
-                    <li>
-                        <i class="icon-star"></i>{{ story.getRating }}
-                    </li>
-                    <li>
-                        <a href="{{ path('story_teller', { 'id': story.getUser().getId() }) }}"><i class="icon-pencil"></i>{{ story.getUser() }}</a>
-                    </li>
-                    <li>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        {% endfor %}
+        {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
     </div>
 
 </div>
