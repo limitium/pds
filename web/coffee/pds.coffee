@@ -47,4 +47,4 @@ $(document).ready ->
     showStar()
 
   $(".carousel-inner").html "<div class='item'>"+$(".carousel-inner").html().split("[pagebreak]").join("</div><div class='item'>")+"</div>"
-  $("#myCarousel").carousel().carousel("next").carousel "pause"
+  $("#myCarousel").carousel(interval: 10000000).carousel "next"

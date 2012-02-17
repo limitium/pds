@@ -1,45 +1,71 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
-<div class="row">
-    <div class="span10">
-        <div class="row">
-            <div class="span4 tag-name">Location</div>
-            <div class="span4 tag-name">Time</div>
+<div class="main row">
+    <div class="span4 box-container">
+        <div class="box-header">
+            Location
         </div>
-        <div class="row">
-            <div class="span4 well tags-cloud">
-                {% for location in locations %}
-                <a href="{{ path('story_location', { 'id': location.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ location }}</a>
-                {% endfor %}
-            </div>
-            <div class="span4 well tags-cloud">
-                {% for time in times %}
-                <a href="{{ path('story_time', { 'id': time.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ time }}</a>
-                {% endfor %}
-            </div>
+        <div class="box-body tags-cloud">
+            {% for location in locations %}
+            <a href="{{ path('story_location', { 'id': location.getId() }) }}"
+               class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ location }}</a>
+            {% endfor %}
         </div>
-        <div class="row">
-            <div class="span4 tag-name">Topic</div>
-            <div class="span4 tag-name">Teller</div>
-        </div>
-        <div class="row">
-            <div class="span4 well tags-cloud">
-                {% for topic in topics%}
-                <a class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ topic}}</a>
-                {% endfor %}
-            </div>
-            <div class="span4 well tags-cloud">
-                {% for teller in tellers%}
-                <a href="{{ path('story_teller', { 'id': teller.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ teller }}</a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <div class="span2 top">
-        {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
     </div>
 
+    <div class="span4 box-container">
+        <div class="box-header">
+            Time
+        </div>
+        <div class="box-body tags-cloud">
+            {% for time in times %}
+            <a href="{{ path('story_time', { 'id': time.getId() }) }}"
+               class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ time }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="span4 box-container">
+        <div class="box-header">
+            Top
+        </div>
+        <div class="box-body tags-cloud">
+            {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
+        </div>
+    </div>
 </div>
+<div class="row">
+    <div class="span4 box-container">
+        <div class="box-header">
+            Topic
+        </div>
+        <div class="box-body tags-cloud">
+            {% for topic in topics%}
+            <a class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ topic}}</a>
+            {% endfor %}
+        </div>
+    </div>
 
+    <div class="span4 box-container">
+        <div class="box-header">
+            Person
+        </div>
+        <div class="box-body tags-cloud">
+            {% for teller in tellers%}
+            <a href="{{ path('story_teller', { 'id': teller.getId() }) }}"
+               class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ teller }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="span4 box-container">
+        <div class="box-header">
+            Preview
+        </div>
+        <div class="box-body tags-cloud">
+            {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
+        </div>
+    </div>
+</div>
 
         {% endblock %}

@@ -2,6 +2,12 @@ body {
     background: url('../img/bg-noise.jpg') #F0F2F5;
 }
 
+@barStartColor:rgba(66,118,72,1);
+@barEndColor:rgb(36,78,32);
+.navbar-inner{
+    #gradient > .vertical(@barStartColor,@barEndColor);
+}
+
 #page {
     padding-top: 5em;
 }
@@ -16,4 +22,19 @@ body {
     vertical-align: text-top;
     background-image: url(../img/ajax-loader.gif);
     visibility: hidden;
+}
+
+footer{
+    text-align: center;
+    margin-top: 20px;
+    .f1{
+        color: white;
+        padding: 5px;
+        #gradient > .vertical(@barStartColor,@barEndColor);
+
+    }
+    .f2{
+        padding: 10px;
+        background-color: white;
+    }
 }
