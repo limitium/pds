@@ -293,4 +293,13 @@ class Story
     {
         return $this->Time;
     }
+
+    public function canVote(\PDS\UserBundle\Entity\User $user){
+        foreach($this->getVotes() as $vote){
+            if($vote->getUser() == $user){
+                return false;
+            }
+        }
+        return true;
+    }
 }

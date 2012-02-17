@@ -246,7 +246,7 @@ class User implements UserInterface {
      * @return Boolean
      */
     function equals(UserInterface $user) {
-        return $this->username == $user->getUsername();
+        return $this->getUsername() == $user->getUsername();
     }
 
     /**

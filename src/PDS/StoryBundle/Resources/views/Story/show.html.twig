@@ -20,6 +20,8 @@
         <ul class="info offset2 span7">
             <li>
                 <i class="ajax-loader"></i>
+                <i class="icon-star"></i>
+                {% if app.user and story.canVote(app.user) %}
                 <ul class='star-rating'>
                     <li><a href='#' title='Rate this 1 star out of 5' class='one-star'>1</a></li>
                     <li><a href='#' title='Rate this 2 stars out of 5' class='two-stars'>2</a></li>
@@ -30,6 +32,7 @@
                 <form id="form_vote" class="hidden" action="{{ path('vote_create') }}" method="post">
                     {{ form_rest(form_vote) }}
                 </form>
+                {% endif %}
             </li>
             <li class="rating-value">
                 {{ story.getRating }}

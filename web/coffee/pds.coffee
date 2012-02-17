@@ -21,23 +21,30 @@ $(document).ready ->
         form.before html
     false
 
-  voting = false
-  $(".star-rating li a").click ->
-    unless voting
-      voting = true
-      loader = $(".meta .ajax-loader")
-      form = $("#form_vote")
-      values = {}
-      loader.css "visibility", "visible"
-      $.each form.serializeArray(), (i, field) ->
-        values[field.name] = field.value
+  showStar = -> $(".meta .icon-star").css display:"inline-block"
+  stars = $(".star-rating li a")
+  if stars.length
+    voting = false
+    $(".star-rating li a").click ->
+      unless voting
+        voting = true
+        loader = $(".meta .ajax-loader")
+        form = $("#form_vote")
+        values = {}
+        loader.css "visibility", "visible"
+        $.each form.serializeArray(), (i, field) ->
+          values[field.name] = field.value
 
-      values["vote[value]"] = $(this).html()
-      $.post form.attr("action"), values, (rating) ->
-        voting = false
-        loader.css "visibility", "hidden"
-        $(".rating-value").html rating
-    false
+        values["vote[value]"] = $(this).html()
+        $.post form.attr("action"), values, (rating) ->
+          voting = false
+          loader.css "visibility", "hidden"
+          $(".rating-value").html rating
+          $(".star-rating").hide()
+          showStar()
+      false
+  else
+    showStar()
 
   $(".carousel-inner").html "<div class='item'>"+$(".carousel-inner").html().split("[pagebreak]").join("</div><div class='item'>")+"</div>"
-  $("#myCarousel").carousel().carousel "next"
+  $("#myCarousel").carousel().carousel("next").carousel "pause"
