@@ -38,3 +38,6 @@ $(document).ready ->
         loader.css "visibility", "hidden"
         $(".rating-value").html rating
     false
+
+  $(".carousel-inner").html "<div class='item'>"+$(".carousel-inner").html().split("[pagebreak]").join("</div><div class='item'>")+"</div>"
+  $("#myCarousel").carousel().carousel "next"

@@ -4,11 +4,22 @@
     }
     .show {
         .projector{
-
+            padding-top: 20px;
+            .carousel{
+                .carousel-inner{
+                    min-height: 500px;
+                }
+                .carousel-control{
+                    left: -50px;
+                    &.right{
+                        left: auto;
+                        right: -50px;
+                    }
+                }
+            }
         }
 
         .meta {
-            padding-top: 10px;
 
             li {
                 display: inline-block;
