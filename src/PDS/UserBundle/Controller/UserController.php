@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 use PDS\UserBundle\Entity\User;
 use PDS\UserBundle\Form\UserType;
+use PDS\UserBundle\Form\RegisterType;
 /**
  * User controller.
  *
