@@ -1,7 +1,7 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
 {% block story %}
-<h1>In {{ time.getName }}</h1>
-<div class="offset5">
+{% block header %}
+In {{ time.getName }}
+{% endblock %}
     {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
-</div>
         {% endblock %}

@@ -1,6 +1,8 @@
 {% extends 'PDSUserBundle:User:user.html.twig' %}
+{% block header %}
+Edit profile “{{ entity.username }}”
+{% endblock %}
 {% block user %}
-<h1>Edit profile “{{ entity.username }}”</h1>
 
 <form class="offset1 edit" action="{{ path('user_update', { 'id': entity.id }) }}"
       method="post" {{ form_enctype(form) }}>

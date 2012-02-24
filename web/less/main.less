@@ -3,6 +3,7 @@
 @barEndColor:rgb(36,78,32);
 @pds-green:rgba(66,118,72,1);
 @pds-grey:#F9F9F9;
+@pds-side-margin: 7px;
 
 .navbar-inner{
     #gradient > .vertical(@barStartColor,@barEndColor);
@@ -10,6 +11,7 @@
 
 #page {
     padding-top: 5em;
+    min-height: 600px;
     background: url("../img/gradient.gif") repeat-x scroll 0 0 #73ADD7;
 
     .content-container{
@@ -17,6 +19,8 @@
         .border-radius(10px);
         margin-top: 20px;
         padding-bottom: 1px;
+        margin-left: 0 - @pds-side-margin;
+        width:940px + @pds-side-margin;
         .content-header{
             text-align: center;
             padding: 15px;
@@ -26,7 +30,7 @@
 
          }
         .content-body{
-            margin: 10px 7px 7px 7px;
+            margin: 10px @pds-side-margin @pds-side-margin 7px;
             background-color: @pds-grey;
             .border-radius(10px);
             text-align: left;

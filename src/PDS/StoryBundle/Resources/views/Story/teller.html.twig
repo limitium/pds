@@ -1,7 +1,7 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
+{% block header %}
+By {{ teller }}
+{% endblock %}
 {% block story %}
-<h1>By {{ teller }}</h1>
-<div class="offset5">
     {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
-</div>
         {% endblock %}
