@@ -1,8 +1,10 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
-{% block story %}
-<div class="show row">
-    <h1>{{ story.getTitle() }}</h1>
+{% block header %}
+{{ story.getTitle() }}
+{% endblock %}
 
+{% block story %}
+<div class="show">
     <div class="projector">
         <div id="myCarousel" class="carousel">
             <!-- Carousel items -->
@@ -83,7 +85,7 @@
         </ul>
     </div>
 </div>
-<div id="comments" class="row">
+<div id="comments">
     <span class="span10 offset1"><i class="icon-comment"></i>Comments:</span>
     {% for comment in story.getComments() %}
     {% include 'PDSStoryBundle:Comment:show.html.twig' with {'comment': comment} %}

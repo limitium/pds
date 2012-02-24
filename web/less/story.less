@@ -1,23 +1,17 @@
 
-body{
-    background: url("../img/gradient.gif") repeat-x scroll 0 0 #73ADD7
-}
 .story{
-    h1{
-        text-align: center;
-    }
     .show {
         .projector{
-            padding-top: 20px;
+            padding: 20px 13px 0 13px;
             .carousel{
                 .carousel-inner{
                     min-height: 500px;
                 }
                 .carousel-control{
-                    left: -50px;
+                    left: -70px;
                     &.right{
                         left: auto;
-                        right: -50px;
+                        right: -70px;
                     }
                 }
             }
@@ -33,7 +27,7 @@ body{
                 display: none;
             }
             .info {
-
+                margin-left: 120px;
                 .star-rating {
                     height: 16px !important;
                     display: inline-block;
@@ -70,8 +64,7 @@ body{
     
 
     .box-container{
-        text-align: center;
-         background-color: rgba(66,118,72,1);
+         background-color: @pds-green;
          .border-radius();
          margin-top: 20px;
         .box-header{
@@ -79,11 +72,33 @@ body{
             color: white;
             font-size: 24px;
             font-weight: 900;
+            text-align: center;
          }
         .box-body{
             margin: 10px 7px 7px 7px;
-            background-color: rgba(255,255,255,1);
+            background-color: @pds-grey;
             .border-radius();
+        }
+    }
+    .short-list{
+        padding:3px;
+        margin:0;
+        list-style: none;
+        text-align: left;
+        font-size: 16px;
+        font-weight: bold;
+        li{
+            a{
+                height: 24px;
+                display: inline-block;
+                width: 160px;
+                overflow: hidden;
+            }
+        }
+        .star-rating{
+            padding-top: 2px;
+            background: url(../img/star_rating.png) bottom left repeat-x;
+            display: inline-block;
         }
     }
 }

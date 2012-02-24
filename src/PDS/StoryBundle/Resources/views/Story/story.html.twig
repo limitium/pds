@@ -1,10 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends '::content.html.twig' %}
 
 {% block stylesheets %}
 {{parent()}}
 {% endblock%}
 
-{% block content %}
+{% block body %}
 <div class="story">
     {% block story %}{% endblock %}
 </div>

@@ -1,0 +1,8 @@
+<ul class="short-list">
+    {% for story in stories %}
+    <li>
+        <a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a>
+        <i class="star-rating" style="width:{{ 20 * story.getRating() }}px"></i>
+    </li>
+    {% endfor %}
+</ul>

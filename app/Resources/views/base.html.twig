@@ -60,7 +60,8 @@
         </div>
     </div>
 </div>
-<div id="page" class="container">
+<div id="page">
+    <div class="container">
     {% if app.session.flash('notice') %}
     <div class="flash-message">
         <em>Notice</em>: {{ app.session.flash('notice') }}
@@ -68,6 +69,7 @@
     {% endif %}
     {% block content %}
     {% endblock %}
+    </div>
 </div>
 <footer>
     <div class="f1">

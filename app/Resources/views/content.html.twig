@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+{{parent()}}
+{% endblock%}
+
+{% block content %}
+<div class="content-container">
+    <div class="content-header">
+        {% block header %}
+        {% endblock %}
+    </div>
+    <div class="content-body">
+        {% block body %}
+        {% endblock %}
+    </div>
+</div>
+        {% endblock %}

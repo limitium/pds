@@ -1,16 +1,41 @@
-body {
-    background: url('../img/bg-noise.jpg') #F0F2F5;
-}
 
 @barStartColor:rgba(66,118,72,1);
 @barEndColor:rgb(36,78,32);
+@pds-green:rgba(66,118,72,1);
+@pds-grey:#F9F9F9;
+
 .navbar-inner{
     #gradient > .vertical(@barStartColor,@barEndColor);
 }
 
 #page {
     padding-top: 5em;
+    background: url("../img/gradient.gif") repeat-x scroll 0 0 #73ADD7;
+
+    .content-container{
+        background-color: @pds-green;
+        .border-radius(10px);
+        margin-top: 20px;
+        padding-bottom: 1px;
+        .content-header{
+            text-align: center;
+            padding: 15px;
+            color: white;
+            font-size: 34px;
+            font-weight: 900;
+
+         }
+        .content-body{
+            margin: 10px 7px 7px 7px;
+            background-color: @pds-grey;
+            .border-radius(10px);
+            text-align: left;
+        }
+    }
 }
+
+
+
 .top{
     padding-top: 70px;
 }
@@ -26,7 +51,8 @@ body {
 
 footer{
     text-align: center;
-    margin-top: 20px;
+    padding-top: 20px;
+    background-color: rgba(115,173,215,1);
     .f1{
         color: white;
         padding: 5px;
