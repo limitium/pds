@@ -14,6 +14,7 @@ use PDS\StoryBundle\Entity\Vote;
 use PDS\StoryBundle\Form\VoteType;
 
 use PDS\StoryBundle\Entity\Time;
+use PDS\StoryBundle\Entity\Page;
 
 /**
  * Story controller.
@@ -150,11 +151,15 @@ class StoryController extends Controller {
      * @Template()
      */
     public function newAction() {
-        $entity = new Story();
-        $form = $this->createForm(new StoryType(), $entity);
+        $story = new Story();
+        for($i=0;$i<3;$i++){
+            $page = new Page();
+            $story->addPage($page);
+        }
+        $form = $this->createForm(new StoryType(), $story);
 
         return array(
-            'entity' => $entity,
+            'entity' => $story,
             'form' => $form->createView()
         );
     }

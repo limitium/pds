@@ -3,39 +3,29 @@
 Create a new story
 {% endblock %}
 {% block story %}
-<div class="edit">
+<div class="edit row">
 
     <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
-        <div class="row">
-            <div class="span12">
-                {{ form_label(form.title)}}
-                {{ form_widget(form.title) }}
-            </div>
+        <div class="span6">
+            {{ form_label(form.title)}}
+            {{ form_widget(form.title) }}
+            {{ form_label(form.meta)}}
+            {{ form_widget(form.meta) }}
+            {{ form_label(form.Country)}}
+            {{ form_widget(form.Country) }}
+            {{ form_label(form.date)}}
+            {{ form_widget(form.date) }}
         </div>
-        <div class="row">
-            <div class="span5">
-                {{ form_label(form.meta)}}
-                {{ form_widget(form.meta) }}
-            </div>
-            <div class="span2">
-                {{ form_label(form.Country)}}
-                {{ form_widget(form.Country) }}
-                {{ form_label(form.date)}}
-                {{ form_widget(form.date) }}
-            </div>
+        <div class="span6">
+            {{ form_label(form.Pages)}}
+            {{ form_widget(form.Pages)}}
+            <button class="btn btn-small add-page"><i class="icon-plus"></i> Page</button>
         </div>
         {{ form_rest(form) }}
-        <p>
+        <p class="span12">
             <button class="btn btn-small" type="submit"><i class="icon-pencil"></i>Create</button>
         </p>
     </form>
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('story') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
 </div>
-        {% endblock %}
+{% endblock %}

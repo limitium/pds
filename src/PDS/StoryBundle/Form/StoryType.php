@@ -12,7 +12,10 @@ class StoryType extends AbstractType {
             ->add('Country')
             ->add('date')
 //            ->add('Topics')
-            ->add('meta');
+            ->add('meta')
+            ->add('Pages', 'collection', array('type' => new PageType(),
+            'allow_add' => true,
+            'allow_delete' => true));
     }
 
     public function getName() {

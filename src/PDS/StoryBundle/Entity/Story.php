@@ -352,4 +352,9 @@ class Story
     {
         return $this->Pages;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }
