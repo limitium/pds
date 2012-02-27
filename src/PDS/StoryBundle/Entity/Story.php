@@ -21,11 +21,6 @@ class Story
     private $title;
 
     /**
-     * @var text $body
-     */
-    private $body;
-
-    /**
      * @var datetime $created_at
      */
     private $created_at;
@@ -95,26 +90,6 @@ class Story
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set body
-     *
-     * @param text $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-    }
-
-    /**
-     * Get body
-     *
-     * @return text 
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -301,5 +276,80 @@ class Story
             }
         }
         return true;
+    }
+    /**
+     * @var text $meta
+     */
+    private $meta;
+
+    /**
+     * @var integer $status
+     */
+    private $status;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Page
+     */
+    private $Pages;
+
+
+    /**
+     * Set meta
+     *
+     * @param text $meta
+     */
+    public function setMeta($meta)
+    {
+        $this->meta = $meta;
+    }
+
+    /**
+     * Get meta
+     *
+     * @return text 
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Add Pages
+     *
+     * @param PDS\StoryBundle\Entity\Page $pages
+     */
+    public function addPage(\PDS\StoryBundle\Entity\Page $pages)
+    {
+        $this->Pages[] = $pages;
+    }
+
+    /**
+     * Get Pages
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPages()
+    {
+        return $this->Pages;
     }
 }

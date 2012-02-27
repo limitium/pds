@@ -12,7 +12,7 @@ class StoryType extends AbstractType {
             ->add('Country')
             ->add('date')
 //            ->add('Topics')
-            ->add('body');
+            ->add('meta');
     }
 
     public function getName() {

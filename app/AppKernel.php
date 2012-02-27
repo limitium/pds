@@ -22,7 +22,6 @@ class AppKernel extends Kernel
 
             new PDS\StoryBundle\PDSStoryBundle(),
             new PDS\UserBundle\PDSUserBundle(),
-            new Acme\DemoBundle\AcmeDemoBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

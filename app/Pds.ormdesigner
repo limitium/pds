@@ -10,12 +10,13 @@
     <table name="Story" visPositionX="287" visPositionY="167" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="title" required="true" type="string"/>
-      <column name="body" required="true" type="text"/>
+      <column name="meta" required="true" type="text"/>
       <column name="created_at" required="true" type="datetime"/>
       <column name="user_id" type="integer"/>
       <column name="country_id" type="integer"/>
       <column name="time_id" type="integer"/>
       <column name="date" type="date"/>
+      <column name="status" type="integer"/>
     </table>
     <table name="Vote" visPositionX="364" visPositionY="413" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
@@ -50,6 +51,12 @@
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
+    <table name="Page" visPositionX="36" visPositionY="207" visSizeX="0" visSizeX2="89" visSizeY="0" visSizeY2="59">
+      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+      <column name="body" required="true" type="text"/>
+      <column name="lineno" type="integer"/>
+      <column name="story_id" type="integer"/>
+    </table>
     <foreign-key caption="User Story" from="Story" inverse-alias="User" name="FK_Story_User_id" owning-alias="Stories" to="User">
       <foreign-key-column from="user_id" to="id"/>
     </foreign-key>
@@ -76,6 +83,9 @@
     </foreign-key>
     <foreign-key caption="Topic StoryTopic" from="StoryTopic" name="FK_StoryTopic_Topic_id" to="Topic">
       <foreign-key-column from="topic_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Story Page" from="Page" inverse-alias="Story" name="FK_Page_Story_id" owning-alias="Pages" to="Story" visCaption1X="0" visCaption1Y="0" visCenterX="-17" visCenterY="0">
+      <foreign-key-column from="story_id" to="id"/>
     </foreign-key>
     <many-to-many-relation mn-table="StoryTopic">
       <many-to-many-foreign-key foreign-key="FK_StoryTopic_Story_id" relation-alias="Stories"/>

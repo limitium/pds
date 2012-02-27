@@ -3,7 +3,7 @@
 Create a new story
 {% endblock %}
 {% block story %}
-<div class="edit row offset2">
+<div class="edit">
 
     <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
         <div class="row">
@@ -14,8 +14,8 @@ Create a new story
         </div>
         <div class="row">
             <div class="span5">
-                {{ form_label(form.body)}}
-                {{ form_widget(form.body) }}
+                {{ form_label(form.meta)}}
+                {{ form_widget(form.meta) }}
             </div>
             <div class="span2">
                 {{ form_label(form.Country)}}

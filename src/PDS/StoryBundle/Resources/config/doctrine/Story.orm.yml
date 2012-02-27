@@ -9,7 +9,7 @@ PDS\StoryBundle\Entity\Story:
     title:
       type: string
       nullable: false
-    body:
+    meta:
       type: text
       nullable: false
     created_at:
@@ -18,12 +18,18 @@ PDS\StoryBundle\Entity\Story:
     date:
       type: date
       nullable: true
+    status:
+      type: integer
+      nullable: true
   oneToMany:
     Votes:
       targetEntity: PDS\StoryBundle\Entity\Vote
       mappedBy: Story
     Comments:
       targetEntity: PDS\StoryBundle\Entity\Comment
+      mappedBy: Story
+    Pages:
+      targetEntity: PDS\StoryBundle\Entity\Page
       mappedBy: Story
   manyToOne:
     User:

@@ -7,7 +7,7 @@
     <div class="span3">
         <ul class="thumbnails">
             <li>
-                <img class="userpic thumbnail" src="{% if user.photo %}/pds/web/userpics/{{ user.photo }}{% else %}http://placehold.it/150&text=Photo{% endif %}" alt="{{ user }}">
+                <img class="userpic thumbnail" src="{% if user.photo %}{{ asset('userpic/'+ user.photo) }}{% else %}http://placehold.it/150&text=Photo{% endif %}" alt="{{ user }}">
             </li>
         </ul>
     </div>

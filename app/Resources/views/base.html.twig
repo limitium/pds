@@ -4,6 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/rating.css') }}" type="text/css" media="all"/>
+    {% if app.environment == 'prod' %}
+        <link rel="stylesheet" href="{{ asset('css/pds.css') }}" type="text/css" media="all"/>
+    {% endif %}
     {% endblock %}
     <title>{% block title %}PDS{% endblock %}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
@@ -17,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="{{ path('homepage')}}">PDS</a>
+            <a class="brand" href="{{ path('homepage')}}"><img src="{{ asset("img/mystory_logo.png") }}" /></a>
 
             <div class="nav-collapse">
                 <ul class="nav">
@@ -80,22 +83,27 @@
     <div class="f2">
         <div class="container">
             <img class="pull-right" src="{{ asset('img/da_vinci.png') }}"/>
-                This project has been carried out with the support of the European Community. The content of this
-                material does not necessarily reﬂect the position of the European Community, nor does it involve
-                any responsibility on their part. Copyright © 2011 MyStory Project. All Rights Reserved.
-            </div>
+            This project has been carried out with the support of the European Community. The content of this
+            material does not necessarily reﬂect the position of the European Community, nor does it involve
+            any responsibility on their part. Copyright © 2011 MyStory Project. All Rights Reserved.
+        </div>
     </div>
 </footer>
 {% block javascripts %}
-<link rel="stylesheet/less" type="text/css" href="{{ asset('less/bs/bootstrap.less') }}">
-<link rel="stylesheet/less" type="text/css" href="{{ asset('less/pds.less') }}">
-<script src="{{ asset('js/less-1.2.1.min.js') }}"></script>
 
-<script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js') }}"></script>
-<script src="{{ asset('js/bootstrap.js') }}"></script>
+{% if app.environment == 'dev' %}
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('less/bs/bootstrap.less') }}">
+    <link rel="stylesheet/less" type="text/css" href="{{ asset('less/pds.less') }}">
+    <script src="{{ asset('js/less-1.2.1.min.js') }}"></script>
+    <script type="text/coffeescript" src="{{ asset('coffee/pds.coffee') }}"></script>
+    <script src="{{ asset('js/coffee-script.js') }}"></script>
+{% else %}
+    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ asset('js/pds.js') }}"></script>
+{% endif %}
 
-<script type="text/coffeescript" src="{{ asset('coffee/pds.coffee') }}"></script>
-<script src="{{ asset('js/coffee-script.js') }}"></script>
+
 {% endblock %}
 </body>
 </html>
