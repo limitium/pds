@@ -48,7 +48,6 @@
 
     }
     .edit {
-        /*padding: 3em 0 0 3em;*/
         #story_date_year {
             width: 65px;
         }
@@ -59,6 +58,50 @@
 
         #story_date_day {
             width: 48px;
+        }
+        .pages-label{
+            margin-top: 9px;
+        }
+        #story_Pages {
+            list-style: none;
+            width: 690px;
+            margin: 0px;
+            li{
+                .border-radius();
+                border: 1px solid @pds-green;
+                margin-bottom: 10px;
+            }
+            .story-page-header {
+                font-weight: 900;
+                font-size: 200%;
+                line-height: 28px;
+                display: block;
+                width: 100%;
+                margin-left: 5px;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            .story-page-data {
+                /*padding-top: 10px;*/
+            }
+            textarea {
+                height: 250px;
+                width: 680px;
+                border:none;
+                margin:0px;
+                padding: 4px;
+            }
+        }
+        .add-page{
+            margin-right: 10px;
+        }
+        .meta{
+            padding: 10px 0 10px 10px;
+            margin-right: -10px;
+        }
+        .create-story{
+            margin-left: 10px;
         }
     }
 

@@ -10,7 +10,7 @@ class StoryType extends AbstractType {
         $builder
             ->add('title')
             ->add('Country')
-            ->add('date')
+            ->add('date','date',array('widget' => 'single_text','format'=>'dd/MM/yyyy'))
 //            ->add('Topics')
             ->add('meta')
             ->add('Pages', 'collection', array('type' => new PageType(),

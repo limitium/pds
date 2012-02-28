@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="pds_user.example.class">PDS\UserBundle\Example</parameter>
+        <parameter key="pds_story.example.class">PDS\StoryBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="pds_user.example" class="%pds_user.example.class%">
+        <service id="pds_story.example" class="%pds_story.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>

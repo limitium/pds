@@ -50,5 +50,13 @@ $(document).ready ->
     pages.append pages.attr("data-prototype").split("$$name$$").join(pages.children().length)
     return false
 
+
+  $(document).delegate ".story-page-header", "click", ->
+    pageData = $(@).siblings(".story-page-data")
+    if pageData.is(":visible") then pageData.slideUp() else pageData.slideDown()
+    return false
+
+  $("#story_date").datepicker(changeMonth: true, changeYear: true)
+
   $(".carousel-inner").html "<div class='item'>"+$(".carousel-inner").html().split("[pagebreak]").join("</div><div class='item'>")+"</div>"
   $("#myCarousel").carousel(interval: 10000000).carousel "next"

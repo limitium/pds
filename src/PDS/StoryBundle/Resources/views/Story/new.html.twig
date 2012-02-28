@@ -1,4 +1,33 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
+
+
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css"
+      type="text/css" media="all"/>
+{% endblock%}
+{% block javascripts %}
+{{parent()}}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+{% endblock%}
+
+{% form_theme form _self %}
+
+{% block collection_widget %}
+{% spaceless %}
+{% if prototype is defined %}
+{% set attr = attr|merge({'data-prototype': form_story_page(prototype) }) %}
+{% endif %}
+<ul {{ block('widget_container_attributes') }}>
+    {{ form_errors(form) }}
+    {% for child in form %}
+    {{ form_story_page(child) }}
+    {% endfor %}
+</ul>
+{% endspaceless %}
+{% endblock collection_widget %}
+
+
 {% block header %}
 Create a new story
 {% endblock %}
@@ -6,24 +35,20 @@ Create a new story
 <div class="edit row">
 
     <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
-        <div class="span6">
-            {{ form_label(form.title)}}
-            {{ form_widget(form.title) }}
-            {{ form_label(form.meta)}}
-            {{ form_widget(form.meta) }}
-            {{ form_label(form.Country)}}
-            {{ form_widget(form.Country) }}
-            {{ form_label(form.date)}}
-            {{ form_widget(form.date) }}
+        <div class="meta span3">
+            {{ form_row(form.title)}}
+            {{ form_row(form.meta)}}
+            {{ form_row(form.Country)}}
+            {{ form_row(form.date)}}
         </div>
-        <div class="span6">
-            {{ form_label(form.Pages)}}
+        <div class="span9">
+            <label class="pages-label">Pages</label>
             {{ form_widget(form.Pages)}}
-            <button class="btn btn-small add-page"><i class="icon-plus"></i> Page</button>
+            <button class="btn btn-small pull-right add-page"><i class="icon-plus"></i> Page</button>
         </div>
         {{ form_rest(form) }}
         <p class="span12">
-            <button class="btn btn-small" type="submit"><i class="icon-pencil"></i>Create</button>
+            <button class="btn btn-small create-story" type="submit"><i class="icon-pencil"></i>Create</button>
         </p>
     </form>
 

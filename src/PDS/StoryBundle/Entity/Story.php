@@ -58,8 +58,9 @@ class Story
     public function __construct()
     {
         $this->Votes = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->Comments = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->Topics = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Topics = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Pages = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -351,6 +352,20 @@ class Story
     public function getPages()
     {
         return $this->Pages;
+    }
+
+    /**
+     * Set Pages
+     *
+     * @param Doctrine\Common\Collections\ArrayCollection  $pages
+     */
+    public function setPages(\Doctrine\Common\Collections\ArrayCollection $pages) {
+        $this->Pages[] = $pages;
+    }
+
+
+    public function removePage(\Pds\StoryBundle\Entity\Page $page) {
+        $this->Pages->removeElement($page);
     }
 
     public function __toString()

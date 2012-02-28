@@ -1,0 +1,11 @@
+parameters:
+#    tox_parser.example.class: Tox\ParserBundle\Example
+
+services:
+  story.twig.extension:
+    class: PDS\StoryBundle\Twig\Extension\StoryExtension
+    tags:
+      -  { name: twig.extension }
+#    tox_parser.example:
+#        class: %tox_parser.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

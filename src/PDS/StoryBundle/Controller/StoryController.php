@@ -21,14 +21,16 @@ use PDS\StoryBundle\Entity\Page;
  *
  * @Route("/story")
  */
-class StoryController extends Controller {
+class StoryController extends Controller
+{
     /**
      * Lists all Story entities.
      *
      * @Route("/location/{id}", name="story_location")
      * @Template()
      */
-    public function locationAction($id) {
+    public function locationAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
 
@@ -40,7 +42,7 @@ class StoryController extends Controller {
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
 
-        return array('stories' => $stories,'location'=>$location
+        return array('stories' => $stories, 'location' => $location
         );
     }
 
@@ -50,7 +52,8 @@ class StoryController extends Controller {
      * @Route("/time/{id}", name="story_time")
      * @Template()
      */
-    public function timeAction($id) {
+    public function timeAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
 
@@ -62,7 +65,7 @@ class StoryController extends Controller {
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
 
-        return array('stories' => $stories,'time'=>$time
+        return array('stories' => $stories, 'time' => $time
         );
     }
 
@@ -72,7 +75,8 @@ class StoryController extends Controller {
      * @Route("/teller/{id}", name="story_teller")
      * @Template()
      */
-    public function tellerAction($id) {
+    public function tellerAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
 
@@ -84,7 +88,7 @@ class StoryController extends Controller {
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
 
-        return array('stories' => $stories,'teller'=>$teller
+        return array('stories' => $stories, 'teller' => $teller
         );
     }
 
@@ -94,7 +98,8 @@ class StoryController extends Controller {
      * @Route("/", name="story")
      * @Template()
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
@@ -117,7 +122,8 @@ class StoryController extends Controller {
      * @Route("/{id}/show", name="story_show")
      * @Template()
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
 
@@ -150,9 +156,10 @@ class StoryController extends Controller {
      * @Route("/new", name="story_new")
      * @Template()
      */
-    public function newAction() {
+    public function newAction()
+    {
         $story = new Story();
-        for($i=0;$i<3;$i++){
+        for ($i = 0; $i < 3; $i++) {
             $page = new Page();
             $story->addPage($page);
         }
@@ -171,38 +178,44 @@ class StoryController extends Controller {
      * @Method("post")
      * @Template("PDSStoryBundle:Story:new.html.twig")
      */
-    public function createAction() {
-        $entity = new Story();
+    public function createAction()
+    {
+        $story = new Story();
         $request = $this->getRequest();
-        $form = $this->createForm(new StoryType(), $entity);
+        $form = $this->createForm(new StoryType(), $story);
         $form->bindRequest($request);
-
         if ($form->isValid()) {
-            $entity->setCreatedAt(new \DateTime("now"));
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            $entity->setUser($user);
-
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($entity);
+            foreach ($story->getPages() as $page) {
+                $page->setStory($story);
+                $em->persist($page);
+            }
+            $story->setCreatedAt(new \DateTime("now"));
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            $story->setUser($user);
+            $story->setTime($em->getRepository('PDSStoryBundle:Time')->find(1));
+
+            $em->persist($story);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('story_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('story_show', array('id' => $story->getId())));
 
         }
 
         return array(
-            'entity' => $entity,
+            'source' => $story,
             'form' => $form->createView()
         );
     }
 
     /**
- * Displays a form to edit an existing Story entity.
- *
- * @Route("/{id}/edit", name="story_edit")
- * @Template()
- */
-    public function editAction($id) {
+     * Displays a form to edit an existing Story entity.
+     *
+     * @Route("/{id}/edit", name="story_edit")
+     * @Template()
+     */
+    public function editAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
@@ -228,7 +241,8 @@ class StoryController extends Controller {
      * @Method("post")
      * @Template("PDSStoryBundle:Story:edit.html.twig")
      */
-    public function updateAction($id) {
+    public function updateAction($id)
+    {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
@@ -264,7 +278,8 @@ class StoryController extends Controller {
      * @Route("/{id}/delete", name="story_delete")
      * @Method("post")
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -285,7 +300,8 @@ class StoryController extends Controller {
         return $this->redirect($this->generateUrl('story'));
     }
 
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm();

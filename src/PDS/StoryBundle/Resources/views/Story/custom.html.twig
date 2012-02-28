@@ -1,0 +1,15 @@
+{% block form_story_page  %}
+{% spaceless %}
+<li {{ block('widget_container_attributes') }}>
+
+    <a href="#" class="story-page-header">{{ form.vars.name }}</a>
+    <div class="story-page-data">
+        {% for child in form %}
+            <div>
+                {{ form_widget(child) }}
+            </div>
+        {% endfor %}
+    </div>
+</li>
+{% endspaceless %}
+{% endblock form_story_page %}

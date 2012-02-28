@@ -24,4 +24,10 @@ class PageType extends AbstractType
     {
         return 'pds_storybundle_pagetype';
     }
+    public function getDefaultOptions(array $options) {
+        return array(
+            'data_class' => 'PDS\StoryBundle\Entity\Page',
+        );
+    }
+
 }
