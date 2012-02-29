@@ -102,7 +102,7 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->top();
         $locations = $em->getRepository('PDSStoryBundle:Country')->findAll();
         $times = $em->getRepository('PDSStoryBundle:Time')->findAll();
         $topics = $em->getRepository('PDSStoryBundle:Topic')->findAll();
@@ -143,7 +143,7 @@ class StoryController extends Controller
         $vote->setStory($story);
         $formVote = $this->createForm(new VoteType(), $vote);
 
-        $related = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $related = $em->getRepository('PDSStoryBundle:Story')->related($story);
         return array(
             'related' => $related,
             'story' => $story,

@@ -5,24 +5,35 @@ namespace PDS\StoryBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 
-class StoryRepository extends EntityRepository {
+use PDS\StoryBundle\Entity\Story;
 
-    public function top($limit = 10){
+class StoryRepository extends EntityRepository
+{
+
+    public function top($limit = 10)
+    {
         $q = $this
-            ->createQueryBuilder('u')
-            ->where('u.username = :username OR u.email = :email')
-            ->setParameter('username', $username)
-            ->setParameter('email', $username)
+            ->createQueryBuilder('s')
+            ->select('s')
+            ->addSelect("SUM(v.value)/COUNT(v.id) as rat")
+            ->leftJoin("s.Votes", "v")
+            ->groupBy("s.id")
+            ->orderBy("rat", "desc")
             ->getQuery();
-        try {
-            ////             The Query::getSingleResult() method throws an exception
-            ////             if there is no record matching the criteria.
-            $user = $q->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new UsernameNotFoundException(sprintf('Unable to find an active admin AcmeUserBundle:User object identified by "%s".', $username), null, 0, $e);
-        }
 
-        return $user;
+        $q->setMaxResults($limit);
+        $r = $q->getResult();
+        $res = array();
+        foreach ($r as $rr) {
+            $res[] = $rr[0];
+        }
+        return $res;
+    }
+
+    public function related(Story $story)
+    {
+
+        return $this->top();
     }
 
 }
