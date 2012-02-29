@@ -40,7 +40,7 @@ $(document).ready ->
           voting = false
           loader.css "visibility", "hidden"
           $(".rating-value").html rating
-          $(".star-rating").hide()
+          $(".meta .star-rating").hide()
           showStar()
       false
   else
