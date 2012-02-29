@@ -26,6 +26,9 @@ PDS\StoryBundle\Entity\Story:
     Comments:
       targetEntity: PDS\StoryBundle\Entity\Comment
       mappedBy: Story
+    Pages:
+      targetEntity: PDS\StoryBundle\Entity\Page
+      mappedBy: Story
   manyToOne:
     User:
       targetEntity: PDS\UserBundle\Entity\User

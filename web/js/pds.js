@@ -48,7 +48,7 @@ $(document).ready(function() {
                     voting = false;
                     loader.css("visibility", "hidden");
                     $(".rating-value").html(rating);
-                    $(".star-rating").hide();
+                    $(".meta .star-rating").hide();
                     return showStar();
                 });
             }
@@ -57,8 +57,28 @@ $(document).ready(function() {
     } else {
         showStar();
     }
-    $(".carousel-inner").html("<div class='item'>" + $(".carousel-inner").html().split("[pagebreak]").join("</div><div class='item'>") + "</div>");
-    return $("#myCarousel").carousel({
+    $(".add-page").click(function() {
+        var pages;
+        pages = $("#story_Pages");
+        pages.append(pages.attr("data-prototype").split("$$name$$").join(pages.children().length));
+        return false;
+    });
+    $(document).delegate(".story-page-header", "click", function() {
+        var pageData;
+        pageData = $(this).siblings(".story-page-data");
+        if (pageData.is(":visible")) {
+            pageData.slideUp();
+        } else {
+            pageData.slideDown();
+        }
+        return false;
+    });
+    $("#myCarousel").carousel({
         interval: 10000000
     }).carousel("next");
+    $("#story_date").datepicker({
+        changeMonth: true,
+        changeYear: true
+    });
+    return true;
 });

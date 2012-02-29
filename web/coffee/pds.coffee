@@ -62,4 +62,6 @@ $(document).ready ->
 
   $("#story_date").datepicker(changeMonth: true, changeYear: true)
 
+  true
+
 

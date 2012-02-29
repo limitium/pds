@@ -10,7 +10,7 @@ class StoryExtension extends FormExtension
 
     public function __construct()
     {
-        parent::__construct(array('PDSStoryBundle:Story:custom.html.twig '));
+        parent::__construct(array('PDSStoryBundle:Story:custom.html.twig'));
     }
 
     public function getFilters()
