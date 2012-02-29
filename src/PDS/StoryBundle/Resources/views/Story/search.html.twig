@@ -1,0 +1,8 @@
+{% extends 'PDSStoryBundle:Story:story.html.twig' %}
+{% block header %}
+ Results for "{{ q }}"
+{% endblock %}
+
+{% block story %}
+{% include 'PDSStoryBundle:Story:short_list.html.twig' with {'stories': stories} %}
+{% endblock %}

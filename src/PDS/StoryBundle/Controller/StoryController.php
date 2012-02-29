@@ -95,6 +95,23 @@ class StoryController extends Controller
     /**
      * Lists all Story entities.
      *
+     * @Route("/search", name="story_search")
+     * @Template()
+     */
+    public function searchAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $q = $this->getRequest()->get("q");
+        $stories = $em->getRepository('PDSStoryBundle:Story')->search($q);
+
+
+        return array('stories' => $stories, 'q' => $q);
+    }
+
+    /**
+     * Lists all Story entities.
+     *
      * @Route("/", name="story")
      * @Template()
      */

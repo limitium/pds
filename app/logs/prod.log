@@ -25,3 +25,8 @@
 [2012-02-24 16:43:52] security.DEBUG: Username "qwe" was reloaded from user provider. [] []
 [2012-02-24 16:43:52] request.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException: No route found for "GET /2" (uncaught exception) at Z:\home\localhost\www\pds\app\cache\prod\classes.php line 4560 [] []
 [2012-02-24 16:43:52] security.DEBUG: Write SecurityContext in the session [] []
+[2012-02-29 15:32:07] security.DEBUG: Read SecurityContext from the session [] []
+[2012-02-29 15:32:07] security.DEBUG: Reloading user from user provider. [] []
+[2012-02-29 15:32:08] security.DEBUG: Username "qwe" was reloaded from user provider. [] []
+[2012-02-29 15:32:08] request.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException: No route found for "GET /2" (uncaught exception) at Z:\home\localhost\www\pds\app\cache\prod\classes.php line 4560 [] []
+[2012-02-29 15:32:08] security.DEBUG: Write SecurityContext in the session [] []

@@ -36,4 +36,9 @@ class StoryRepository extends EntityRepository
         return $this->top();
     }
 
+    public function search($q)
+    {
+        return $this->top();
+    }
+
 }
