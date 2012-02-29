@@ -1,28 +1,57 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
+
+
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/ui-lightness/jquery-ui.css"
+      type="text/css" media="all"/>
+{% endblock%}
+{% block javascripts %}
+{{parent()}}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+
+{% endblock%}
+
+{% form_theme form _self %}
+
+{% block collection_widget %}
+{% spaceless %}
+{% if prototype is defined %}
+{% set attr = attr|merge({'data-prototype': form_story_page(prototype) }) %}
+{% endif %}
+<ul {{ block('widget_container_attributes') }}>
+    {{ form_errors(form) }}
+    {% for child in form %}
+    {{ form_story_page(child) }}
+    {% endfor %}
+</ul>
+{% endspaceless %}
+{% endblock collection_widget %}
+
+
 {% block header %}
-Edit story
+Create a new story
 {% endblock %}
 {% block story %}
-<div class="edit row offset2">
-<form action="{{ path('story_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
+<div class="edit row">
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('story') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('story_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+    <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }}>
+        <div class="meta span3">
+            {{ form_row(form.title)}}
+            {{ form_row(form.meta)}}
+            {{ form_row(form.Country)}}
+            {{ form_row(form.date)}}
+        </div>
+        <div class="span9">
+            <label class="pages-label">Pages</label>
+            {{ form_widget(form.Pages)}}
+            <button class="btn btn-small pull-right add-page"><i class="icon-plus"></i> Page</button>
+        </div>
+        {{ form_rest(form) }}
+        <p class="span12">
+            <button class="btn btn-small create-story" type="submit"><i class="icon-pencil"></i> Update</button>
+        </p>
+    </form>
+
 </div>
-        {% endblock %}
+{% endblock %}

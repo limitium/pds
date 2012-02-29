@@ -1,4 +1,5 @@
 $(document).ready ->
+
   commenting = false
   $("#form_comment").submit ->
     unless commenting
@@ -56,7 +57,9 @@ $(document).ready ->
     if pageData.is(":visible") then pageData.slideUp() else pageData.slideDown()
     return false
 
+
+  $("#myCarousel").carousel(interval: 10000000).carousel "next"
+
   $("#story_date").datepicker(changeMonth: true, changeYear: true)
 
-  $(".carousel-inner").html "<div class='item'>"+$(".carousel-inner").html().split("[pagebreak]").join("</div><div class='item'>")+"</div>"
-  $("#myCarousel").carousel(interval: 10000000).carousel "next"
+

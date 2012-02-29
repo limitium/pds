@@ -9,6 +9,7 @@
 {% block javascripts %}
 {{parent()}}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+
 {% endblock%}
 
 {% form_theme form _self %}
@@ -48,7 +49,7 @@ Create a new story
         </div>
         {{ form_rest(form) }}
         <p class="span12">
-            <button class="btn btn-small create-story" type="submit"><i class="icon-pencil"></i>Create</button>
+            <button class="btn btn-small create-story" type="submit"><i class="icon-pencil"></i> Create</button>
         </p>
     </form>
 

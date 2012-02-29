@@ -143,7 +143,9 @@ class StoryController extends Controller
         $vote->setStory($story);
         $formVote = $this->createForm(new VoteType(), $vote);
 
+        $related = $em->getRepository('PDSStoryBundle:Story')->findAll();
         return array(
+            'related' => $related,
             'story' => $story,
             'form_comment' => $formComment->createView(),
             'form_vote' => $formVote->createView(),
@@ -218,18 +220,18 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
+        $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
 
-        if (!$entity) {
+        if (!$story) {
             throw $this->createNotFoundException('Unable to find Story entity.');
         }
 
-        $editForm = $this->createForm(new StoryType(), $entity);
+        $editForm = $this->createForm(new StoryType(), $story);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'story' => $story,
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -245,13 +247,13 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
+        $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
 
-        if (!$entity) {
+        if (!$story) {
             throw $this->createNotFoundException('Unable to find Story entity.');
         }
 
-        $editForm = $this->createForm(new StoryType(), $entity);
+        $editForm = $this->createForm(new StoryType(), $story);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -259,17 +261,23 @@ class StoryController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $em->persist($entity);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($story);
+            foreach ($story->getPages() as $page) {
+                $page->setStory($story);
+                $em->persist($page);
+            }
             $em->flush();
 
-            return $this->redirect($this->generateUrl('story_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('story_show', array('id' => $id)));
         }
 
         return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'story' => $story,
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+
     }
 
     /**
