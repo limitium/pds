@@ -2,12 +2,19 @@
 {% spaceless %}
 <li {{ block('widget_container_attributes') }}>
 
-    <a href="#" class="story-page-header">{{ form.vars.name }}</a>
+    <div href="#" class="story-page-header">
+        <div class="page-number pull-left">
+            {{ form.vars.name }}
+        </div>
+        <button class="btn btn-small pull-right page-delete"><i class="icon-remove"></i></button>
+        <button class="btn btn-small pull-right page-down"><i class="icon-arrow-down"></i></button>
+        <button class="btn btn-small pull-right page-up"><i class="icon-arrow-up"></i></button>
+    </div>
     <div class="story-page-data">
         {% for child in form %}
-            <div>
-                {{ form_widget(child) }}
-            </div>
+        <div>
+            {{ form_widget(child) }}
+        </div>
         {% endfor %}
     </div>
 </li>

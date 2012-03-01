@@ -59,14 +59,14 @@
         #story_date_day {
             width: 48px;
         }
-        .pages-label{
+        .pages-label {
             margin-top: 9px;
         }
         #story_Pages {
             list-style: none;
             width: 690px;
             margin: 0px;
-            li{
+            li {
                 .border-radius();
                 border: 1px solid @pds-green;
                 margin-bottom: 10px;
@@ -75,32 +75,42 @@
                 font-weight: 900;
                 font-size: 200%;
                 line-height: 28px;
-                display: block;
+                display: table;
                 width: 100%;
                 margin-left: 5px;
+                color: @linkColor;
                 &:hover {
+                    color: @linkColorHover;
                     text-decoration: none;
+                }
+                .page-number {
+                    display: inline-block;
+                    width: 82%;
+                }
+                button {
+                 margin-right: 5px;
+                 z-index: 1000;
                 }
             }
             .story-page-data {
-                /*padding-top: 10px;*/
+            /*padding-top: 10px;*/
             }
             textarea {
                 height: 250px;
                 width: 680px;
-                border:none;
-                margin:0px;
+                border: none;
+                margin: 0px;
                 padding: 4px;
             }
         }
-        .add-page{
+        .add-page {
             margin-right: 10px;
         }
-        .meta{
+        .meta {
             padding: 10px 0 10px 10px;
             margin-right: -10px;
         }
-        .create-story{
+        .create-story {
             margin-left: 10px;
         }
     }

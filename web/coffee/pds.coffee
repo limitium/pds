@@ -1,5 +1,4 @@
 $(document).ready ->
-
   commenting = false
   $("#form_comment").submit ->
     unless commenting
@@ -19,7 +18,6 @@ $(document).ready ->
         $("#comment_message").val ""
         loader.css "visibility", "hidden"
         form.before html
-    false
 
   showStar = -> $(".meta .icon-star").css display: "inline-block"
   stars = $(".star-rating li a")
@@ -42,26 +40,69 @@ $(document).ready ->
           $(".rating-value").html rating
           $(".meta .star-rating").hide()
           showStar()
-      false
   else
     showStar()
+
+
+  setLineno = (page, lineno) ->
+    page.attr("data-page", lineno)
+    $(".page-number", page).html lineno
+    $($("input", page)[0]).val lineno
+
+  refreshLineno = ->
+    $("#story_Pages li").each (i, li)->
+      setLineno($(@), i + 1)
+
+  reorderPages= ->
+    newOrder = []
+
+    $("#story_Pages li").each (i, li)->
+      newOrder[parseInt($(li).attr("data-page"))] = li
+
+    cont = $("#story_Pages")
+    for page in newOrder
+      cont.append(page)
+
+  refreshLineno()
+
+  $(document).delegate ".story-page-header .page-number", "click", ->
+    pageData = $(@).parent().siblings(".story-page-data")
+    if pageData.is(":visible") then pageData.slideUp() else pageData.slideDown()
+
+  $(document).delegate ".story-page-header .page-delete", "click", ->
+    $(@).parents("li").slideUp(->
+      $(@).remove()
+      refreshLineno()
+    )
+    false
+
+  changePosition = (page, delta) ->
+    curLineno = parseInt(page.attr("data-page"))
+    toLineno = curLineno + delta
+
+    return if (delta == -1 and curLineno == 1) or ( delta == 1 and curLineno == page.siblings().length + 1)
+
+    setLineno($("li[data-page=" + toLineno + "]"), curLineno)
+    setLineno(page, toLineno)
+    reorderPages()
+
+  $(document).delegate ".story-page-header .page-up", "click", ->
+    changePosition($(@).parents("li"), -1)
+    false
+
+  $(document).delegate ".story-page-header .page-down", "click", ->
+    changePosition($(@).parents("li"), +1)
+    false
 
   $(".add-page").click ->
     pages = $("#story_Pages")
     pages.append pages.attr("data-prototype").split("$$name$$").join(pages.children().length)
-    return false
-
-
-  $(document).delegate ".story-page-header", "click", ->
-    pageData = $(@).siblings(".story-page-data")
-    if pageData.is(":visible") then pageData.slideUp() else pageData.slideDown()
-    return false
+    refreshLineno()
+    false
 
 
   $("#myCarousel").carousel(interval: 10000000).carousel "next"
 
   $("#story_date").datepicker(changeMonth: true, changeYear: true)
-
-  true
 
 
