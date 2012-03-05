@@ -3,11 +3,12 @@
 namespace PDS\StoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineExtensions\Taggable\Taggable;
 
 /**
  * PDS\StoryBundle\Entity\Story
  */
-class Story
+class Story     implements Taggable
 {
    
     /**
@@ -19,11 +20,6 @@ class Story
      * @var string $title
      */
     private $title;
-
-    /**
-     * @var text $body
-     */
-    private $body;
 
     /**
      * @var datetime $created_at
@@ -63,8 +59,9 @@ class Story
     public function __construct()
     {
         $this->Votes = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->Comments = new \Doctrine\Common\Collections\ArrayCollection();
-    $this->Topics = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Topics = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Pages = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -95,26 +92,6 @@ class Story
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set body
-     *
-     * @param text $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-    }
-
-    /**
-     * Get body
-     *
-     * @return text 
-     */
-    public function getBody()
-    {
-        return $this->body;
     }
 
     /**
@@ -301,5 +278,141 @@ class Story
             }
         }
         return true;
+    }
+    /**
+     * @var text $meta
+     */
+    private $meta;
+
+    /**
+     * @var integer $status
+     */
+    private $status;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Page
+     */
+    private $Pages;
+
+
+    /**
+     * Set meta
+     *
+     * @param text $meta
+     */
+    public function setMeta($meta)
+    {
+        $this->meta = $meta;
+    }
+
+    /**
+     * Get meta
+     *
+     * @return text 
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Add Pages
+     *
+     * @param PDS\StoryBundle\Entity\Page $pages
+     */
+    public function addPage(\PDS\StoryBundle\Entity\Page $pages)
+    {
+        $this->Pages[] = $pages;
+    }
+
+    /**
+     * Get Pages
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPages()
+    {
+        return $this->Pages;
+    }
+
+    /**
+     * Set Pages
+     *
+     * @param Doctrine\Common\Collections\ArrayCollection  $pages
+     */
+    public function setPages(\Doctrine\Common\Collections\ArrayCollection $pages) {
+        $this->Pages = $pages;
+    }
+
+
+    public function removePage(\Pds\StoryBundle\Entity\Page $page) {
+        $this->Pages->removeElement($page);
+    }
+
+    /**
+     * Set Pages
+     *
+     * @param Doctrine\Common\Collections\ArrayCollection  $topics
+     */
+    public function setTopics(\Doctrine\Common\Collections\ArrayCollection $topics) {
+        $this->Topics = $topics;
+    }
+
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Returns the unique taggable resource type
+     *
+     * @return string
+     */
+    function getTaggableType()
+    {
+        return "story";
+    }
+
+    /**
+     * Returns the unique taggable resource identifier
+     *
+     * @return string
+     */
+    function getTaggableId()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * Returns the collection of tags for this Taggable entity
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+
+        return $this->tags;
     }
 }

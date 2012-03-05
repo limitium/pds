@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Play';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Play'), url('http://themes.googleusercontent.com/static/fonts/play/v3/-SXnV4mZjf4oh1IBw13WZw.woff') format('woff');
+}
+@font-face {
+  font-family: 'Jura';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Jura Regular'), local('Jura-Regular'), url('http://themes.googleusercontent.com/static/fonts/jura/v4/pqMzP52_r6zHbOILcX8h-A.woff') format('woff');
+}

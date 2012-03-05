@@ -1,0 +1,8 @@
+PDS\StoryBundle\Entity\Tag:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO

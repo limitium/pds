@@ -6,7 +6,7 @@
     <module-position name="UserBundle" visPositionX="819" visPositionY="50"/>
   </project>
 
-  <module description="all about stories" import-format="Doctrine2Yml" import-path="..\src\PDS\StoryBundle\Resources\config\doctrine\" name="StoryBundle" visBkColor="16643574" visSizeX="0" visSizeX2="478" visSizeY="0" visSizeY2="491">
+  <module description="all about stories" import-format="Doctrine2Yml" import-path="..\src\PDS\StoryBundle\Resources\config\doctrine\" name="StoryBundle" visBkColor="16643574" visSizeX="0" visSizeX2="478" visSizeY="0" visSizeY2="515">
     <table name="Story" visPositionX="298" visPositionY="177" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="129">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="title" required="true" type="string"/>
@@ -41,14 +41,6 @@
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
-    <table name="Topic" visPositionX="129" visPositionY="432" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
-      <column auto-increment="true" name="id" primary="true" type="integer"/>
-      <column name="name" required="true" type="string"/>
-    </table>
-    <table name="StoryTopic" visPositionX="117" visPositionY="287" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="60">
-      <column name="story_id" required="true" type="integer"/>
-      <column name="topic_id" required="true" type="integer"/>
-    </table>
     <table name="Time" visPositionX="113" visPositionY="136" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
@@ -58,6 +50,13 @@
       <column name="body" required="true" type="text"/>
       <column name="lineno" type="integer"/>
       <column name="story_id" type="integer"/>
+    </table>
+    <table name="Tag" visPositionX="45" visPositionY="425" visSizeX="0" visSizeX2="119" visSizeY="0" visSizeY2="73">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+    </table>
+    <table name="Tagging" visPositionX="139" visPositionY="312" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="87">
+      <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <column name="tag_id" type="integer"/>
     </table>
     <foreign-key caption="User Story" from="Story" inverse-alias="User" name="FK_Story_User_id" owning-alias="Stories" to="User">
       <foreign-key-column from="user_id" to="id"/>
@@ -80,19 +79,12 @@
     <foreign-key caption="User Comment" from="Comment" inverse-alias="User" name="FK_Comment_User_id" owning-alias="Comments" to="User">
       <foreign-key-column from="user_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Story StoryTopic" from="StoryTopic" name="FK_StoryTopic_Story_id" to="Story">
-      <foreign-key-column from="story_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="Topic StoryTopic" from="StoryTopic" name="FK_StoryTopic_Topic_id" to="Topic">
-      <foreign-key-column from="topic_id" to="id"/>
-    </foreign-key>
     <foreign-key caption="Story Page" from="Page" inverse-alias="Story" name="FK_Page_Story_id" owning-alias="Pages" to="Story" visCaption1X="-2" visCaption1Y="0" visCenterX="-17" visCenterY="0">
       <foreign-key-column from="story_id" to="id"/>
     </foreign-key>
-    <many-to-many-relation mn-table="StoryTopic">
-      <many-to-many-foreign-key foreign-key="FK_StoryTopic_Story_id" relation-alias="Stories"/>
-      <many-to-many-foreign-key foreign-key="FK_StoryTopic_Topic_id" relation-alias="Topics"/>
-    </many-to-many-relation>
+    <foreign-key caption="Tag Tagging" from="Tagging" inverse-alias="Tag" name="FK_Tagging_Tag_id" owning-alias="" to="Tag" visCaption1X="1" visCaption1Y="0" visCenterX="0" visCenterY="0">
+      <foreign-key-column from="tag_id" to="id"/>
+    </foreign-key>
   </module>
 
   <module import-format="Doctrine2Yml" import-path="..\src\PDS\UserBundle\Resources\config\doctrine\" name="UserBundle" visBkColor="13353215" visSizeX="278" visSizeX2="197" visSizeY="20" visSizeY2="507">

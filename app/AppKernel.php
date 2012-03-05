@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Limitium\ORMBundle\ORMBundle(),
             new Gregwar\FormBundle\GregwarFormBundle(),
+            new FPN\TagBundle\FPNTagBundle(),
 
             new PDS\StoryBundle\PDSStoryBundle(),
             new PDS\UserBundle\PDSUserBundle(),

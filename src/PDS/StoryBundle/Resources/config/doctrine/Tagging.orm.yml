@@ -1,0 +1,14 @@
+PDS\StoryBundle\Entity\Tagging:
+  type: entity
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+  manyToOne:
+    Tag:
+      targetEntity: PDS\StoryBundle\Entity\Tag
+      joinColumns:
+        tag_id:
+          referencedColumnName: id

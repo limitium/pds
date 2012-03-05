@@ -78,8 +78,4 @@ class Topic
     {
         return $this->Stories;
     }
-
-    public function __toString() {
-        return $this->getName();
-    }
 }

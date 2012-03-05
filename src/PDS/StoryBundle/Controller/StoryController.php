@@ -202,7 +202,9 @@ class StoryController extends Controller
         $story = new Story();
         $request = $this->getRequest();
         $form = $this->createForm(new StoryType(), $story);
-        $form->bindRequest($request);
+
+        $data = $request->get($form->getName());
+        $form->bind($data);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             foreach ($story->getPages() as $page) {

@@ -16,6 +16,8 @@ $loader->registerNamespaces(array(
     'Metadata'         => __DIR__.'/../vendor/metadata/src',
     'Limitium'         => __DIR__.'/../vendor/bundles',
     'Gregwar'         => __DIR__.'/../vendor/bundles',
+    'FPN'                => __DIR__.'/../vendor/bundles',
+    'DoctrineExtensions' => __DIR__.'/../vendor/doctrine-extensions-taggable/lib',
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',

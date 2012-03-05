@@ -70,3 +70,9 @@
     git=http://github.com/Gregwar/FormBundle.git
     target=/bundles/Gregwar/FormBundle
 
+[doctrine-extensions-taggable]
+    git=git://github.com/FabienPennequin/DoctrineExtensions-Taggable.git
+
+[FPNTagBundle]
+    git=git://github.com/FabienPennequin/FPNTagBundle.git
+    target=bundles/FPN/TagBundle

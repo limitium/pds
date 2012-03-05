@@ -70,3 +70,7 @@ services:
         class: PDS\StoryBundle\Twig\Extension\StoryExtension
         tags:
           -  { name: twig.extension }
+fpn_tag:
+    model:
+        tag_class:     PDS\StoryBundle\Entity\Tag
+        tagging_class: PDS\StoryBundle\Entity\Tagging

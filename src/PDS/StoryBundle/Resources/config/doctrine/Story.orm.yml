@@ -48,15 +48,3 @@ PDS\StoryBundle\Entity\Story:
       joinColumns:
         time_id:
           referencedColumnName: id
-  manyToMany:
-    Topics:
-      targetEntity: Topic
-      inversedBy: Stories
-      joinTable:
-        name: StoryTopic
-        joinColumns:
-          story_id:
-            referencedColumnName: id
-        inverseJoinColumns:
-          topic_id:
-            referencedColumnName: id

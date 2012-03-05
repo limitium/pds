@@ -3,11 +3,12 @@
 namespace PDS\StoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DoctrineExtensions\Taggable\Taggable;
 
 /**
  * PDS\StoryBundle\Entity\Story
  */
-class Story
+class Story     implements Taggable
 {
    
     /**
@@ -360,7 +361,7 @@ class Story
      * @param Doctrine\Common\Collections\ArrayCollection  $pages
      */
     public function setPages(\Doctrine\Common\Collections\ArrayCollection $pages) {
-        $this->Pages[] = $pages;
+        $this->Pages = $pages;
     }
 
 
@@ -368,8 +369,50 @@ class Story
         $this->Pages->removeElement($page);
     }
 
+    /**
+     * Set Pages
+     *
+     * @param Doctrine\Common\Collections\ArrayCollection  $topics
+     */
+    public function setTopics(\Doctrine\Common\Collections\ArrayCollection $topics) {
+        $this->Topics = $topics;
+    }
+
+
     public function __toString()
     {
         return $this->title;
+    }
+
+    /**
+     * Returns the unique taggable resource type
+     *
+     * @return string
+     */
+    function getTaggableType()
+    {
+        return "story";
+    }
+
+    /**
+     * Returns the unique taggable resource identifier
+     *
+     * @return string
+     */
+    function getTaggableId()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * Returns the collection of tags for this Taggable entity
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    function getTags()
+    {
+        $this->tags = $this->tags ?: new ArrayCollection();
+
+        return $this->tags;
     }
 }

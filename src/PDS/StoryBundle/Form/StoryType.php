@@ -11,7 +11,7 @@ class StoryType extends AbstractType {
             ->add('title')
             ->add('Country')
             ->add('date','date',array('widget' => 'single_text','format'=>'dd/MM/yyyy'))
-//            ->add('Topics')
+            ->add('Topics','text')
             ->add('meta')
             ->add('Pages', 'collection', array('type' => new PageType(),
             'allow_add' => true,
