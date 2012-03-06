@@ -72,6 +72,29 @@ class StoryController extends Controller
     /**
      * Lists all Story entities.
      *
+     * @Route("/topic/{id}", name="story_topic")
+     * @Template()
+     */
+    public function topicAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+
+        $topic = $em->getRepository('PDSStoryBundle:Tag')->find($id);
+
+        if (!$topic) {
+            throw $this->createNotFoundException('Unable to find Tag.');
+        }
+
+        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+
+        return array('stories' => $stories, 'topic' => $topic
+        );
+    }
+
+    /**
+     * Lists all Story entities.
+     *
      * @Route("/teller/{id}", name="story_teller")
      * @Template()
      */
@@ -122,7 +145,7 @@ class StoryController extends Controller
         $stories = $em->getRepository('PDSStoryBundle:Story')->top();
         $locations = $em->getRepository('PDSStoryBundle:Country')->findAll();
         $times = $em->getRepository('PDSStoryBundle:Time')->findAll();
-        $topics = $em->getRepository('PDSStoryBundle:Topic')->findAll();
+        $topics = $em->getRepository('PDSStoryBundle:Tag')->findAll();
         $tellers = $em->getRepository('PDSUserBundle:User')->findAll();
 
 
@@ -161,6 +184,7 @@ class StoryController extends Controller
         $formVote = $this->createForm(new VoteType(), $vote);
 
         $related = $em->getRepository('PDSStoryBundle:Story')->related($story);
+        $this->get('fpn_tag.tag_manager')->loadTagging($story);
         return array(
             'related' => $related,
             'story' => $story,
@@ -202,9 +226,7 @@ class StoryController extends Controller
         $story = new Story();
         $request = $this->getRequest();
         $form = $this->createForm(new StoryType(), $story);
-
-        $data = $request->get($form->getName());
-        $form->bind($data);
+        $form->bindRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             foreach ($story->getPages() as $page) {
@@ -214,10 +236,13 @@ class StoryController extends Controller
             $story->setCreatedAt(new \DateTime("now"));
             $user = $this->container->get('security.context')->getToken()->getUser();
             $story->setUser($user);
-            $story->setTime($em->getRepository('PDSStoryBundle:Time')->find(1));
+
+            $this->updateTime($story, $em);
 
             $em->persist($story);
             $em->flush();
+
+            $this->updateTopics($story);
 
             return $this->redirect($this->generateUrl('story_show', array('id' => $story->getId())));
 
@@ -227,6 +252,31 @@ class StoryController extends Controller
             'source' => $story,
             'form' => $form->createView()
         );
+    }
+
+    private function updateTime($story, $em)
+    {
+        $years = floor($story->getDate()->format("Y") / 10) * 10;
+        $time = $em->getRepository('PDSStoryBundle:Time')->findByName($years);
+        if (!$time) {
+            $time = new Time();
+            $time->setName($years);
+            $em->persist($time);
+        }
+        $story->setTime($time);
+    }
+
+    private function updateTopics(Story $story)
+    {
+        $tagManager = $this->get('fpn_tag.tag_manager');
+        foreach (explode(",", $story->getTopics()) as $topic) {
+            $topic = trim($topic);
+            if ($topic) {
+                $topic = $tagManager->loadOrCreateTag($topic);
+                $tagManager->addTag($topic, $story);
+            }
+        }
+        $tagManager->saveTagging($story);
     }
 
     /**
@@ -245,6 +295,12 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Story entity.');
         }
 
+        $this->get('fpn_tag.tag_manager')->loadTagging($story);
+        $topics = array();
+        foreach ($story->getTags() as $topic) {
+            $topics[] = $topic->getName();
+        }
+        $story->setTopics(implode(", ", $topics));
         $editForm = $this->createForm(new StoryType(), $story);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -288,6 +344,7 @@ class StoryController extends Controller
             }
             $em->flush();
 
+            $this->updateTopics($story);
             return $this->redirect($this->generateUrl('story_show', array('id' => $id)));
         }
 

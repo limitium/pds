@@ -6,3 +6,7 @@ PDS\StoryBundle\Entity\Tag:
       type: integer
       generator:
         strategy: AUTO
+  oneToMany:
+    tagging:
+      targetEntity: PDS\StoryBundle\Entity\Tagging
+      mappedBy: tag

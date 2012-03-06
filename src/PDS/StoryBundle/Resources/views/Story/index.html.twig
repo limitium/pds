@@ -42,7 +42,7 @@
             </div>
             <div class="box-body tags-cloud">
                 {% for topic in topics%}
-                <a class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ topic}}</a>
+                <a href="{{ path('story_topic', { 'id': topic.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ topic}}</a>
                 {% endfor %}
             </div>
         </div>
@@ -69,4 +69,4 @@
         </div>
     </div>
 </div>
-        {% endblock %}
+{% endblock %}

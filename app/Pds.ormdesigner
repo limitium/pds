@@ -45,7 +45,7 @@
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
-    <table name="Page" visPositionX="36" visPositionY="207" visSizeX="0" visSizeX2="89" visSizeY="0" visSizeY2="59">
+    <table name="Page" visPositionX="17" visPositionY="222" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
       <column name="body" required="true" type="text"/>
       <column name="lineno" type="integer"/>
@@ -82,7 +82,7 @@
     <foreign-key caption="Story Page" from="Page" inverse-alias="Story" name="FK_Page_Story_id" owning-alias="Pages" to="Story" visCaption1X="-2" visCaption1Y="0" visCenterX="-17" visCenterY="0">
       <foreign-key-column from="story_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Tag Tagging" from="Tagging" inverse-alias="Tag" name="FK_Tagging_Tag_id" owning-alias="" to="Tag" visCaption1X="1" visCaption1Y="0" visCenterX="0" visCenterY="0">
+    <foreign-key caption="Tag Tagging" from="Tagging" inverse-alias="tag" name="FK_Tagging_Tag_id" owning-alias="tagging" to="Tag" visCaption1X="1" visCaption1Y="0" visCenterX="0" visCenterY="0">
       <foreign-key-column from="tag_id" to="id"/>
     </foreign-key>
   </module>

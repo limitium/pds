@@ -70,24 +70,9 @@
             <li>
                 <a href="{{ path('story_time', { 'id': story.getTime().getId() }) }}">{{ story.getTime()}}</a>
             </li>
-            {% for topic in story.getTopics() %}
+            {% for topic in story.getTags() %}
             <li>
-                <a>{{ topic }}</a>
-            </li>
-            <li>
-                <a>{{ topic }}</a>
-            </li>
-            <li>
-                <a>{{ topic }}</a>
-            </li>
-            <li>
-                <a>{{ topic }}</a>
-            </li>
-            <li>
-                <a>{{ topic }}</a>
-            </li>
-            <li>
-                <a>{{ topic }}</a>
+                <a href="{{ path('story_topic', { 'id': topic.getId() }) }}">{{ topic.getName() }}</a>
             </li>
             {% endfor %}
         </ul>

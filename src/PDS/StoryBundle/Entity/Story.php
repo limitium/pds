@@ -215,16 +215,6 @@ class Story     implements Taggable
     }
 
     /**
-     * Add Topics
-     *
-     * @param PDS\StoryBundle\Entity\Topic $topics
-     */
-    public function addTopic(\PDS\StoryBundle\Entity\Topic $topics)
-    {
-        $this->Topics[] = $topics;
-    }
-
-    /**
      * Get Topics
      *
      * @return Doctrine\Common\Collections\Collection 
@@ -374,7 +364,7 @@ class Story     implements Taggable
      *
      * @param Doctrine\Common\Collections\ArrayCollection  $topics
      */
-    public function setTopics(\Doctrine\Common\Collections\ArrayCollection $topics) {
+    public function setTopics($topics) {
         $this->Topics = $topics;
     }
 
@@ -404,6 +394,7 @@ class Story     implements Taggable
         return $this->getId();
     }
 
+    private $tags;
     /**
      * Returns the collection of tags for this Taggable entity
      *
@@ -411,7 +402,7 @@ class Story     implements Taggable
      */
     function getTags()
     {
-        $this->tags = $this->tags ?: new ArrayCollection();
+        $this->tags = $this->tags ?: new \Doctrine\Common\Collections\ArrayCollection();
 
         return $this->tags;
     }

@@ -7,8 +7,9 @@ PDS\StoryBundle\Entity\Tagging:
       generator:
         strategy: AUTO
   manyToOne:
-    Tag:
+    tag:
       targetEntity: PDS\StoryBundle\Entity\Tag
+      inversedBy: tagging
       joinColumns:
         tag_id:
           referencedColumnName: id
