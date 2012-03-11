@@ -2,7 +2,8 @@
 SQLyog Ultimate - MySQL GUI v8.2 
 MySQL - 5.1.40-community : Database - pds
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -27,8 +28,8 @@ CREATE TABLE `Comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_5BC96BF0AA5D4036` (`story_id`),
   KEY `IDX_5BC96BF0A76ED395` (`user_id`),
-  CONSTRAINT `FK_5BC96BF0A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK_5BC96BF0AA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
+  CONSTRAINT `FK_5BC96BF0AA5D4036` FOREIGN KEY (`story_id`) REFERENCES `Story` (`id`),
+  CONSTRAINT `FK_5BC96BF0A76ED395` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `Comment` */
@@ -60,12 +61,12 @@ CREATE TABLE `Page` (
   `lineno` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_B438191EAA5D4036` (`story_id`),
-  CONSTRAINT `FK_B438191EAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_B438191EAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `Story` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
 
 /*Data for the table `Page` */
 
-insert  into `Page`(`id`,`story_id`,`body`,`lineno`) values (1,4,'qqqqqq',NULL),(2,4,'qqqqqqqqqqqqqqqqqq',NULL),(3,4,'qqqqqqqqq',NULL),(4,5,'qweqweqwe',NULL),(5,5,'sssssssssss',NULL),(6,5,'fffffffffffffff',NULL),(7,5,'hhhhhhhhhhhhhh',NULL),(8,6,'page 1',NULL),(9,6,'page 2',NULL),(10,6,'page 3',NULL),(11,6,'page 4',NULL),(12,6,'page 5',NULL),(13,5,'zzzzzzzzzzzzzzzzzzzzz',NULL),(14,1,'<h3>Little mudding</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/V_fh2fyXcc0\" frameborder=\"0\" allowfullscreen></iframe>',1),(15,1,'<h3>Crossing a river</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/hUMzu9k3CbE\" frameborder=\"0\" allowfullscreen></iframe>',2),(16,1,'<h3>Sand dune ;)</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/gvoL3g1wfjU\" frameborder=\"0\" allowfullscreen></iframe>',3),(17,1,'<h3>Moar sand</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/9gnLSq29E9g\" frameborder=\"0\" \r\nallowfullscreen></iframe>',4),(18,2,'<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/-UrJBu0_Yss\" frameborder=\"0\" allowfullscreen></iframe>\r\n<p>\r\nStuck in the creek at night. Morning evacuation :)\r\n</p>',NULL),(19,7,'1',1),(20,7,'3',2),(21,7,'2',3);
+insert  into `Page`(`id`,`story_id`,`body`,`lineno`) values (1,4,'qqqqqq',NULL),(2,4,'qqqqqqqqqqqqqqqqqq',NULL),(3,4,'qqqqqqqqq',NULL),(4,5,'qweqweqwe',NULL),(5,5,'sssssssssss',NULL),(6,5,'fffffffffffffff',NULL),(7,5,'hhhhhhhhhhhhhh',NULL),(8,6,'page 1',NULL),(9,6,'page 2',NULL),(10,6,'page 3',NULL),(11,6,'page 4',NULL),(12,6,'page 5',NULL),(13,5,'zzzzzzzzzzzzzzzzzzzzz',NULL),(14,1,'<h3>Little mudding</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/V_fh2fyXcc0\" frameborder=\"0\" allowfullscreen></iframe>',1),(15,1,'<h3>Crossing a river</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/hUMzu9k3CbE\" frameborder=\"0\" allowfullscreen></iframe>',2),(16,1,'<h3>Sand dune ;)</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/gvoL3g1wfjU\" frameborder=\"0\" allowfullscreen></iframe>',3),(17,1,'<h3>Moar sand</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/9gnLSq29E9g\" frameborder=\"0\" \r\nallowfullscreen></iframe>',4),(18,2,'<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/-UrJBu0_Yss\" frameborder=\"0\" allowfullscreen></iframe>\r\n<p>\r\nStuck in the creek at night. Morning evacuation :)\r\n</p>',NULL),(19,7,'1',1),(20,7,'3',2),(21,7,'2',3),(22,8,'1',1),(23,8,'2',2),(24,8,'1',3),(25,9,'1',1),(26,9,'2',2),(27,9,'1',3),(28,10,'1',1),(29,10,'2',2),(30,10,'1',3),(31,11,'1',1),(32,11,'2',2),(33,11,'1',3),(34,12,'1',1),(35,12,'2',2),(36,12,'1',3),(37,13,'1',1),(38,13,'1',2),(39,13,'22',3),(40,14,'1',1),(41,14,'1',2),(42,14,'22',3),(43,15,'1',1),(44,15,'1',2),(45,15,'22',3),(46,16,'1',1),(47,16,'1',2),(48,16,'22',3),(49,17,'1',1),(50,17,'1',2),(51,17,'22',3),(52,18,'1',1),(53,18,'213',2),(54,18,'23123',3),(55,19,'1',1),(56,19,'213',2),(57,19,'23123',3),(58,20,'1',1),(59,20,'213',2),(60,20,'23123',3),(61,21,'1',1),(62,21,'213',2),(63,21,'23123',3),(64,22,'1',1),(65,22,'213',2),(66,22,'23123',3),(67,23,'1',1),(68,23,'213',2),(69,23,'23123',3);
 
 /*Table structure for table `Role` */
 
@@ -95,37 +96,58 @@ CREATE TABLE `Story` (
   `country_id` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `time_id` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_2A972B3CA76ED395` (`user_id`),
   KEY `IDX_2A972B3CF92F3E70` (`country_id`),
   KEY `IDX_2A972B3C5EEADD3B` (`time_id`),
-  CONSTRAINT `FK_2A972B3C5EEADD3B` FOREIGN KEY (`time_id`) REFERENCES `time` (`id`),
-  CONSTRAINT `FK_2A972B3CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK_2A972B3CF92F3E70` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=cp1251;
+  CONSTRAINT `FK_2A972B3CA76ED3951` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
+  CONSTRAINT `FK_2A972B3C5EEADD3B` FOREIGN KEY (`time_id`) REFERENCES `Time` (`id`),
+  CONSTRAINT `FK_2A972B3CF92F3E70` FOREIGN KEY (`country_id`) REFERENCES `Country` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `Story` */
 
-insert  into `Story`(`id`,`meta`,`created_at`,`user_id`,`title`,`country_id`,`date`,`time_id`,`status`) values (1,'<p>[13:12:25] Андрей Елькин: хехе\r\n[13:14:07] Андрей Елькин: аж бедная скрючилась вся)\r\n[13:18:07] limitium: кто\r\n[13:24:34] Андрей Елькин: картинку посмотри\r\n[13:24:56] limitium: 2 девки\r\n[13:25:08] Андрей Елькин: внимание вопрос\r\n[13:25:18] Андрей Елькин: какая из 2х девок скрючилась?\r\n[13:26:16] limitium: обе норм\r\n[13:26:24] Андрей Елькин: ок!\r\n</p>\r\n[pagebreak]\r\n<iframe width=\"900\" height=\"500\" src=\"http://www.youtube.com/embed/8vcmhFvTeOo\" frameborder=\"0\" allowfullscreen></iframe>\r\n[pagebreak]\r\n<p>\r\nСтруктура и интерпретация компьютерных программ преподавалась в Массачусетском технологическом институте, и этот курс имел влияние на весь мир по учебным программам компьютерных наук в течение последних двух десятилетий. На stackoverflow пишут, что книга буквально просветлит нас (will enlighten you) и после нее появится стремление писать великолепные программы. И что если все остальные книги делают из нас лучшего (better) программиста, то конкретно эта — сделает из читателя программиста.\r\n</p>\r\n[pagebreak]\r\n<p>\r\nПервое англоязычное издание этой книги вышло в 1999 году. Первое русское издание — в 2004 году в серии «Библиотека программиста».\r\n\r\n«Это великая книга для программистов, которые где-то как-то научились программировать, может быть, в институте, но не совсем уверены что и как делать. Это как разница между наброском и готовым произведением. То, что вы изучали в университете — это наброски, эскизы, и вы вроде бы можете рисовать красиво, но если всё ещё чувствуете, что не вполне знаете с чего начать, если кто-то предложил вам написать программу для обмена музыкой через P2P-сети, то эта книга для вас». Джо Спольски.\r\n</p>\r\n[pagebreak]\r\n<p>\r\nТот самый Стив Макконнелл, которому приписывают фразу: \"Пишите код так, как будто сопровождать его будет склонный к насилию психопат, который знает, где вы живете.\"\r\n\r\nПервое издание этой книги вышло в 1993 году, второе — в 2004. Первый русский перевод — в 2005 году.\r\n\r\n«Энциклопедия хороших практик программирования. Совершенный код фокусируется на личном искусстве, мастерстве — тех вещах, которые мы интуитивно называем writing clean code. Это та книга, которая может 50 страниц описывать правильное форматирование кода и количество пробелов». Джо Спольски.\r\n</p>','2012-02-03 17:29:06',2,'One day of my suv',22,'2012-01-07',2,NULL),(2,'<div id=\"mybook\">\r\n    <div class=\"b-load\">\r\n        <div>\r\n            <h3>Yay, Page 1!</h3>\r\n        </div>\r\n        <div>\r\n            <h3>Yay, Page 2!</h3>\r\n        </div>\r\n        <div>\r\n            <h3>Yay, Page 3!</h3>\r\n        </div>\r\n        <div>\r\n            <h3>Yay, Page 4!</h3>\r\n        </div>\r\n    </div>\r\n</div>','2012-02-07 13:12:05',2,'Stuck in the creek',2,'2012-01-15',8,NULL),(3,'qwe','2012-02-24 16:35:11',2,'qweqwe',1,'2008-02-04',1,NULL),(4,'qqqqqqqqq','2012-02-28 16:36:15',2,'qqqqqqqq',1,'2012-07-02',2,NULL),(5,'meta','2012-02-28 16:55:35',2,'Story 1',7,'2012-08-02',1,NULL),(6,'lalalal lalal','2012-02-29 10:33:03',2,'one more story',1,'2012-02-02',1,NULL),(7,'qwe','2012-03-02 09:59:03',2,'qwe',1,'2012-06-03',1,NULL);
+insert  into `Story`(`id`,`meta`,`created_at`,`user_id`,`title`,`country_id`,`date`,`time_id`) values (1,'<p>[13:12:25] Андрей Елькин: хехе\r\n[13:14:07] Андрей Елькин: аж бедная скрючилась вся)\r\n[13:18:07] limitium: кто\r\n[13:24:34] Андрей Елькин: картинку посмотри\r\n[13:24:56] limitium: 2 девки\r\n[13:25:08] Андрей Елькин: внимание вопрос\r\n[13:25:18] Андрей Елькин: какая из 2х девок скрючилась?\r\n[13:26:16] limitium: обе норм\r\n[13:26:24] Андрей Елькин: ок!\r\n</p>\r\n[pagebreak]\r\n<iframe width=\"900\" height=\"500\" src=\"http://www.youtube.com/embed/8vcmhFvTeOo\" frameborder=\"0\" allowfullscreen></iframe>\r\n[pagebreak]\r\n<p>\r\nСтруктура и интерпретация компьютерных программ преподавалась в Массачусетском технологическом институте, и этот курс имел влияние на весь мир по учебным программам компьютерных наук в течение последних двух десятилетий. На stackoverflow пишут, что книга буквально просветлит нас (will enlighten you) и после нее появится стремление писать великолепные программы. И что если все остальные книги делают из нас лучшего (better) программиста, то конкретно эта — сделает из читателя программиста.\r\n</p>\r\n[pagebreak]\r\n<p>\r\nПервое англоязычное издание этой книги вышло в 1999 году. Первое русское издание — в 2004 году в серии «Библиотека программиста».\r\n\r\n«Это великая книга для программистов, которые где-то как-то научились программировать, может быть, в институте, но не совсем уверены что и как делать. Это как разница между наброском и готовым произведением. То, что вы изучали в университете — это наброски, эскизы, и вы вроде бы можете рисовать красиво, но если всё ещё чувствуете, что не вполне знаете с чего начать, если кто-то предложил вам написать программу для обмена музыкой через P2P-сети, то эта книга для вас». Джо Спольски.\r\n</p>\r\n[pagebreak]\r\n<p>\r\nТот самый Стив Макконнелл, которому приписывают фразу: \"Пишите код так, как будто сопровождать его будет склонный к насилию психопат, который знает, где вы живете.\"\r\n\r\nПервое издание этой книги вышло в 1993 году, второе — в 2004. Первый русский перевод — в 2005 году.\r\n\r\n«Энциклопедия хороших практик программирования. Совершенный код фокусируется на личном искусстве, мастерстве — тех вещах, которые мы интуитивно называем writing clean code. Это та книга, которая может 50 страниц описывать правильное форматирование кода и количество пробелов». Джо Спольски.\r\n</p>','2012-02-03 17:29:06',2,'One day of my suv',22,'2012-01-07',2),(2,'<div id=\"mybook\">\r\n    <div class=\"b-load\">\r\n        <div>\r\n            <h3>Yay, Page 1!</h3>\r\n        </div>\r\n        <div>\r\n            <h3>Yay, Page 2!</h3>\r\n        </div>\r\n        <div>\r\n            <h3>Yay, Page 3!</h3>\r\n        </div>\r\n        <div>\r\n            <h3>Yay, Page 4!</h3>\r\n        </div>\r\n    </div>\r\n</div>','2012-02-07 13:12:05',2,'Stuck in the creek',2,'2012-01-15',8),(3,'qwe','2012-02-24 16:35:11',2,'qweqwe',1,'2008-02-04',1),(4,'qqqqqqqqq','2012-02-28 16:36:15',2,'qqqqqqqq',1,'2012-07-02',2),(5,'meta','2012-02-28 16:55:35',2,'Story 1',7,'2012-08-02',1),(6,'lalalal lalal','2012-02-29 10:33:03',2,'one more story',1,'2012-02-02',1),(7,'qwe','2012-03-02 09:59:03',2,'qwe',1,'2012-06-03',1),(8,'1','2012-03-06 10:55:42',2,'1',1,'2012-07-03',1),(9,'1','2012-03-06 11:04:41',2,'1',1,'2012-07-03',1),(10,'1','2012-03-06 11:05:41',2,'1',1,'2012-07-03',1),(11,'1','2012-03-06 11:06:25',2,'1',1,'2012-07-03',1),(12,'1','2012-03-06 11:14:52',2,'tags test',1,'2012-07-03',1),(13,'111','2012-03-06 14:25:42',2,'tags',1,'2012-07-03',1),(14,'111','2012-03-06 14:30:06',2,'tags',1,'2012-07-03',1),(15,'111','2012-03-06 14:31:43',2,'tags',1,'2012-07-03',1),(16,'111','2012-03-06 14:32:23',2,'tags',1,'2012-07-03',1),(17,'111','2012-03-06 14:33:18',2,'tags',1,'2012-07-03',1),(18,'1','2012-03-06 15:19:22',2,'1',1,'2012-08-03',2),(19,'1','2012-03-06 15:19:56',2,'1',1,'2012-08-03',2),(20,'1','2012-03-06 15:20:49',2,'1',1,'2012-08-03',2),(21,'1','2012-03-06 15:23:03',2,'1',1,'2012-08-03',2),(22,'1','2012-03-06 15:24:23',2,'1',1,'2012-08-03',2),(23,'1','2012-03-06 15:25:01',2,'1',1,'2012-08-03',12);
 
-/*Table structure for table `StoryTopic` */
 
-DROP TABLE IF EXISTS `StoryTopic`;
+/*Table structure for table `Tag` */
 
-CREATE TABLE `StoryTopic` (
-  `story_id` int(11) NOT NULL,
-  `topic_id` int(11) NOT NULL,
-  PRIMARY KEY (`story_id`,`topic_id`),
-  KEY `IDX_D854EEFAAA5D4036` (`story_id`),
-  KEY `IDX_D854EEFA1F55203D` (`topic_id`),
-  CONSTRAINT `FK_D854EEFA1F55203D` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`),
-  CONSTRAINT `FK_D854EEFAAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+DROP TABLE IF EXISTS `Tag`;
 
-/*Data for the table `StoryTopic` */
+CREATE TABLE `Tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `slug` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_3BC4F1635E237E06` (`name`),
+  UNIQUE KEY `UNIQ_3BC4F163989D9B62` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
-insert  into `StoryTopic`(`story_id`,`topic_id`) values (1,2),(1,3),(1,5),(1,7);
+/*Data for the table `Tag` */
+
+insert  into `Tag`(`id`,`name`,`slug`,`created_at`,`updated_at`) values (5,'aaaa','aaaa','2012-03-06 14:33:18','2012-03-06 14:33:18'),(6,'dddddd','dddddd','2012-03-06 14:33:45','2012-03-06 14:33:45'),(7,'ssssss','ssssss','2012-03-06 14:33:46','2012-03-06 14:33:46'),(8,'zzzzzzzzz','zzzzzzzzz','2012-03-06 14:33:46','2012-03-06 14:33:46'),(9,'123','123','2012-03-06 15:19:22','2012-03-06 15:19:22');
+
+/*Table structure for table `Tagging` */
+
+DROP TABLE IF EXISTS `Tagging`;
+
+CREATE TABLE `Tagging` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag_id` int(11) DEFAULT NULL,
+  `resource_type` varchar(50) NOT NULL,
+  `resource_id` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_6B13E8BFBAD26311` (`tag_id`),
+  CONSTRAINT `FK_6B13E8BFBAD26311` FOREIGN KEY (`tag_id`) REFERENCES `Tag` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+/*Data for the table `Tagging` */
+
+insert  into `Tagging`(`id`,`tag_id`,`resource_type`,`resource_id`,`created_at`,`updated_at`) values (5,5,'story','17','2012-03-06 14:33:18','2012-03-06 14:33:18'),(6,5,'story','17','2012-03-06 14:33:18','2012-03-06 14:33:18'),(7,5,'story','17','2012-03-06 14:33:18','2012-03-06 14:33:18'),(8,6,'story','17','2012-03-06 14:33:46','2012-03-06 14:33:46'),(9,7,'story','17','2012-03-06 14:33:46','2012-03-06 14:33:46'),(10,8,'story','17','2012-03-06 14:33:46','2012-03-06 14:33:46'),(11,9,'story','18','2012-03-06 15:19:22','2012-03-06 15:19:22'),(12,9,'story','19','2012-03-06 15:19:56','2012-03-06 15:19:56'),(13,9,'story','20','2012-03-06 15:20:49','2012-03-06 15:20:49'),(14,9,'story','21','2012-03-06 15:23:03','2012-03-06 15:23:03'),(15,9,'story','22','2012-03-06 15:24:23','2012-03-06 15:24:23'),(16,9,'story','23','2012-03-06 15:25:01','2012-03-06 15:25:01');
 
 /*Table structure for table `Time` */
 
@@ -135,11 +157,11 @@ CREATE TABLE `Time` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `Time` */
 
-insert  into `Time`(`id`,`name`) values (1,'1900'),(2,'1910'),(3,'1920'),(4,'1930'),(5,'1940'),(6,'1950'),(7,'1960'),(8,'1970'),(9,'1980'),(10,'1990'),(11,'2000');
+insert  into `Time`(`id`,`name`) values (1,'1900'),(2,'1910'),(3,'1920'),(4,'1930'),(5,'1940'),(6,'1950'),(7,'1960'),(8,'1970'),(9,'1980'),(10,'1990'),(11,'2000'),(12,'2010');
 
 /*Table structure for table `Topic` */
 
@@ -177,7 +199,7 @@ CREATE TABLE `User` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_2DA17977F85E0677` (`username`),
   KEY `IDX_2DA17977F92F3E70` (`country_id`),
-  CONSTRAINT `FK_2DA17977F92F3E70` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
+  CONSTRAINT `FK_2DA17977F92F3E70` FOREIGN KEY (`country_id`) REFERENCES `Country` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `User` */
@@ -194,8 +216,8 @@ CREATE TABLE `UserRole` (
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `IDX_A8503F73A76ED395` (`user_id`),
   KEY `IDX_A8503F73D60322AC` (`role_id`),
-  CONSTRAINT `FK_A8503F73A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK_A8503F73D60322AC` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
+  CONSTRAINT `FK_A8503F73A76ED395` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
+  CONSTRAINT `FK_A8503F73D60322AC` FOREIGN KEY (`role_id`) REFERENCES `Role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `UserRole` */
@@ -213,8 +235,8 @@ CREATE TABLE `Vote` (
   UNIQUE KEY `unqiue_pair` (`user_id`,`story_id`),
   KEY `IDX_FA222A5AAA5D4036` (`story_id`),
   KEY `IDX_FA222A5AA76ED395` (`user_id`),
-  CONSTRAINT `FK_FA222A5AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK_FA222A5AAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
+  CONSTRAINT `FK_FA222A5AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
+  CONSTRAINT `FK_FA222A5AAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `Story` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `Vote` */

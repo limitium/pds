@@ -5,23 +5,25 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
-    'Symfony'          => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
-    'Sensio'           => __DIR__.'/../vendor/bundles',
-    'JMS'              => __DIR__.'/../vendor/bundles',
-    'Doctrine\\Common' => __DIR__.'/../vendor/doctrine-common/lib',
-    'Doctrine\\DBAL'   => __DIR__.'/../vendor/doctrine-dbal/lib',
-    'Doctrine'         => __DIR__.'/../vendor/doctrine/lib',
-    'Monolog'          => __DIR__.'/../vendor/monolog/src',
-    'Assetic'          => __DIR__.'/../vendor/assetic/src',
-    'Metadata'         => __DIR__.'/../vendor/metadata/src',
-    'Limitium'         => __DIR__.'/../vendor/bundles',
-    'Gregwar'         => __DIR__.'/../vendor/bundles',
+    'Symfony'            => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
+    'Sensio'             => __DIR__.'/../vendor/bundles',
+    'JMS'                => __DIR__.'/../vendor/bundles',
+    'Doctrine\\Common'   => __DIR__.'/../vendor/doctrine-common/lib',
+    'Doctrine\\DBAL'     => __DIR__.'/../vendor/doctrine-dbal/lib',
+    'Doctrine'           => __DIR__.'/../vendor/doctrine/lib',
+    'Monolog'            => __DIR__.'/../vendor/monolog/src',
+    'Assetic'            => __DIR__.'/../vendor/assetic/src',
+    'Metadata'           => __DIR__.'/../vendor/metadata/src',
+    'Limitium'           => __DIR__.'/../vendor/bundles',
+    'Gregwar'            => __DIR__.'/../vendor/bundles',
     'FPN'                => __DIR__.'/../vendor/bundles',
     'DoctrineExtensions' => __DIR__.'/../vendor/doctrine-extensions-taggable/lib',
+    'Buzz'               => __DIR__.'/../vendor',
 ));
 $loader->registerPrefixes(array(
-    'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
-    'Twig_'            => __DIR__.'/../vendor/twig/lib',
+    'Twig_Extensions_'   => __DIR__.'/../vendor/twig-extensions/lib',
+    'Twig_'              => __DIR__.'/../vendor/twig/lib',
+    'Zend_'              => __DIR__.'/../vendor/zend/library',
 ));
 
 // intl
@@ -46,4 +48,7 @@ AnnotationRegistry::registerFile(__DIR__.'/../vendor/doctrine/lib/Doctrine/ORM/M
 // the lazy loading of the init file (which is expensive)
 require_once __DIR__.'/../vendor/swiftmailer/lib/classes/Swift.php';
 Swift::registerAutoload(__DIR__.'/../vendor/swiftmailer/lib/swift_init.php');
+
+// Zend Framework GData needs a special autoload fix too
+set_include_path(__DIR__.'/../vendor/zend/library'.PATH_SEPARATOR.get_include_path());
 
