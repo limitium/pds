@@ -212,18 +212,28 @@ class StoryController extends Controller
 
         $devKey = "AI39si4W6QZ0x9lK4kBmLM0mxqMKYotCEcUZdz971RmCYHIbGaGmMSy9n0A7fqepT8i6cCnRpMzhJrUYT5wwpUc7yFhbiGDGYg";
         $browser = new Browser();
-        $email = 'mystories.eu';
-        $passwd = 'Xk@l456Kkd';
+
+        $authenticationURL= 'https://www.google.com/accounts/ClientLogin';
 
         try {
-            $client = \Zend_Gdata_ClientLogin::getHttpClient($email, $passwd, 'cl');
+            $client = \Zend_Gdata_ClientLogin::getHttpClient(
+                          $username = 'mystories.eu@gmail.com',
+                          $password = 'Xk@l456Kkd',
+                          $service = 'youtube',
+                          $client = null,
+                          $source = 'mystories.eu', // a short string identifying your application
+                          $loginToken = null,
+                          $loginCaptcha = null,
+                          $authenticationURL);
         } catch (Zend_Gdata_App_CaptchaRequiredException $cre) {
             echo 'URL of CAPTCHA image: ' . $cre->getCaptchaUrl() . "\n";
             echo 'Token ID: ' . $cre->getCaptchaToken() . "\n";
         } catch (Zend_Gdata_App_AuthException $ae) {
             echo 'Problem authenticating: ' . $ae->exception() . "\n";
         }
-
+        https://developers.google.com/youtube/2.0/developers_guide_php
+print_r($client);
+        die;
 
 // Note that this example creates an unversioned service object.
 // You do not need to specify a version number to upload content
