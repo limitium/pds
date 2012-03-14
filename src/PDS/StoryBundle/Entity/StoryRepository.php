@@ -64,7 +64,11 @@ class StoryRepository extends EntityRepository
 
     public function search($q)
     {
-        return $this->top();
+        $queryBuilder = $this->generateTopQueryBuilder();
+        return $this->getStories(
+            $queryBuilder
+                ->where($queryBuilder->expr()->like("s.title", "'%$q%'"))
+        );
     }
 
     private function getStories(QueryBuilder $queryBuilder, $limit = 10)
