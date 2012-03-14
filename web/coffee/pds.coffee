@@ -101,7 +101,7 @@ $(document).ready ->
     false
 
 
-  $("#myCarousel").carousel(interval: 10000000).carousel "next"
+  $("#myCarousel").carousel(interval: 10000).carousel "next"
 
   $("#story_date").datepicker(changeMonth: true, changeYear: true)
 

@@ -64,7 +64,19 @@
                 Preview
             </div>
             <div class="box-body tags-cloud">
-                {% include 'PDSStoryBundle:Story:short_list.html.twig' with {'stories': stories} %}
+                {% for story in stories %}
+                <div class="projector">
+                    <div id="myCarousel" class="carousel">
+                        <div class="carousel-inner">
+                            {% for page in story.getPages() %}
+                            <div class="item">
+                                {{ page.body | raw }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

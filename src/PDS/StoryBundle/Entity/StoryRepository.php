@@ -20,61 +20,19 @@ class StoryRepository extends EntityRepository
         return $this->getStories($this->generateTopQueryBuilder(), $limit);
     }
 
-    private function getStories(QueryBuilder $queryBuilder, $limit = 10)
-    {
-        $query = $queryBuilder->getQuery();
-        $query->setMaxResults($limit);
-        $r = $query->getResult();
-        $res = array();
-        foreach ($r as $rr) {
-            $res[] = $rr[0];
-        }
-        return $res;
-    }
-
-    /**
-     * @return \Doctrine\ORM\QueryBuilder
-     */
-    private function generateTopQueryBuilder()
-    {
-        return $this
-            ->createQueryBuilder('s')
-            ->select('s')
-            ->addSelect("SUM(v.value)/COUNT(v.id) as rat")
-            ->leftJoin("s.Votes", "v")
-            ->groupBy("s.id")
-            ->orderBy("rat", "desc");
-    }
-
-
     public function byTime(Time $time)
     {
-        return $this->getStories(
-            $this->generateTopQueryBuilder()
-                ->leftJoin("s.Time", "t")
-                ->where("t.id = ?1")
-                ->setParameter(1, $time->getId())
-        );
+        return $this->getFilteredBy($time);
     }
 
     public function byTeller(User $user)
     {
-        return $this->getStories(
-            $this->generateTopQueryBuilder()
-                ->leftJoin("s.User", "u")
-                ->where("u.id = ?1")
-                ->setParameter(1, $user->getId())
-        );
+        return $this->getFilteredBy($user);
     }
 
     public function byLocation(Country $country)
     {
-        return $this->getStories(
-            $this->generateTopQueryBuilder()
-                ->leftJoin("s.Country", "c")
-                ->where("c.id = ?1")
-                ->setParameter(1, $country->getId())
-        );
+        return $this->getFilteredBy($country);
     }
 
     public function byTopic(Tag $tag)
@@ -107,6 +65,44 @@ class StoryRepository extends EntityRepository
     public function search($q)
     {
         return $this->top();
+    }
+
+    private function getStories(QueryBuilder $queryBuilder, $limit = 10)
+    {
+        $query = $queryBuilder->getQuery();
+        $query->setMaxResults($limit);
+        $r = $query->getResult();
+        $res = array();
+        foreach ($r as $rr) {
+            $res[] = $rr[0];
+        }
+        return $res;
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function generateTopQueryBuilder()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->select('s')
+            ->addSelect("SUM(v.value)/COUNT(v.id) as rat")
+            ->leftJoin("s.Votes", "v")
+            ->groupBy("s.id")
+            ->orderBy("rat", "desc");
+    }
+
+
+    private function getFilteredBy($relatedEntity)
+    {
+        $class = explode("\\", get_class($relatedEntity));
+        return $this->getStories(
+            $this->generateTopQueryBuilder()
+                ->leftJoin("s." . end($class), "r")
+                ->where("r.id = ?1")
+                ->setParameter(1, $relatedEntity->getId())
+        );
     }
 
 }
