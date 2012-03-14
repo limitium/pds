@@ -42,7 +42,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Locatin entity.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byLocation($location);
 
         return array('stories' => $stories, 'location' => $location
         );
@@ -65,7 +65,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Time entity.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byTime($time);
 
         return array('stories' => $stories, 'time' => $time
         );
@@ -88,7 +88,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Tag.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byTopic($topic);
 
         return array('stories' => $stories, 'topic' => $topic
         );
@@ -111,7 +111,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Teller entity.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byTeller($teller);
 
         return array('stories' => $stories, 'teller' => $teller
         );
@@ -144,7 +144,7 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->top();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->top(7);
         $locations = $em->getRepository('PDSStoryBundle:Country')->findAll();
         $times = $em->getRepository('PDSStoryBundle:Time')->findAll();
         $topics = $em->getRepository('PDSStoryBundle:Tag')->findAll();
@@ -213,26 +213,26 @@ class StoryController extends Controller
         $devKey = "AI39si4W6QZ0x9lK4kBmLM0mxqMKYotCEcUZdz971RmCYHIbGaGmMSy9n0A7fqepT8i6cCnRpMzhJrUYT5wwpUc7yFhbiGDGYg";
         $browser = new Browser();
 
-        $authenticationURL= 'https://www.google.com/accounts/ClientLogin';
+        $authenticationURL = 'https://www.google.com/accounts/ClientLogin';
 
         try {
             $client = \Zend_Gdata_ClientLogin::getHttpClient(
-                          $username = 'mystories.eu@gmail.com',
-                          $password = 'Xk@l456Kkd',
-                          $service = 'youtube',
-                          $client = null,
-                          $source = 'mystories.eu', // a short string identifying your application
-                          $loginToken = null,
-                          $loginCaptcha = null,
-                          $authenticationURL);
+                $username = 'mystories.eu@gmail.com',
+                $password = 'Xk@l456Kkd',
+                $service = 'youtube',
+                $client = null,
+                $source = 'mystories.eu', // a short string identifying your application
+                $loginToken = null,
+                $loginCaptcha = null,
+                $authenticationURL);
         } catch (Zend_Gdata_App_CaptchaRequiredException $cre) {
             echo 'URL of CAPTCHA image: ' . $cre->getCaptchaUrl() . "\n";
             echo 'Token ID: ' . $cre->getCaptchaToken() . "\n";
         } catch (Zend_Gdata_App_AuthException $ae) {
             echo 'Problem authenticating: ' . $ae->exception() . "\n";
         }
-        https://developers.google.com/youtube/2.0/developers_guide_php
-print_r($client);
+        https: //developers.google.com/youtube/2.0/developers_guide_php
+        print_r($client);
         die;
 
 // Note that this example creates an unversioned service object.

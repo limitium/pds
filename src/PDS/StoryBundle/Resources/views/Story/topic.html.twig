@@ -3,5 +3,9 @@
 {{ topic.getName() }}
 {% endblock %}
 {% block story %}
+{% if stories %}
 {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
+{% else %}
+There isn't any story about {{ topic.getName }}
+{% endif %}
 {% endblock %}
