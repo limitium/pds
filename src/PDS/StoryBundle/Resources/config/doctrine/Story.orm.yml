@@ -38,7 +38,7 @@ PDS\StoryBundle\Entity\Story:
           referencedColumnName: id
     Country:
       targetEntity: PDS\StoryBundle\Entity\Country
-      inversedBy: Storeis
+      inversedBy: Stories
       joinColumns:
         country_id:
           referencedColumnName: id

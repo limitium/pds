@@ -9,7 +9,7 @@
             <div class="box-body tags-cloud">
                 {% for location in locations %}
                 <a href="{{ path('story_location', { 'id': location.getId() }) }}"
-                   class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ location }}</a>
+                   class="size{{ location.weight }}">{{ location }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="box-body tags-cloud">
                 {% for time in times %}
                 <a href="{{ path('story_time', { 'id': time.getId() }) }}"
-                   class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ time }}</a>
+                   class="size{{ time.weight }}">{{ time }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -42,7 +42,7 @@
             </div>
             <div class="box-body tags-cloud">
                 {% for topic in topics%}
-                <a href="{{ path('story_topic', { 'id': topic.getId() }) }}" class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ topic}}</a>
+                <a href="{{ path('story_topic', { 'id': topic.getId() }) }}" class="size{{ topic.weight }}">{{ topic}}</a>
                 {% endfor %}
             </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="box-body tags-cloud">
                 {% for teller in tellers%}
                 <a href="{{ path('story_teller', { 'id': teller.getId() }) }}"
-                   class="size{{ random([1,2,3,4,5,6,7,8,9,10,11,12]) }}">{{ teller }}</a>
+                   class="size{{ teller.weight }}">{{ teller }}</a>
                 {% endfor %}
             </div>
         </div>

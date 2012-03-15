@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use  Doctrine\ORM\EntityRepositor;
+
 use PDS\StoryBundle\Entity\Story;
 use PDS\StoryBundle\Form\StoryType;
 use PDS\StoryBundle\Entity\Comment;
@@ -145,17 +147,55 @@ class StoryController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
 
         $stories = $em->getRepository('PDSStoryBundle:Story')->top(7);
-        $locations = $em->getRepository('PDSStoryBundle:Country')->findAll();
-        $times = $em->getRepository('PDSStoryBundle:Time')->findAll();
-        $topics = $em->getRepository('PDSStoryBundle:Tag')->findAll();
-        $tellers = $em->getRepository('PDSUserBundle:User')->findAll();
 
+        $locations = $this->getWeight($em->getRepository('PDSStoryBundle:Country'));
+        $times = $this->getWeight($em->getRepository('PDSStoryBundle:Time'));
+        $tellers = $this->getWeight($em->getRepository('PDSUserBundle:User'));
+        $topics = $this->calculateWeight($em
+            ->getRepository('PDSStoryBundle:Tag')
+            ->createQueryBuilder("t")
+            ->select("t")
+            ->addSelect("COUNT(t.id) as weight")
+            ->leftJoin("t.tagging", "tg")
+            ->where("tg.resourceType = 'story'")
+            ->groupBy("t.id")
+            ->getQuery()
+            ->getResult());
 
         return array('stories' => $stories,
             'locations' => $locations,
             'times' => $times,
             'topics' => $topics,
             'tellers' => $tellers);
+    }
+
+    private function getWeight(\Doctrine\ORM\EntityRepository $repo)
+    {
+        return $this->calculateWeight($repo
+            ->createQueryBuilder("c")
+            ->select("c")
+            ->addSelect("COUNT(c.id) as weight")
+            ->leftJoin("c.Stories", "s")
+            ->groupBy("c.id")
+            ->getQuery()
+            ->getResult());
+
+    }
+
+    private function calculateWeight($entities)
+    {
+        $max = 0;
+        $min = PHP_INT_MAX;
+        foreach ($entities as $r) {
+            $min = min($r['weight'], $min);
+            $max = max($r['weight'], $max);
+        }
+        $result = array();
+        foreach ($entities as $r) {
+            $r[0]->weight =round($r["weight"] * 12 / $max);
+            $result[] = $r[0];
+        }
+        return $result;
     }
 
     /**
