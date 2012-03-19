@@ -100,6 +100,10 @@ $(document).ready ->
     refreshLineno()
     false
 
+  $(".add-video").click ->
+    $("#video-upload").modal()
+    false
+
 
   $("#myCarousel").carousel(interval: 10000).carousel "next"
 
