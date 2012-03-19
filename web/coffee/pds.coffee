@@ -19,7 +19,7 @@ $(document).ready ->
         loader.css "visibility", "hidden"
         form.before html
 
-  showStar = -> $(".meta .icon-star").css display: "inline-block"
+  showStar = -> $(".meta .icon-star").css display:"inline-block"
   stars = $(".star-rating li a")
   if stars.length
     voting = false
@@ -50,13 +50,13 @@ $(document).ready ->
     $($("input", page)[0]).val lineno
 
   refreshLineno = ->
-    $("#story_Pages li").each (i, li)->
+    $("#story_Pages li").each (i, li) ->
       setLineno($(@), i + 1)
 
   reorderPages= ->
     newOrder = []
 
-    $("#story_Pages li").each (i, li)->
+    $("#story_Pages li").each (i, li) ->
       newOrder[parseInt($(li).attr("data-page"))] = li
 
     cont = $("#story_Pages")
@@ -70,10 +70,9 @@ $(document).ready ->
     if pageData.is(":visible") then pageData.slideUp() else pageData.slideDown()
 
   $(document).delegate ".story-page-header .page-delete", "click", ->
-    $(@).parents("li").slideUp(->
+    $(@).parents("li").slideUp ->
       $(@).remove()
       refreshLineno()
-    )
     false
 
   changePosition = (page, delta) ->
@@ -100,13 +99,20 @@ $(document).ready ->
     refreshLineno()
     false
 
+  $("#video-upload button").click ->
+    console.log 123
+    $("#video-upload form").ajaxSubmit ->
+      console.log arguments
+    console.log 234
+    false
+
   $(".add-video").click ->
     $("#video-upload").modal()
     false
 
 
-  $("#myCarousel").carousel(interval: 10000).carousel "next"
+  $("#myCarousel").carousel(interval:10000).carousel "next"
 
-  $("#story_date").datepicker(changeMonth: true, changeYear: true)
+  $("#story_date").datepicker(changeMonth:true, changeYear:true)
 
 
