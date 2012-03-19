@@ -33,8 +33,33 @@
 Create a new story
 {% endblock %}
 {% block story %}
-<div class="edit row">
 
+<div class="edit row">
+    <div class="modal fade" id="video-upload">
+        <form class="form-horizontal" action="{{ path('story_upload_video') }}" method="post" {{ form_enctype(formUpload) }}>
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+
+                <h3>Upload video to youtube.com</h3>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="form_video">Select video</label>
+
+                        <div class="controls">
+                            {{ form_widget(formUpload.video)}}
+                        </div>
+                    </div>
+                </fieldset>
+                {{ form_rest(formUpload) }}
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary"><i class="icon-upload icon-white"></i> Upload</button>
+            </div>
+        </form>
+    </div>
     <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
         <div class="meta span3">
             {{ form_row(form.title)}}
@@ -42,6 +67,7 @@ Create a new story
             {{ form_row(form.Country)}}
             {{ form_row(form.date)}}
             {{ form_row(form.Topics)}}
+            <button class="btn btn-small add-video" type="button"><i class="icon-upload"></i> Add video</button>
         </div>
         <div class="span9">
             <label class="pages-label">Pages</label>

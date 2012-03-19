@@ -10,7 +10,7 @@ PDS\StoryBundle\Entity\Country:
       type: string
       nullable: false
   oneToMany:
-    Storeis:
+    Stories:
       targetEntity: PDS\StoryBundle\Entity\Story
       mappedBy: Country
     Users:

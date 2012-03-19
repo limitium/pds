@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use  Doctrine\ORM\EntityRepositor;
+
 use PDS\StoryBundle\Entity\Story;
 use PDS\StoryBundle\Form\StoryType;
 use PDS\StoryBundle\Entity\Comment;
@@ -42,7 +44,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Locatin entity.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byLocation($location);
 
         return array('stories' => $stories, 'location' => $location
         );
@@ -65,7 +67,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Time entity.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byTime($time);
 
         return array('stories' => $stories, 'time' => $time
         );
@@ -88,7 +90,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Tag.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byTopic($topic);
 
         return array('stories' => $stories, 'topic' => $topic
         );
@@ -111,7 +113,7 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Teller entity.');
         }
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->byTeller($teller);
 
         return array('stories' => $stories, 'teller' => $teller
         );
@@ -144,18 +146,61 @@ class StoryController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $stories = $em->getRepository('PDSStoryBundle:Story')->top();
-        $locations = $em->getRepository('PDSStoryBundle:Country')->findAll();
-        $times = $em->getRepository('PDSStoryBundle:Time')->findAll();
-        $topics = $em->getRepository('PDSStoryBundle:Tag')->findAll();
-        $tellers = $em->getRepository('PDSUserBundle:User')->findAll();
+        $stories = $em->getRepository('PDSStoryBundle:Story')->top(7);
+
+        $locations = $this->getWeight($em->getRepository('PDSStoryBundle:Country'));
+        $times = $this->getWeight($em->getRepository('PDSStoryBundle:Time'));
+        $tellers = $this->getWeight($em->getRepository('PDSUserBundle:User'));
+        $topics = $this->calculateWeight($em
+            ->getRepository('PDSStoryBundle:Tag')
+            ->createQueryBuilder("t")
+            ->select("t")
+            ->addSelect("COUNT(t.id) as weight")
+            ->leftJoin("t.tagging", "tg")
+            ->where("tg.resourceType = 'story'")
+            ->groupBy("t.id")
+            ->getQuery()
+            ->getResult());
 
 
+        shuffle($locations);
+        shuffle($times);
+        shuffle($topics);
+        shuffle($tellers);
         return array('stories' => $stories,
             'locations' => $locations,
             'times' => $times,
             'topics' => $topics,
             'tellers' => $tellers);
+    }
+
+    private function getWeight(\Doctrine\ORM\EntityRepository $repo)
+    {
+        return $this->calculateWeight($repo
+            ->createQueryBuilder("c")
+            ->select("c")
+            ->addSelect("COUNT(c.id) as weight")
+            ->leftJoin("c.Stories", "s")
+            ->groupBy("c.id")
+            ->getQuery()
+            ->getResult());
+
+    }
+
+    private function calculateWeight($entities)
+    {
+        $max = 0;
+        $min = PHP_INT_MAX;
+        foreach ($entities as $r) {
+            $min = min($r['weight'], $min);
+            $max = max($r['weight'], $max);
+        }
+        $result = array();
+        foreach ($entities as $r) {
+            $r[0]->weight = round($r["weight"] * 12 / $max);
+            $result[] = $r[0];
+        }
+        return $result;
     }
 
     /**
@@ -210,96 +255,86 @@ class StoryController extends Controller
         }
         $form = $this->createForm(new StoryType(), $story);
 
-        $browser = new Browser();
+//        $devKey = "AI39si4W6QZ0x9lK4kBmLM0mxqMKYotCEcUZdz971RmCYHIbGaGmMSy9n0A7fqepT8i6cCnRpMzhJrUYT5wwpUc7yFhbiGDGYg";
+//        $browser = new Browser();
+//
+//        $authenticationURL = 'https://www.google.com/accounts/ClientLogin';
+//
+//        try {
+//            $client = \Zend_Gdata_ClientLogin::getHttpClient(
+//                $username = 'mystories.eu@gmail.com',
+//                $password = 'Xk@l456Kkd',
+//                $service = 'youtube',
+//                $client = null,
+//                $source = 'mystories.eu', // a short string identifying your application
+//                $loginToken = null,
+//                $loginCaptcha = null,
+//                $authenticationURL);
+//        } catch (Zend_Gdata_App_CaptchaRequiredException $cre) {
+//            echo 'URL of CAPTCHA image: ' . $cre->getCaptchaUrl() . "\n";
+//            echo 'Token ID: ' . $cre->getCaptchaToken() . "\n";
+//        } catch (Zend_Gdata_App_AuthException $ae) {
+//            echo 'Problem authenticating: ' . $ae->exception() . "\n";
+//        }
+//        https: //developers.google.com/youtube/2.0/developers_guide_php
+//        print_r($client);
+//        die;
+//
+//// Note that this example creates an unversioned service object.
+//// You do not need to specify a version number to upload content
+//// since the upload behavior is the same for all API versions.
+//        $yt = new \Zend_Gdata_YouTube($client);
+//
+//// create a new VideoEntry object
+//        $myVideoEntry = new \Zend_Gdata_YouTube_VideoEntry();
+//
+//// create a new Zend_Gdata_App_MediaFileSource object
+//        $filesource = $yt->newMediaFileSource('c:\\Team-Gigglepin-4x4-Adventures-SS6[www.savevid.com].flv');
+//        $filesource->setContentType('video/quicktime');
+//// set slug header
+//        $filesource->setSlug('file.mov');
+//
+//// add the filesource to the video entry
+//        $myVideoEntry->setMediaSource($filesource);
+//
+//        $myVideoEntry->setVideoTitle('My Test Movie');
+//        $myVideoEntry->setVideoDescription('My Test Movie');
+//// The category must be a valid YouTube category!
+//        $myVideoEntry->setVideoCategory('Autos');
+//
+//// Set keywords. Please note that this must be a comma-separated string
+//// and that individual keywords cannot contain whitespace
+//        $myVideoEntry->setVideoTags('cars, funny');
+//
+//// set some developer tags -- this is optional
+//// (see Searching by Developer Tags for more details)
+//        $myVideoEntry->setVideoDeveloperTags(array('mydevtag', 'anotherdevtag'));
+//
+//// set the video's location -- this is also optional
+//        $yt->registerPackage('Zend_Gdata_Geo');
+//        $yt->registerPackage('Zend_Gdata_Geo_Extension');
+//        $where = $yt->newGeoRssWhere();
+//        $position = $yt->newGmlPos('37.0 -122.0');
+//        $where->point = $yt->newGmlPoint($position);
+//        $myVideoEntry->setWhere($where);
+//
+//// upload URI for the currently authenticated user
+//        $uploadUrl = 'http://uploads.gdata.youtube.com/feeds/api/users/default/uploads';
+//
+//// try to upload the video, catching a Zend_Gdata_App_HttpException,
+//// if available, or just a regular Zend_Gdata_App_Exception otherwise
+//        try {
+//            $newEntry = $yt->insertEntry($myVideoEntry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
+//        } catch (\Zend_Gdata_App_HttpException $httpException) {
+//            echo $httpException->getRawResponseBody();
+//        } catch (\Zend_Gdata_App_Exception $e) {
+//            echo $e->getMessage();
+//        }
 
-        $authenticationURL = 'https://www.google.com/accounts/ClientLogin';
-
-        try {
-            $httpClient = \Zend_Gdata_ClientLogin::getHttpClient(
-                $username = 'mystories.eu@gmail.com',
-                $password = 'Xk@l456Kkd',
-                $service = 'youtube',
-                $httpClient = null,
-                $source = 'mystories.eu', // a short string identifying your application
-                $loginToken = null,
-                $loginCaptcha = null,
-                $authenticationURL);
-        } catch (\Zend_Gdata_App_CaptchaRequiredException $cre) {
-            echo 'URL of CAPTCHA image: ' . $cre->getCaptchaUrl() . "\n";
-            echo 'Token ID: ' . $cre->getCaptchaToken() . "\n";
-        } catch (\Zend_Gdata_App_AuthException $ae) {
-            echo 'Problem authenticating: ' . $ae->exception() . "\n";
-        }
-        https: //developers.google.com/youtube/2.0/developers_guide_php
-        //print_r($httpClient);
-        //        die;
-
-        // Note that this example crea// Note that this example creates an unversioned service object.
-        // You do not need to specify a version number to upload content
-        // since the upload behavior is the same for all API versions.
-        $yt = new \Zend_Gdata_YouTube($httpClient,
-            $applicationId = "Mystories.eu",
-            $clientId = "Mystories.eu uploader",
-            $developerKey = "AI39si4W6QZ0x9lK4kBmLM0mxqMKYotCEcUZdz971RmCYHIbGaGmMSy9n0A7fqepT8i6cCnRpMzhJrUYT5wwpUc7yFhbiGDGYg"
-        );
-
-        // create a new VideoEntry object
-        $myVideoEntry = new \Zend_Gdata_YouTube_VideoEntry();
-
-        $myVideoEntry->setVideoTitle('My Test Movie');
-        $myVideoEntry->setVideoDescription('My Test Movie');
-        // The category must be a valid YouTube category!
-        $myVideoEntry->setVideoCategory('Autos');
-
-        // Set keywords. Please note that this must be a comma-separated string
-        // and that individual keywords cannot contain whitespace
-        $myVideoEntry->SetVideoTags('cars, funny');
-
-        $tokenHandlerUrl = 'http://gdata.youtube.com/action/GetUploadToken';
-        $tokenArray = $yt->getFormUploadToken($myVideoEntry, $tokenHandlerUrl);
-        $tokenValue = $tokenArray['token'];
-        $postUrl = $tokenArray['url'];
-        print_r($postUrl);
-        print_r($tokenValue);
-        $nextUrl = 'http://www.example.com/youtube_uploads';
-
-        // build the form
-        $form = '<frame><html><body><form action="'. $postUrl .'?nexturl='. $nextUrl .
-                '" method="post" enctype="multipart/form-data">'.
-                '<input name="file" type="file"/>'.
-                '<input name="token" type="hidden" value="'. $tokenValue .'"/>'.
-                '<input value="Upload Video File" type="submit" />'.
-                '</form></body></html></frame>';
-        echo $form;
-        die;
-        //        $authenticationToken = $browser->post("https://www.google.com/accounts/ClientLogin",
-        //            array("Content-Type" => "application/x-www-form-urlencoded"),
-        //            "Email=mystories.eu&Passwd=Xk@l456Kkd&service=youtube&source=mystories.eu")->getContent();
-        //        list($crap, $authenticationToken) = explode("Auth=", $authenticationToken);
-        //        print_r($authenticationToken);
-        //
-
-        //               $browser= new Browser();;
-        //        $r = $browser->post("http://uploads.gdata.youtube.com/feeds/api/users/default/uploads",
-        //            array(
-        //                "youtube_username"=>"",
-        //                "Authorization" => "GoogleLogin auth=$authenticationToken",
-        //                "X-GData-Key" => "key=$devKey",
-        //                "GData-Version" => "2",
-        //                "Content-Length" => strlen($API_XML_Request),
-        //                "Content-Type" => "application/atom+xml; charset=UTF-8"
-        //            ), $API_XML_Request
-        //        );
-        //        echo '<pre>';
-        ////        echo $browser->getC
-        ////        echo $browser->getLastRequest()."\n";
-        //        print_r($r);
-
-
-        die;
         return array(
             'entity' => $story,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formUpload' => $this->createUploadForm()->createView()
         );
     }
 
@@ -480,5 +515,36 @@ class StoryController extends Controller
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
             ->getForm();
+    }
+
+    private function createUploadForm()
+    {
+        return $this->createFormBuilder()
+            ->add('video', 'file', array('required' => true))
+            ->getForm();
+    }
+
+    /**
+     * Uploads video
+     *
+     * @Route("/upload/video", name="story_upload_video")
+     * @Method("post")
+     */
+    public function uploadAction()
+    {
+        $form = $this->createUploadForm();
+        $form->bindRequest($this->getRequest());
+        if ($form->isValid()) {
+
+        }
+//        $request = $this->getRequest();
+//
+//        /* @var UploadedFile */
+//        $uploadedFile = $request->files->get('upfile');
+//        if (null === $uploadedFile)
+//            return new RedirectResponse($this->generateUrl('_upload_index'));
+//
+//        /* @var string*/
+//        $filename = $uploadedFile->getPathname();
     }
 }

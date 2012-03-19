@@ -3,5 +3,9 @@
 From {{ location.getName }}
 {% endblock %}
 {% block story %}
-    {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
-        {% endblock %}
+{% if stories %}
+{% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
+{% else %}
+There isn't any story from {{ location.getName }}
+{% endif %}
+{% endblock %}

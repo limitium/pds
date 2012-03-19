@@ -100,8 +100,12 @@ $(document).ready ->
     refreshLineno()
     false
 
+  $(".add-video").click ->
+    $("#video-upload").modal()
+    false
 
-  $("#myCarousel").carousel(interval: 10000000).carousel "next"
+
+  $("#myCarousel").carousel(interval: 10000).carousel "next"
 
   $("#story_date").datepicker(changeMonth: true, changeYear: true)
 

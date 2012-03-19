@@ -1,7 +1,11 @@
 {% extends 'PDSStoryBundle:Story:story.html.twig' %}
-{% block story %}
 {% block header %}
 In {{ time.getName }}
 {% endblock %}
-    {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
-        {% endblock %}
+{% block story %}
+{% if stories %}
+{% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
+{% else %}
+        There isn't any story in {{ time.getName }}
+{% endif %}
+{% endblock %}

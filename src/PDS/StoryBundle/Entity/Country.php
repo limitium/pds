@@ -122,4 +122,19 @@ class Country
     {
         return $this->Users;
     }
+    /**
+     * @var PDS\StoryBundle\Entity\Story
+     */
+    private $Stories;
+
+
+    /**
+     * Get Stories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getStories()
+    {
+        return $this->Stories;
+    }
 }
