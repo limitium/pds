@@ -251,15 +251,19 @@ class StoryController extends Controller
     public function newAction()
     {
         $story = new Story();
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $page = new Page();
             $story->addPage($page);
         }
         $form = $this->createForm(new StoryType(), $story);
 
+        $formView = $form->createView();
+        $formView['meta']->setAttribute('placeholder','Meta information about story, keywords, dates etc.');
+        $formView['Pages'][0]['body']->setAttribute('placeholder','Write here summary of the sotry. This page will show your summary and some information about your story.');
+        $formView['Pages'][1]['body']->setAttribute('placeholder','Add your story here. If you want to have more pages, just click + Page button below this box.');
         return array(
             'entity' => $story,
-            'form' => $form->createView(),
+            'form' => $formView,
             'formUpload' => $this->createUploadForm()->createView()
         );
     }

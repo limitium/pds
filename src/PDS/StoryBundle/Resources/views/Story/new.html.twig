@@ -37,21 +37,25 @@ Create a new story
 
 <div class="edit row">
     <div class="modal fade" id="video-upload">
-        <form class="form-horizontal" action="{{ path('story_upload_video') }}" method="post" {{ form_enctype(formUpload) }}>
+        <form class="form-horizontal" action="{{ path('story_upload_video') }}"
+              method="post" {{ form_enctype(formUpload) }}>
             <div class="modal-header">
                 <a class="close" data-dismiss="modal">×</a>
+
                 <h3>Upload video to youtube.com</h3>
             </div>
             <div class="modal-body">
                 <fieldset>
                     <div class="control-group">
                         <label class="control-label" for="form_title">Title</label>
+
                         <div class="controls">
                             {{ form_widget(formUpload.title)}}
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="form_video">Select video</label>
+
                         <div class="controls">
                             {{ form_widget(formUpload.video)}}
                         </div>
@@ -71,25 +75,28 @@ Create a new story
     </div>
     <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
         <div class="meta span3">
-            {{ form_row(form.title)}}
-            {{ form_row(form.meta)}}
+            <h1>Information about the story</h1>
             {{ form_row(form.Country)}}
             {{ form_row(form.date)}}
             {{ form_row(form.Topics)}}
+            {{ form_row(form.meta)}}
             <button class="btn btn-small add-video" type="button"><i class="icon-upload"></i> Add video</button>
             <ul class="videos">
             </ul>
         </div>
         <div class="span9">
-            <label class="pages-label">Pages</label>
+            <label for="story_title" class="title required">Title of the story</label>
+            {{ form_widget(form.title)}}
             {{ form_widget(form.Pages)}}
-            <button class="btn btn-small pull-right add-page"><i class="icon-plus"></i> Page</button>
+
         </div>
         {{ form_rest(form) }}
-        <p class="span12">
-            <button class="btn btn-small create-story" type="submit"><i class="icon-pencil"></i> Create</button>
-        </p>
+        <div class="buttons span9 offset3">
+            <button class="btn btn-small pull-left add-page"><i class="icon-plus"></i> Page</button>
+            <button class="btn pull-right btn-small create-story" type="submit"><i class="icon-pencil"></i> Create
+            </button>
+        </div>
     </form>
 
 </div>
-{% endblock %}
+        {% endblock %}

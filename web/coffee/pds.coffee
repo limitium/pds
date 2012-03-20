@@ -46,7 +46,12 @@ $(document).ready ->
 
   setLineno = (page, lineno) ->
     page.attr("data-page", lineno)
-    $(".page-number", page).html lineno
+    buttons = $("button",page)
+    if lineno > 2
+      buttons.show()
+     else
+      buttons.hide()
+    $(".page-number", page).html  if lineno > 1 then "Page " + (lineno - 1) else "Story summary"
     $($("input", page)[0]).val lineno
 
   refreshLineno = ->
@@ -94,6 +99,8 @@ $(document).ready ->
     false
 
   $(".add-page").click ->
+    #@todo: do something with place holders page
+    $($("#story_Pages textarea")[1]).attr "placeholder", ""
     pages = $("#story_Pages")
     pages.append pages.attr("data-prototype").split("$$name$$").join(pages.children().length)
     refreshLineno()
