@@ -169,11 +169,22 @@ class StoryController extends Controller
         shuffle($times);
         shuffle($topics);
         shuffle($tellers);
+
+        $images = array();
+        foreach ($stories as $story) {
+            foreach ($story->getPages() as $page) {
+                preg_match_all("/(<img .+?>)/i", $page->getBody(), $matches);
+                foreach ($matches[1] as $img) {
+                    $images[] = $img;
+                }
+            }
+        }
         return array('stories' => $stories,
             'locations' => $locations,
             'times' => $times,
             'topics' => $topics,
-            'tellers' => $tellers);
+            'tellers' => $tellers,
+            'images' => $images);
     }
 
     private function getWeight(\Doctrine\ORM\EntityRepository $repo)
@@ -258,9 +269,9 @@ class StoryController extends Controller
         $form = $this->createForm(new StoryType(), $story);
 
         $formView = $form->createView();
-        $formView['meta']->setAttribute('placeholder','Meta information about story, keywords, dates etc.');
-        $formView['Pages'][0]['body']->setAttribute('placeholder','Write here summary of the sotry. This page will show your summary and some information about your story.');
-        $formView['Pages'][1]['body']->setAttribute('placeholder','Add your story here. If you want to have more pages, just click + Page button below this box.');
+        $formView['meta']->setAttribute('placeholder', 'Meta information about story, keywords, dates etc.');
+        $formView['Pages'][0]['body']->setAttribute('placeholder', 'Write here summary of the sotry. This page will show your summary and some information about your story.');
+        $formView['Pages'][1]['body']->setAttribute('placeholder', 'Add your story here. If you want to have more pages, just click + Page button below this box.');
         return array(
             'entity' => $story,
             'form' => $formView,

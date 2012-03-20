@@ -42,7 +42,8 @@
             </div>
             <div class="box-body tags-cloud">
                 {% for topic in topics%}
-                <a href="{{ path('story_topic', { 'id': topic.getId() }) }}" class="size{{ topic.weight }}">{{ topic}}</a>
+                <a href="{{ path('story_topic', { 'id': topic.getId() }) }}"
+                   class="size{{ topic.weight }}">{{ topic}}</a>
                 {% endfor %}
             </div>
         </div>
@@ -64,21 +65,19 @@
                 Preview
             </div>
             <div class="box-body tags-cloud">
-                {% for story in stories %}
                 <div class="projector">
                     <div id="myCarousel" class="carousel">
                         <div class="carousel-inner">
-                            {% for page in story.getPages() %}
+                            {% for img in images %}
                             <div class="item">
-                                {{ page.body | raw }}
+                                {{ img | raw }}
                             </div>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
+        {% endblock %}

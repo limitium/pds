@@ -75,7 +75,7 @@ Create a new story
     </div>
     <form action="{{ path('story_create') }}" method="post" {{ form_enctype(form) }}>
         <div class="meta span3">
-            <h1>Information about the story</h1>
+            <h1 class="title-meta">Information about the story</h1>
             {{ form_row(form.Country)}}
             {{ form_row(form.date)}}
             {{ form_row(form.Topics)}}

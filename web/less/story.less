@@ -57,8 +57,15 @@
 
     }
     .edit {
+        .title-meta{
+            font-size: 22px;
+            line-height: 19px;
+        }
         .title {
             .header-text()
+        }
+        #story_title{
+            width: 680px;
         }
         #video-upload{
             display: none;
@@ -160,6 +167,15 @@
             margin: 10px 7px 7px 7px;
             background-color: @pds-grey;
             .border-radius();
+            #myCarousel{
+                .item{
+                    img{
+                        .border-radius();
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+            }
         }
     }
     .short-list {
