@@ -99,15 +99,33 @@ $(document).ready ->
     refreshLineno()
     false
 
-  $("#video-upload button").click ->
-    console.log 123
-    $("#video-upload form").ajaxSubmit ->
-      console.log arguments
-    console.log 234
-    false
 
   $(".add-video").click ->
     $("#video-upload").modal()
+    false
+
+  $("#video-upload button").click ->
+    progress = $("#video-upload .progress").css display: "block"
+    progressHelp = $("#video-upload .progress-help").css display: "block"
+    bar = progress.children().css width: "0%";
+    progress.removeClass("progress-info").addClass "progress-success"
+    progressHelp.html "Uploading..."
+    $("#video-upload form").ajaxSubmit
+      uploadProgress: (e, position, total, percent)->
+        if percent > 98
+          percent = 100
+          progressHelp.html "Sending to youtube..."
+          progress.removeClass("progress-success").addClass "progress-info"
+        bar.css width: percent + "%"
+      success: (data)->
+        console.log arguments
+        progress.css display: "none"
+        progressHelp.css display: "none"
+
+        data = $.parseJSON data
+        console.log data
+        $(".videos").append '<li data-player="'+data.player+'"><a href="'+data.url+'"><img src="'+data.thumbnail+'"/></a></li>'
+        $("#video-upload").modal "hide"
     false
 
 

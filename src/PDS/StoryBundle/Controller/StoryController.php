@@ -18,6 +18,8 @@ use PDS\StoryBundle\Form\VoteType;
 use PDS\StoryBundle\Entity\Time;
 use PDS\StoryBundle\Entity\Page;
 
+use PDS\StoryBundle\Youtube\YoutubeFile;
+
 use Buzz\Browser;
 
 /**
@@ -255,82 +257,6 @@ class StoryController extends Controller
         }
         $form = $this->createForm(new StoryType(), $story);
 
-        //        $devKey = "AI39si4W6QZ0x9lK4kBmLM0mxqMKYotCEcUZdz971RmCYHIbGaGmMSy9n0A7fqepT8i6cCnRpMzhJrUYT5wwpUc7yFhbiGDGYg";
-        //        $browser = new Browser();
-        //
-        //        $authenticationURL = 'https://www.google.com/accounts/ClientLogin';
-        //
-        //        try {
-        //            $client = \Zend_Gdata_ClientLogin::getHttpClient(
-        //                $username = 'mystories.eu@gmail.com',
-        //                $password = 'Xk@l456Kkd',
-        //                $service = 'youtube',
-        //                $client = null,
-        //                $source = 'mystories.eu', // a short string identifying your application
-        //                $loginToken = null,
-        //                $loginCaptcha = null,
-        //                $authenticationURL);
-        //        } catch (Zend_Gdata_App_CaptchaRequiredException $cre) {
-        //            echo 'URL of CAPTCHA image: ' . $cre->getCaptchaUrl() . "\n";
-        //            echo 'Token ID: ' . $cre->getCaptchaToken() . "\n";
-        //        } catch (Zend_Gdata_App_AuthException $ae) {
-        //            echo 'Problem authenticating: ' . $ae->exception() . "\n";
-        //        }
-        //        https: //developers.google.com/youtube/2.0/developers_guide_php
-        //        print_r($client);
-        //        die;
-        //
-        //// Note that this example creates an unversioned service object.
-        //// You do not need to specify a version number to upload content
-        //// since the upload behavior is the same for all API versions.
-        //        $yt = new \Zend_Gdata_YouTube($client);
-        //
-        //// create a new VideoEntry object
-        //        $myVideoEntry = new \Zend_Gdata_YouTube_VideoEntry();
-        //
-        //// create a new Zend_Gdata_App_MediaFileSource object
-        //        $filesource = $yt->newMediaFileSource('c:\\Team-Gigglepin-4x4-Adventures-SS6[www.savevid.com].flv');
-        //        $filesource->setContentType('video/quicktime');
-        //// set slug header
-        //        $filesource->setSlug('file.mov');
-        //
-        //// add the filesource to the video entry
-        //        $myVideoEntry->setMediaSource($filesource);
-        //
-        //        $myVideoEntry->setVideoTitle('My Test Movie');
-        //        $myVideoEntry->setVideoDescription('My Test Movie');
-        //// The category must be a valid YouTube category!
-        //        $myVideoEntry->setVideoCategory('Autos');
-        //
-        //// Set keywords. Please note that this must be a comma-separated string
-        //// and that individual keywords cannot contain whitespace
-        //        $myVideoEntry->setVideoTags('cars, funny');
-        //
-        //// set some developer tags -- this is optional
-        //// (see Searching by Developer Tags for more details)
-        //        $myVideoEntry->setVideoDeveloperTags(array('mydevtag', 'anotherdevtag'));
-        //
-        //// set the video's location -- this is also optional
-        //        $yt->registerPackage('Zend_Gdata_Geo');
-        //        $yt->registerPackage('Zend_Gdata_Geo_Extension');
-        //        $where = $yt->newGeoRssWhere();
-        //        $position = $yt->newGmlPos('37.0 -122.0');
-        //        $where->point = $yt->newGmlPoint($position);
-        //        $myVideoEntry->setWhere($where);
-        //
-        //// upload URI for the currently authenticated user
-        //        $uploadUrl = 'http://uploads.gdata.youtube.com/feeds/api/users/default/uploads';
-        //
-        //// try to upload the video, catching a Zend_Gdata_App_HttpException,
-        //// if available, or just a regular Zend_Gdata_App_Exception otherwise
-        //        try {
-        //            $newEntry = $yt->insertEntry($myVideoEntry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
-        //        } catch (\Zend_Gdata_App_HttpException $httpException) {
-        //            echo $httpException->getRawResponseBody();
-        //        } catch (\Zend_Gdata_App_Exception $e) {
-        //            echo $e->getMessage();
-        //        }
-
         return array(
             'entity' => $story,
             'form' => $form->createView(),
@@ -524,6 +450,7 @@ class StoryController extends Controller
     {
         return $this->createFormBuilder()
             ->add('video', 'file', array('required' => true))
+            ->add('title', 'text', array('required' => true))
             ->getForm();
     }
 
@@ -541,22 +468,23 @@ class StoryController extends Controller
         if ($form->isValid()) {
             $data = $form->getData();
             $video = $data['video'];
-print_r($video);
-            return array(
-                'status' => 'ok',
-            );
+            if ($video->isValid()) {
+                $yf = new YoutubeFile($data['title'], $video->move(sys_get_temp_dir(), $video->getClientOriginalName())->getPathname());
+                $videoEntry = $yf->upload();
+                $thumbnails = $videoEntry->getVideoThumbnails();
+                return array(
+                    'ok' => true,
+                    'video' => array(
+                        'thumbnail' => $thumbnails[2]['url'],
+                        'url' => $videoEntry->getVideoWatchPageUrl(),
+                        'player' => $videoEntry->getFlashPlayerUrl()
+                    )
+                );
+            }
         }
         return array(
-            'status' => 'beda',
+            'ok' => false,
         );
-        //        $request = $this->getRequest();
-        //
-        //        /* @var UploadedFile */
-        //        $uploadedFile = $request->files->get('upfile');
-        //        if (null === $uploadedFile)
-        //            return new RedirectResponse($this->generateUrl('_upload_index'));
-        //
-        //        /* @var string*/
-        //        $filename = $uploadedFile->getPathname();
     }
+
 }

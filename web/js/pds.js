@@ -122,8 +122,52 @@ $(document).ready(function() {
         refreshLineno();
         return false;
     });
+    $(".add-video").click(function() {
+        $("#video-upload").modal();
+        return false;
+    });
+    $("#video-upload button").click(function() {
+        var bar, progress, progressHelp;
+        progress = $("#video-upload .progress").css({
+            display: "block"
+        });
+        progressHelp = $("#video-upload .progress-help").css({
+            display: "block"
+        });
+        bar = progress.children().css({
+            width: "0%"
+        });
+        progress.removeClass("progress-info").addClass("progress-success");
+        progressHelp.html("Uploading...");
+        $("#video-upload form").ajaxSubmit({
+            uploadProgress: function(e, position, total, percent) {
+                if (percent > 98) {
+                    percent = 100;
+                    progressHelp.html("Sending to youtube...");
+                    progress.removeClass("progress-success").addClass("progress-info");
+                }
+                return bar.css({
+                    width: percent + "%"
+                });
+            },
+            success: function(data) {
+                console.log(arguments);
+                progress.css({
+                    display: "none"
+                });
+                progressHelp.css({
+                    display: "none"
+                });
+                data = $.parseJSON(data);
+                console.log(data);
+                $(".videos").append('<li data-player="' + data.player + '"><a href="' + data.url + '"><img src="' + data.thumbnail + '"/></a></li>');
+                return $("#video-upload").modal("hide");
+            }
+        });
+        return false;
+    });
     $("#myCarousel").carousel({
-        interval: 10000000
+        interval: 10000
     }).carousel("next");
     return $("#story_date").datepicker({
         changeMonth: true,

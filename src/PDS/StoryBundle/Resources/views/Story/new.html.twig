@@ -40,19 +40,27 @@ Create a new story
         <form class="form-horizontal" action="{{ path('story_upload_video') }}" method="post" {{ form_enctype(formUpload) }}>
             <div class="modal-header">
                 <a class="close" data-dismiss="modal">×</a>
-
                 <h3>Upload video to youtube.com</h3>
             </div>
             <div class="modal-body">
                 <fieldset>
                     <div class="control-group">
+                        <label class="control-label" for="form_title">Title</label>
+                        <div class="controls">
+                            {{ form_widget(formUpload.title)}}
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <label class="control-label" for="form_video">Select video</label>
-
                         <div class="controls">
                             {{ form_widget(formUpload.video)}}
                         </div>
                     </div>
                 </fieldset>
+                <div class="progress-help"></div>
+                <div class="progress progress-success progress-striped active">
+                    <div class="bar" style="width: 0%;"></div>
+                </div>
                 {{ form_rest(formUpload) }}
             </div>
             <div class="modal-footer">
@@ -69,6 +77,8 @@ Create a new story
             {{ form_row(form.date)}}
             {{ form_row(form.Topics)}}
             <button class="btn btn-small add-video" type="button"><i class="icon-upload"></i> Add video</button>
+            <ul class="videos">
+            </ul>
         </div>
         <div class="span9">
             <label class="pages-label">Pages</label>

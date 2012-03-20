@@ -54,6 +54,9 @@ PDS\UserBundle\Entity\User:
     Comments:
       targetEntity: PDS\StoryBundle\Entity\Comment
       mappedBy: User
+    Videos:
+      targetEntity: PDS\StoryBundle\Entity\Video
+      mappedBy: User
   manyToOne:
     Country:
       targetEntity: PDS\StoryBundle\Entity\Country

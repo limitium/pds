@@ -638,6 +638,9 @@ footer .f2{padding:10px;background-color:white;}
 .story .show .meta .info{margin-left:120px;}.story .show .meta .info .star-rating{height:16px !important;display:inline-block;}
 .story .show .meta .info .rating-value{margin-left:-20px !important;}
 .story .show .meta .icon-star{height:20px;margin-left:86px;margin-bottom:-3px;display:none;}
+.story .edit #video-upload{display:none;}.story .edit #video-upload form{margin:0px;}
+.story .edit #video-upload .progress{display:none;}
+.story .edit #video-upload .progress-help{display:none;}
 .story .edit #story_date_year{width:65px;}
 .story .edit #story_date_month{width:48px;}
 .story .edit #story_date_day{width:48px;}
@@ -649,7 +652,7 @@ footer .f2{padding:10px;background-color:white;}
 .story .edit #story_Pages .story-page-data{}
 .story .edit #story_Pages textarea{height:250px;width:680px;border:none;margin:0px;padding:4px;}
 .story .edit .add-page{margin-right:10px;}
-.story .edit .meta{padding:10px 0 10px 10px;margin-right:-10px;}
+.story .edit .meta{padding:10px 0 10px 10px;margin-right:-10px;}.story .edit .meta .videos{margin:10px 0 0 0;list-style:none;}
 .story .edit .create-story{margin-left:10px;}
 .story .box-container{background-color:#366638;background-image:-moz-linear-gradient(top, #427648, #244e20);background-image:-ms-linear-gradient(top, #427648, #244e20);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#427648), to(#244e20));background-image:-webkit-linear-gradient(top, #427648, #244e20);background-image:-o-linear-gradient(top, #427648, #244e20);background-image:linear-gradient(top, #427648, #244e20);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#427648', endColorstr='#244e20', GradientType=0);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;margin-top:20px;}.story .box-container .box-header{padding-top:5px;color:white;font-size:24px;font-weight:900;text-align:center;}
 .story .box-container .box-body{margin:10px 7px 7px 7px;background-color:#f9f9f9;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}

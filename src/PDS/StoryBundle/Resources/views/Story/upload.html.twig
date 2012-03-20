@@ -1,1 +1,5 @@
-{{ status }}
+{% if ok %}
+{{ video | json_encode | raw }}
+{% else %}
+error
+{% endif %}
