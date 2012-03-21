@@ -70,7 +70,7 @@
                         <div class="carousel-inner">
                             {% for img in images %}
                             <div class="item">
-                                {{ img | raw }}
+                                <a href="{{ path('story_show', { 'id': img.story.id }) }}#page{{img.page.lineno}}">{{ img.img | raw }}</a>
                             </div>
                             {% endfor %}
                         </div>
@@ -80,4 +80,4 @@
         </div>
     </div>
 </div>
-        {% endblock %}
+{% endblock %}

@@ -175,7 +175,9 @@ class StoryController extends Controller
             foreach ($story->getPages() as $page) {
                 preg_match_all("/(<img .+?>)/i", $page->getBody(), $matches);
                 foreach ($matches[1] as $img) {
-                    $images[] = $img;
+                    $images[] = array('img' => $img,
+                        'story' => $story,
+                        'page' => $page);
                 }
             }
         }

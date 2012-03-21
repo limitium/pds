@@ -7,6 +7,7 @@
     margin-left: 5px;
     color: @linkColor;
 }
+
 .story {
     .show {
         .projector {
@@ -57,25 +58,25 @@
 
     }
     .edit {
-        .title-meta{
+        .title-meta {
             font-size: 22px;
             line-height: 19px;
         }
         .title {
             .header-text()
         }
-        #story_title{
+        #story_title {
             width: 680px;
         }
-        #video-upload{
+        #video-upload {
             display: none;
-            form{
-                margin:0px;
+            form {
+                margin: 0px;
             }
-            .progress{
+            .progress {
                 display: none;
             }
-            .progress-help{
+            .progress-help {
                 display: none
             }
         }
@@ -114,8 +115,8 @@
                     width: 82%;
                 }
                 button {
-                 margin-right: 5px;
-                 z-index: 1000;
+                    margin-right: 5px;
+                    z-index: 1000;
                 }
             }
             .story-page-data {
@@ -135,7 +136,7 @@
         .meta {
             padding: 10px 0 10px 10px;
             margin-right: -10px;
-            .videos{
+            .videos {
                 margin: 10px 0 0 0;
                 list-style: none;
             }
@@ -143,9 +144,9 @@
         .create-story {
             margin-left: 10px;
         }
-        .buttons{
+        .buttons {
             padding-bottom: 10px;
-            .create-story{
+            .create-story {
                 margin-right: 10px;
             }
         }
@@ -167,12 +168,16 @@
             margin: 10px 7px 7px 7px;
             background-color: @pds-grey;
             .border-radius();
-            #myCarousel{
-                .item{
-                    img{
-                        .border-radius();
-                        height: 100%;
-                        width: 100%;
+            #myCarousel {
+                .item {
+                    a {
+                        margin: 0px;
+                        padding: 0px;
+                        img {
+                            .border-radius();
+                            height: 100%;
+                            width: 100%;
+                        }
                     }
                 }
             }
