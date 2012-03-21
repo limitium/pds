@@ -98,12 +98,31 @@ $(document).ready ->
     changePosition($(@).parents("li"), +1)
     false
 
+  addEditor = (id) ->
+    textarea = $("#"+id)
+    placeholder = textarea.attr "placeholder"
+
+    new nicEditor().panelInstance id
+
+    if placeholder
+      edEl = textarea.siblings().children(".niceditor-elm").focus ->
+        text = edEl.html()
+        if text == textarea.attr "placeholder"
+          edEl.html ""
+      .blur ->
+        !edEl.html() and edEl.html textarea.attr "placeholder"
+      .html placeholder
+
   $(".add-page").click ->
     #@todo: do something with place holders page
+    placeholder = $($("#story_Pages textarea")[1]).attr "placeholder"
     $($("#story_Pages textarea")[1]).attr "placeholder", ""
+    if $($("#story_Pages .niceditor-elm")[1]).html() == placeholder
+      $($("#story_Pages .niceditor-elm")[1]).html ""
+
     pages = $("#story_Pages")
     pages.append pages.attr("data-prototype").split("$$name$$").join(pages.children().length)
-    new nicEditor().panelInstance "story_Pages_"+(pages.children().length-1)+"_body"
+    addEditor "story_Pages_"+(pages.children().length-1)+"_body"
     refreshLineno()
     false
 
@@ -137,8 +156,7 @@ $(document).ready ->
     false
 
   $("#story_Pages textarea").each ->
-    new nicEditor().panelInstance @.id
-
+    addEditor @.id
 
   $("#myCarousel").carousel(interval:10000).carousel "next"
 
