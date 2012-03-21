@@ -49,7 +49,7 @@ $(document).ready ->
     buttons = $("button",page)
     if lineno > 2
       buttons.show()
-     else
+    else
       buttons.hide()
     $(".page-number", page).html  if lineno > 1 then "Page " + (lineno - 1) else "Story summary"
     $($("input", page)[0]).val lineno
@@ -103,6 +103,7 @@ $(document).ready ->
     $($("#story_Pages textarea")[1]).attr "placeholder", ""
     pages = $("#story_Pages")
     pages.append pages.attr("data-prototype").split("$$name$$").join(pages.children().length)
+    new nicEditor().panelInstance "story_Pages_"+(pages.children().length-1)+"_body"
     refreshLineno()
     false
 
@@ -134,6 +135,9 @@ $(document).ready ->
         $(".videos").append '<li data-player="'+data.player+'"><a href="'+data.url+'"><img src="'+data.thumbnail+'"/></a></li>'
         $("#video-upload").modal "hide"
     false
+
+  $("#story_Pages textarea").each ->
+    new nicEditor().panelInstance @.id
 
 
   $("#myCarousel").carousel(interval:10000).carousel "next"
