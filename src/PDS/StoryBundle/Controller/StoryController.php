@@ -153,6 +153,7 @@ class StoryController extends Controller
         $locations = $this->getWeight($em->getRepository('PDSStoryBundle:Country'));
         $times = $this->getWeight($em->getRepository('PDSStoryBundle:Time'));
         $tellers = $this->getWeight($em->getRepository('PDSUserBundle:User'));
+
         $topics = $this->calculateWeight($em
             ->getRepository('PDSStoryBundle:Tag')
             ->createQueryBuilder("t")
@@ -165,11 +166,6 @@ class StoryController extends Controller
             ->getResult());
 
 
-        shuffle($locations);
-        shuffle($times);
-        shuffle($topics);
-        shuffle($tellers);
-
         $images = array();
         foreach ($stories as $story) {
             foreach ($story->getPages() as $page) {
@@ -181,6 +177,13 @@ class StoryController extends Controller
                 }
             }
         }
+
+        shuffle($images);
+        shuffle($locations);
+        shuffle($times);
+        shuffle($topics);
+        shuffle($tellers);
+
         return array('stories' => $stories,
             'locations' => $locations,
             'times' => $times,

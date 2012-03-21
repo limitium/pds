@@ -37,21 +37,27 @@ Create a new story
 
     <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }}>
         <div class="meta span3">
-            {{ form_row(form.title)}}
-            {{ form_row(form.meta)}}
+            <h1 class="title-meta">Information about the story</h1>
             {{ form_row(form.Country)}}
             {{ form_row(form.date)}}
             {{ form_row(form.Topics)}}
+            {{ form_row(form.meta)}}
+            <button class="btn btn-small add-video" type="button"><i class="icon-upload"></i> Add video</button>
+            <ul class="videos">
+            </ul>
         </div>
         <div class="span9">
-            <label class="pages-label">Pages</label>
+            <label for="story_title" class="title required">Title of the story</label>
+            {{ form_widget(form.title)}}
             {{ form_widget(form.Pages)}}
-            <button class="btn btn-small pull-right add-page"><i class="icon-plus"></i> Page</button>
+
         </div>
         {{ form_rest(form) }}
-        <p class="span12">
-            <button class="btn btn-small create-story" type="submit"><i class="icon-pencil"></i> Update</button>
-        </p>
+        <div class="buttons span9 offset3">
+            <button class="btn btn-small pull-left add-page"><i class="icon-plus"></i> Page</button>
+            <button class="btn pull-right btn-small create-story" type="submit"><i class="icon-pencil"></i> Update
+            </button>
+        </div>
     </form>
 
 </div>
