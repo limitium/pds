@@ -414,6 +414,7 @@ class StoryController extends Controller
                 $page->setStory($story);
                 $em->persist($page);
             }
+            $this->updateTime($story, $em);
             $em->flush();
 
             $this->updateTopics($story);
