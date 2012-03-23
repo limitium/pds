@@ -47,11 +47,15 @@ $(document).ready ->
   setLineno = (page, lineno) ->
     page.attr("data-page", lineno)
     buttons = $("button",page)
-    if lineno > 2
-      buttons.show()
-    else
+
+    if lineno <= 2
+      title = if lineno == 1 then "Write summary" else "Create Story"
       buttons.hide()
-    $(".page-number", page).html  if lineno > 1 then "Page " + (lineno - 1) else "Story summary"
+    else
+      title = "Create story " + (lineno-1)
+      buttons.show()
+
+    $(".page-number", page).html title
     $($("input", page)[0]).val lineno
 
   refreshLineno = ->

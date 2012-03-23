@@ -406,4 +406,34 @@ class Story     implements Taggable
 
         return $this->tags;
     }
+    /**
+     * @var text $meta_place
+     */
+    private $meta_place;
+
+    /**
+     * @var PDS\StoryBundle\Entity\Status
+     */
+    private $Status;
+
+
+    /**
+     * Set meta_place
+     *
+     * @param text $metaPlace
+     */
+    public function setMetaPlace($metaPlace)
+    {
+        $this->meta_place = $metaPlace;
+    }
+
+    /**
+     * Get meta_place
+     *
+     * @return text 
+     */
+    public function getMetaPlace()
+    {
+        return $this->meta_place;
+    }
 }

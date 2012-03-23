@@ -16,11 +16,13 @@
       <column name="country_id" type="integer"/>
       <column name="time_id" type="integer"/>
       <column name="date" type="date"/>
+      <column name="status_id" type="integer"/>
+      <column name="meta_place" type="text"/>
       <orm-properties>
         <attribute name="repository-class">PDS\StoryBundle\Entity\StoryRepository</attribute>
       </orm-properties>
     </table>
-    <table name="Vote" visPositionX="364" visPositionY="413" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="73">
+    <table name="Vote" visPositionX="373" visPositionY="358" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="value" required="true" type="integer"/>
       <column name="story_id" type="integer"/>
@@ -37,7 +39,7 @@
       <column name="story_id" type="integer"/>
       <column name="user_id" type="integer"/>
     </table>
-    <table name="Country" visPositionX="249" visPositionY="430" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+    <table name="Country" visPositionX="213" visPositionY="393" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
     </table>
@@ -66,6 +68,10 @@
       <column name="watch_url" required="true" type="string"/>
       <column name="User_id" type="integer"/>
     </table>
+    <table name="Status" visPositionX="314" visPositionY="456" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+      <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
+      <column name="name" required="true" type="string"/>
+    </table>
     <foreign-key caption="User Story" from="Story" inverse-alias="User" name="FK_Story_User_id" owning-alias="Stories" to="User">
       <foreign-key-column from="user_id" to="id"/>
     </foreign-key>
@@ -75,7 +81,10 @@
     <foreign-key caption="Time Story" from="Story" inverse-alias="Time" name="FK_Story_Time_id" owning-alias="Stories" to="Time">
       <foreign-key-column from="time_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Story Vote" from="Vote" inverse-alias="Story" name="FK_Vote_Story_id" owning-alias="Votes" to="Story" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="4">
+    <foreign-key caption="Status Story" from="Story" inverse-alias="Status" name="FK_Story_Status_id" owning-alias="Stories" to="Status">
+      <foreign-key-column from="status_id" to="id"/>
+    </foreign-key>
+    <foreign-key caption="Story Vote" from="Vote" inverse-alias="Story" name="FK_Vote_Story_id" owning-alias="Votes" to="Story" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="-1">
       <foreign-key-column from="story_id" to="id"/>
     </foreign-key>
     <foreign-key caption="User Vote" from="Vote" inverse-alias="User" name="FK_Vote_User_id" owning-alias="Votes" to="User">

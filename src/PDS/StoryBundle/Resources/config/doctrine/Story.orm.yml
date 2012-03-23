@@ -19,6 +19,9 @@ PDS\StoryBundle\Entity\Story:
     date:
       type: date
       nullable: true
+    meta_place:
+      type: text
+      nullable: true
   oneToMany:
     Votes:
       targetEntity: PDS\StoryBundle\Entity\Vote
@@ -47,4 +50,10 @@ PDS\StoryBundle\Entity\Story:
       inversedBy: Stories
       joinColumns:
         time_id:
+          referencedColumnName: id
+    Status:
+      targetEntity: PDS\StoryBundle\Entity\Status
+      inversedBy: Stories
+      joinColumns:
+        status_id:
           referencedColumnName: id

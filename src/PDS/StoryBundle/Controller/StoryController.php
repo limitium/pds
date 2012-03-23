@@ -275,6 +275,7 @@ class StoryController extends Controller
 
         $formView = $form->createView();
         $formView['meta']->setAttribute('placeholder', 'Meta information about story, keywords, dates etc.');
+        $formView['meta_place']->setAttribute('placeholder', 'Meta information about story place, City, Area, Place etc.');
         $formView['Pages'][0]['body']->setAttribute('placeholder', 'Write here summary of the sotry. This page will show your summary and some information about your story.');
         $formView['Pages'][1]['body']->setAttribute('placeholder', 'Add your story here. If you want to have more pages, just click + Page button below this box.');
         return array(

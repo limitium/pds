@@ -532,4 +532,29 @@ class User implements UserInterface {
         // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
         return 'userpics';
     }
+    /**
+     * @var PDS\StoryBundle\Entity\Video
+     */
+    private $Videos;
+
+
+    /**
+     * Add Videos
+     *
+     * @param PDS\StoryBundle\Entity\Video $videos
+     */
+    public function addVideo(\PDS\StoryBundle\Entity\Video $videos)
+    {
+        $this->Videos[] = $videos;
+    }
+
+    /**
+     * Get Videos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getVideos()
+    {
+        return $this->Videos;
+    }
 }
