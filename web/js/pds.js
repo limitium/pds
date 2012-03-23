@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var changePosition, commenting, refreshLineno, reorderPages, setLineno, showStar, stars, voting;
+    var addEditor, changePosition, commenting, refreshLineno, reorderPages, setLineno, showStar, stars, voting;
     commenting = false;
     $("#form_comment").submit(function() {
         var button, form, loader, values;
@@ -56,8 +56,15 @@ $(document).ready(function() {
         showStar();
     }
     setLineno = function(page, lineno) {
+        var buttons;
         page.attr("data-page", lineno);
-        $(".page-number", page).html(lineno);
+        buttons = $("button", page);
+        if (lineno > 2) {
+            buttons.show();
+        } else {
+            buttons.hide();
+        }
+        $(".page-number", page).html(lineno > 1 ? "Page " + (lineno - 1) : "Story summary");
         return $($("input", page)[0]).val(lineno);
     };
     refreshLineno = function() {
@@ -115,10 +122,33 @@ $(document).ready(function() {
         changePosition($(this).parents("li"), +1);
         return false;
     });
+    addEditor = function(id) {
+        var edEl, placeholder, textarea;
+        textarea = $("#" + id);
+        placeholder = textarea.attr("placeholder");
+        new nicEditor().panelInstance(id);
+        if (placeholder) {
+            return edEl = textarea.siblings().children(".niceditor-elm").focus(function() {
+                var text;
+                text = edEl.html();
+                if (text === textarea.attr("placeholder")) {
+                    return edEl.html("");
+                }
+            }).blur(function() {
+                    return !edEl.html() && edEl.html(textarea.attr("placeholder"));
+                }).html(placeholder);
+        }
+    };
     $(".add-page").click(function() {
-        var pages;
+        var pages, placeholder;
+        placeholder = $($("#story_Pages textarea")[1]).attr("placeholder");
+        $($("#story_Pages textarea")[1]).attr("placeholder", "");
+        if ($($("#story_Pages .niceditor-elm")[1]).html() === placeholder) {
+            $($("#story_Pages .niceditor-elm")[1]).html("");
+        }
         pages = $("#story_Pages");
         pages.append(pages.attr("data-prototype").split("$$name$$").join(pages.children().length));
+        addEditor("story_Pages_" + (pages.children().length - 1) + "_body");
         refreshLineno();
         return false;
     });
@@ -165,6 +195,9 @@ $(document).ready(function() {
             }
         });
         return false;
+    });
+    $("#story_Pages textarea").each(function() {
+        return addEditor(this.id);
     });
     $("#myCarousel").carousel({
         interval: 10000
