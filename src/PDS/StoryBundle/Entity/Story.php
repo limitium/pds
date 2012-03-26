@@ -306,26 +306,6 @@ class Story     implements Taggable
     }
 
     /**
-     * Set status
-     *
-     * @param integer $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Add Pages
      *
      * @param PDS\StoryBundle\Entity\Page $pages
@@ -435,5 +415,25 @@ class Story     implements Taggable
     public function getMetaPlace()
     {
         return $this->meta_place;
+    }
+
+    /**
+     * Set Status
+     *
+     * @param PDS\StoryBundle\Entity\Status $status
+     */
+    public function setStatus(\PDS\StoryBundle\Entity\Status $status)
+    {
+        $this->Status = $status;
+    }
+
+    /**
+     * Get Status
+     *
+     * @return PDS\StoryBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->Status;
     }
 }

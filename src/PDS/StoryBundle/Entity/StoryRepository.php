@@ -15,6 +15,17 @@ use PDS\UserBundle\Entity\User;
 class StoryRepository extends EntityRepository
 {
 
+    public function publishRequest()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->select('s')
+            ->leftJoin('s.Status','st')
+            ->where('st.id = 3')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function top($limit = 10)
     {
         return $this->getStories($this->generateTopQueryBuilder(), $limit);

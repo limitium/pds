@@ -1,0 +1,29 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Storyteller</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for story in stories %}
+    <tr>
+        <td>
+            <a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.id }}</a>
+        </td>
+        <td>
+            <a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a>
+        </td>
+        <td>
+            <a href="{{ path('story_teller', { 'id': story.getUser().getId() }) }}">{{ story.getUser() }}</a>
+        </td>
+        <td>
+            <button class="btn btn-small btn-primary"><i class="icon-ok-sign icon-white"></i> Publish</button>
+            <button class="btn btn-small"><i class="icon-remove-sign"></i> Block</button>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -63,7 +63,22 @@
             line-height: 19px;
         }
         .title {
-            .header-text()
+            .header-text();
+            .status-unpublished {
+
+            }
+            .status-published {
+                background-color: @successText;
+            }
+            .status-moderated {
+                background-color: @orange;
+            }
+            .status-blocked {
+                background-color: @errorText;
+            }
+            button {
+                display: inline-block;
+            }
         }
         #story_title {
             width: 680px;

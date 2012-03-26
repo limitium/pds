@@ -18,6 +18,7 @@ $(document).ready ->
         $("#comment_message").val ""
         loader.css "visibility", "hidden"
         form.before html
+    false
 
   showStar = -> $(".meta .icon-star").css display:"inline-block"
   stars = $(".star-rating li a")
@@ -40,6 +41,7 @@ $(document).ready ->
           $(".rating-value").html rating
           $(".meta .star-rating").hide()
           showStar()
+      false
   else
     showStar()
 
@@ -161,6 +163,14 @@ $(document).ready ->
 
   $("#story_Pages textarea").each ->
     addEditor @.id
+
+  $(".publish-request").click ->
+    button = $(@)
+    button.hide().siblings().removeClass("status-blocked").removeClass("status-unpublished").addClass("status-moderated").html("Moderated")
+    $.post button.attr("data-url"), (ok) ->
+      if ok
+        console.log ok
+    false
 
   $("#myCarousel").carousel(interval:10000).carousel "next"
 

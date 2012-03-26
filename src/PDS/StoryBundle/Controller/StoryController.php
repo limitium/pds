@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 use  Doctrine\ORM\EntityRepositor;
 
 use PDS\StoryBundle\Entity\Story;
@@ -17,6 +18,7 @@ use PDS\StoryBundle\Form\VoteType;
 
 use PDS\StoryBundle\Entity\Time;
 use PDS\StoryBundle\Entity\Page;
+use PDS\StoryBundle\Entity\Status;
 
 use PDS\StoryBundle\Youtube\YoutubeFile;
 
@@ -310,6 +312,8 @@ class StoryController extends Controller
 
             $this->updateTime($story, $em);
 
+            //Unpublished by default
+            $story->setStatus($em->getRepository('PDSStoryBundle:Status')->find(1));
             $em->persist($story);
             $em->flush();
 
@@ -323,6 +327,67 @@ class StoryController extends Controller
             'source' => $story,
             'form' => $form->createView()
         );
+    }
+
+    /**
+     *  Publish request for story.
+     *
+     * @Route("/{id}/publish", name="story_publish")
+     * @Method("post")
+     */
+    public function publishAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
+
+        if (!$story) {
+            throw $this->createNotFoundException('Unable to find Story entity.');
+        }
+
+        $story->setStatus($em->getRepository('PDSStoryBundle:Status')->find(3));
+        $em->flush();
+
+        return new Response("ok");
+
+    }
+
+    /**
+     * Lists all request Story entities.
+     *
+     * @Route("/publish/request", name="story_publish_requests")
+     * @Template()
+     */
+    public function publishlistAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $stories = $em->getRepository('PDSStoryBundle:Story')->publishRequest();
+
+
+        return array('stories' => $stories);
+    }
+
+    /**
+     *  Moderate publish request for story.
+     *
+     * @Route("/{id}/moderate", name="story_moderate")
+     * @Method("post")
+     */
+    public function moderateAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
+
+        if (!$story) {
+            throw $this->createNotFoundException('Unable to find Story entity.');
+        }
+
+        $story->setStatus($em->getRepository('PDSStoryBundle:Status')->find(3));
+
+        return new Response("ok");
+
     }
 
     private function updateTime($story, $em)
@@ -381,6 +446,7 @@ class StoryController extends Controller
             'story' => $story,
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'formUpload' => $this->createUploadForm()->createView()
         );
     }
 
