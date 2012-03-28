@@ -1,6 +1,6 @@
-PDS\StoryBundle\Entity\Time:
+Country:
   type: entity
-  table: time
+  table: country
   fields:
     id:
       id: true
@@ -12,5 +12,8 @@ PDS\StoryBundle\Entity\Time:
       nullable: false
   oneToMany:
     Stories:
-      targetEntity: PDS\StoryBundle\Entity\Story
-      mappedBy: Time
+      targetEntity: Story
+      mappedBy: Country
+    Users:
+      targetEntity: User
+      mappedBy: Country

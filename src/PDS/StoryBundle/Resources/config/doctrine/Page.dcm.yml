@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Page:
+Page:
   type: entity
   table: page
   fields:
@@ -15,7 +15,7 @@ PDS\StoryBundle\Entity\Page:
       nullable: true
   manyToOne:
     Story:
-      targetEntity: PDS\StoryBundle\Entity\Story
+      targetEntity: Story
       inversedBy: Pages
       joinColumns:
         story_id:

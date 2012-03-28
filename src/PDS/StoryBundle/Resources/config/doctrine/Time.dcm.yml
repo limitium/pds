@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Time:
+Time:
   type: entity
   table: time
   fields:
@@ -12,5 +12,5 @@ PDS\StoryBundle\Entity\Time:
       nullable: false
   oneToMany:
     Stories:
-      targetEntity: PDS\StoryBundle\Entity\Story
+      targetEntity: Story
       mappedBy: Time

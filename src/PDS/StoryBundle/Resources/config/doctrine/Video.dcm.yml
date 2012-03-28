@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Video:
+Video:
   type: entity
   table: video
   fields:
@@ -21,7 +21,7 @@ PDS\StoryBundle\Entity\Video:
       nullable: false
   manyToOne:
     User:
-      targetEntity: PDS\UserBundle\Entity\User
+      targetEntity: User
       inversedBy: Videos
       joinColumns:
         User_id:

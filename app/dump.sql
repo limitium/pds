@@ -2,7 +2,8 @@
 SQLyog Ultimate - MySQL GUI v8.2 
 MySQL - 5.1.40-community : Database - pds
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,11 +13,258 @@ MySQL - 5.1.40-community : Database - pds
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`pds` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-/*Data for the table `Page` */
+/*Table structure for table `comment` */
 
-insert  into `Page`(`id`,`story_id`,`body`,`lineno`) values (1,4,'qqqqqq',NULL),(2,4,'qqqqqqqqqqqqqqqqqq',NULL),(3,4,'qqqqqqqqq',NULL),(4,5,'<img src=\"http://jquery.com/demo/thickbox/images/plant4.jpg\">\r\n<img src=\"http://www.boingboing.net/images/_documents_anemone_images_anemone850-1.jpg\"><div>test test</div>',1),(5,5,'sssssssss<img src=\"http://www.marshallcenter.org/mcpublicweb/MCDocs/images/img_CMS/imgThumbnails/400x300-MCDocs-images-img_MC-img_news-0001.jpeg\">ss',2),(6,5,'fffffffffffffff',3),(7,5,'hhhhhhhhhhhhhh',4),(8,6,'page 1',NULL),(9,6,'page 2',NULL),(10,6,'page 3',NULL),(11,6,'page 4',NULL),(12,6,'page 5',NULL),(13,5,'zzzzzzzzzzzzzzzzzzzzz',5),(14,1,'<h3>Little mudding</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/V_fh2fyXcc0\" frameborder=\"0\" allowfullscreen></iframe>',1),(15,1,'<h3>Crossing a river</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/hUMzu9k3CbE\" frameborder=\"0\" allowfullscreen></iframe>',2),(16,1,'<h3>Sand dune ;)</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/gvoL3g1wfjU\" frameborder=\"0\" allowfullscreen></iframe>',3),(17,1,'<h3>Moar sand</h3>\r\n<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/9gnLSq29E9g\" frameborder=\"0\" \r\nallowfullscreen></iframe>',4),(18,2,'<iframe width=\"910\" height=\"450\" src=\"http://www.youtube.com/embed/-UrJBu0_Yss\" frameborder=\"0\" allowfullscreen></iframe>\r\n<p>\r\nStuck in the creek at night. Morning evacuation :)\r\n</p>',1),(19,7,'1',1),(20,7,'3',2),(21,7,'2',3),(22,8,'1',1),(23,8,'2',2),(24,8,'1',3),(25,9,'1',1),(26,9,'2',2),(27,9,'1',3),(28,10,'1',1),(29,10,'2',2),(30,10,'1',3),(31,11,'1',1),(32,11,'2',2),(33,11,'1',3),(34,12,'1',1),(35,12,'2',2),(36,12,'1',3),(37,13,'1',1),(38,13,'1',2),(39,13,'22',3),(40,14,'1',1),(41,14,'1',2),(42,14,'22',3),(43,15,'1',1),(44,15,'1',2),(45,15,'22',3),(46,16,'1',1),(47,16,'1',2),(48,16,'22',3),(49,17,'1',1),(50,17,'1',2),(51,17,'22',3),(52,18,'1',1),(53,18,'213',2),(54,18,'23123',3),(55,19,'1',1),(56,19,'213',2),(57,19,'23123',3),(58,20,'1',1),(59,20,'213',2),(60,20,'23123',3),(61,21,'1',1),(62,21,'213',2),(63,21,'23123',3),(64,22,'1',1),(65,22,'213',2),(66,22,'23123',3),(67,23,'1',1),(68,23,'213',2),(69,23,'23123',3),(70,1,'<img src=\"http://www.aviation-images.com/user/zooms/118/451nw/aviation-images.com21079968wm.jpg?d=1179938582\"/>',5),(71,1,'<img src=\"http://jquery.com/demo/thickbox/images/plant4.jpg\"/>',6),(72,3,'summary',1),(73,3,'page1',2);
+DROP TABLE IF EXISTS `comment`;
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `story_id` int(11) DEFAULT NULL,
+  `message` longtext NOT NULL,
+  `created_at` datetime NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_5BC96BF0AA5D4036` (`story_id`),
+  KEY `IDX_5BC96BF0A76ED395` (`user_id`),
+  CONSTRAINT `FK_5BC96BF0A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_5BC96BF0AA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `comment` */
+
+/*Table structure for table `country` */
+
+DROP TABLE IF EXISTS `country`;
+
+CREATE TABLE `country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `country` */
+
+insert  into `country`(`id`,`name`) values (1,'Austria'),(2,'Belgium'),(3,'Bulgaria'),(4,'Cyprus'),(5,'Czech Republic'),(6,'Denmark'),(7,'Estonia'),(8,'Finland'),(9,'France'),(10,'Germany'),(11,'Greece'),(12,'Hungary'),(13,'Ireland'),(14,'Italy'),(15,'Latvia'),(16,'Lithuania'),(17,'Luxembourg'),(18,'Malta'),(19,'Netherlands'),(20,'Poland'),(21,'Portugal'),(22,'Romania'),(23,'Slovakia'),(24,'Slovenia'),(25,'Spain'),(26,'Sweden'),(27,'United Kingdom');
+
+/*Table structure for table `page` */
+
+DROP TABLE IF EXISTS `page`;
+
+CREATE TABLE `page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `story_id` int(11) DEFAULT NULL,
+  `body` longtext NOT NULL,
+  `lineno` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_B438191EAA5D4036` (`story_id`),
+  CONSTRAINT `FK_B438191EAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+
+/*Data for the table `page` */
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_F75B25545E237E06` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `role` */
+
+insert  into `role`(`id`,`name`) values (1,'admin'),(3,'contributor'),(2,'moderator'),(4,'user');
+
+/*Table structure for table `status` */
+
+DROP TABLE IF EXISTS `status`;
+
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*Data for the table `status` */
+
+insert  into `status`(`id`,`name`) values (1,'Unpublished'),(2,'Published'),(3,'Moderated'),(4,'Blocked');
+
+/*Table structure for table `story` */
+
+DROP TABLE IF EXISTS `story`;
+
+CREATE TABLE `story` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `meta` longtext NOT NULL,
+  `created_at` datetime NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `time_id` int(11) DEFAULT NULL,
+  `status_id` int(11) DEFAULT NULL,
+  `meta_place` longtext,
+  PRIMARY KEY (`id`),
+  KEY `IDX_2A972B3CA76ED395` (`user_id`),
+  KEY `IDX_2A972B3CF92F3E70` (`country_id`),
+  KEY `IDX_2A972B3C5EEADD3B` (`time_id`),
+  KEY `IDX_2A972B3C6BF700BD` (`status_id`),
+  CONSTRAINT `FK_2A972B3C5EEADD3B` FOREIGN KEY (`time_id`) REFERENCES `time` (`id`),
+  CONSTRAINT `FK_2A972B3C6BF700BD` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`),
+  CONSTRAINT `FK_2A972B3CA76ED3951` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_2A972B3CF92F3E70` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `story` */
+
+
+/*Table structure for table `tag` */
+
+DROP TABLE IF EXISTS `tag`;
+
+CREATE TABLE `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `slug` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_3BC4F1635E237E06` (`name`),
+  UNIQUE KEY `UNIQ_3BC4F163989D9B62` (`slug`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tag` */
+
+/*Table structure for table `tagging` */
+
+DROP TABLE IF EXISTS `tagging`;
+
+CREATE TABLE `tagging` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag_id` int(11) DEFAULT NULL,
+  `resource_type` varchar(50) NOT NULL,
+  `resource_id` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_6B13E8BFBAD26311` (`tag_id`),
+  CONSTRAINT `FK_6B13E8BFBAD26311` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+/*Data for the table `tagging` */
+
+/*Table structure for table `time` */
+
+DROP TABLE IF EXISTS `time`;
+
+CREATE TABLE `time` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `time` */
+
+insert  into `time`(`id`,`name`) values (1,'1900'),(2,'1910'),(3,'1920'),(4,'1930'),(5,'1940'),(6,'1950'),(7,'1960'),(8,'1970'),(9,'1980'),(10,'1990'),(11,'2000'),(12,'2010');
+
+/*Table structure for table `topic` */
+
+DROP TABLE IF EXISTS `topic`;
+
+CREATE TABLE `topic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `topic` */
+
+insert  into `topic`(`id`,`name`) values (1,'WW1'),(2,'WW2'),(3,'Daily life'),(4,'Childhood'),(5,'Games'),(6,'Work'),(7,'Health'),(8,'Architecture'),(9,'Travel'),(10,'Passion'),(11,'Hobbies'),(12,'Music'),(13,'Maps');
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `salt` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `biography` longtext,
+  `city` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `institution` varchar(255) DEFAULT NULL,
+  `birth` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_2DA17977F85E0677` (`username`),
+  KEY `IDX_2DA17977F92F3E70` (`country_id`),
+  CONSTRAINT `FK_2DA17977F92F3E70` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `user` */
+
+insert  into `user`(`id`,`username`,`password`,`salt`,`created_at`,`email`,`first_name`,`last_name`,`country_id`,`biography`,`city`,`photo`,`institution`,`birth`) values (1,'user','userpass','1','2012-02-03 16:57:36','kak222ac2a@mail.ru','Albinas','Bagdonas',1,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(2,'qwe','qwe','2','2012-02-03 16:57:36','kaka23a@mail.ru','Sergey','Belov',5,'Built as a sprite\r\nInstead of making every icon an extra request, we\'ve compiled them into a sprite—a bunch of images in one file that uses CSS to position the images with background-position. This is the same method we use on Twitter.com and it has worked well for us.\r\n\r\nAll icons classes are prefixed with .icon- for proper namespacing and scoping, much like our other components. This will help avoid conflicts with other tools.\r\n\r\nGlyphicons has granted us use of the Halflings set in our open-source toolkit so long as we provide a link and credit here in the docs. Please consider doing the same in your projects.','Obninsk','2.jpg','I.A.T.E.','2012-02-06 00:00:00'),(3,'asdasd','asdasd','123','2012-02-03 16:57:36','kakac442a@mail.ru','Irena','Levi?nik',3,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.',NULL,NULL,NULL,'2012-02-06 15:04:16'),(4,'qweqwe','qweqwe','123','2012-02-03 17:05:30','kakaca@mail.ru','Iva','Pust',4,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(5,'zzz','zzz','123','2012-02-03 17:21:43','qweqwe@zzz.ru','Marija','Povil?nait?',7,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(6,'ssss','ssss','123','2012-02-08 11:35:04','kakac2a@mail.ru','Milan','Pavliha',11,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(7,'ggggg','ggggg','123','2012-02-08 11:35:23','ggggg@mail.ru','Rodica','Bernicus',5,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(8,'qweasdzxc','qweqwe','123','2012-02-08 13:08:08','qweqwe@mail.ru',NULL,NULL,8,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16');
+
+/*Table structure for table `user_role` */
+
+DROP TABLE IF EXISTS `user_role`;
+
+CREATE TABLE `user_role` (
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `IDX_2DE8C6A3A76ED395` (`user_id`),
+  KEY `IDX_2DE8C6A3D60322AC` (`role_id`),
+  CONSTRAINT `FK_2DE8C6A3D60322AC` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  CONSTRAINT `FK_2DE8C6A3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+
+/*Data for the table `user_role` */
+
+/*Table structure for table `video` */
+
+DROP TABLE IF EXISTS `video`;
+
+CREATE TABLE `video` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vid` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `player_url` varchar(255) NOT NULL,
+  `watch_url` varchar(255) NOT NULL,
+  `User_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_BD06F52868D3EA09` (`User_id`),
+  CONSTRAINT `FK_BD06F52868D3EA09` FOREIGN KEY (`User_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `video` */
+
+/*Table structure for table `vote` */
+
+DROP TABLE IF EXISTS `vote`;
+
+CREATE TABLE `vote` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `story_id` int(11) DEFAULT NULL,
+  `value` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unqiue_pair` (`user_id`,`story_id`),
+  KEY `IDX_FA222A5AAA5D4036` (`story_id`),
+  KEY `IDX_FA222A5AA76ED395` (`user_id`),
+  CONSTRAINT `FK_FA222A5AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_FA222A5AAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=cp1251;
+
+/*Data for the table `vote` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

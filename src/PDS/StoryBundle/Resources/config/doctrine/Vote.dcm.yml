@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Vote:
+Vote:
   type: entity
   table: vote
   fields:
@@ -12,18 +12,16 @@ PDS\StoryBundle\Entity\Vote:
       nullable: false
   uniqueConstraints:
     unqiue_pair:
-      columns:
-        - user_id
-        - story_id
+      columns: [user_id, story_id]
   manyToOne:
     Story:
-      targetEntity: PDS\StoryBundle\Entity\Story
+      targetEntity: Story
       inversedBy: Votes
       joinColumns:
         story_id:
           referencedColumnName: id
     User:
-      targetEntity: PDS\UserBundle\Entity\User
+      targetEntity: User
       inversedBy: Votes
       joinColumns:
         user_id:

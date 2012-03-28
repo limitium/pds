@@ -1,6 +1,6 @@
-PDS\StoryBundle\Entity\Time:
+Status:
   type: entity
-  table: time
+  table: status
   fields:
     id:
       id: true
@@ -12,5 +12,5 @@ PDS\StoryBundle\Entity\Time:
       nullable: false
   oneToMany:
     Stories:
-      targetEntity: PDS\StoryBundle\Entity\Story
-      mappedBy: Time
+      targetEntity: Story
+      mappedBy: Status

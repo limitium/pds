@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Comment:
+Comment:
   type: entity
   table: comment
   fields:
@@ -15,13 +15,13 @@ PDS\StoryBundle\Entity\Comment:
       nullable: false
   manyToOne:
     Story:
-      targetEntity: PDS\StoryBundle\Entity\Story
+      targetEntity: Story
       inversedBy: Comments
       joinColumns:
         story_id:
           referencedColumnName: id
     User:
-      targetEntity: PDS\UserBundle\Entity\User
+      targetEntity: User
       inversedBy: Comments
       joinColumns:
         user_id:

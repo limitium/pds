@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Story:
+Story:
   type: entity
   table: story
   repositoryClass: PDS\StoryBundle\Entity\StoryRepository
@@ -25,35 +25,35 @@ PDS\StoryBundle\Entity\Story:
       nullable: true
   oneToMany:
     Votes:
-      targetEntity: PDS\StoryBundle\Entity\Vote
+      targetEntity: Vote
       mappedBy: Story
     Comments:
-      targetEntity: PDS\StoryBundle\Entity\Comment
+      targetEntity: Comment
       mappedBy: Story
     Pages:
-      targetEntity: PDS\StoryBundle\Entity\Page
+      targetEntity: Page
       mappedBy: Story
   manyToOne:
     User:
-      targetEntity: PDS\UserBundle\Entity\User
+      targetEntity: User
       inversedBy: Stories
       joinColumns:
         user_id:
           referencedColumnName: id
     Country:
-      targetEntity: PDS\StoryBundle\Entity\Country
+      targetEntity: Country
       inversedBy: Stories
       joinColumns:
         country_id:
           referencedColumnName: id
     Time:
-      targetEntity: PDS\StoryBundle\Entity\Time
+      targetEntity: Time
       inversedBy: Stories
       joinColumns:
         time_id:
           referencedColumnName: id
     Status:
-      targetEntity: PDS\StoryBundle\Entity\Status
+      targetEntity: Status
       inversedBy: Stories
       joinColumns:
         status_id:

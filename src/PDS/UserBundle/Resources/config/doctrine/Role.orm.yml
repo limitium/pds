@@ -1,5 +1,6 @@
 PDS\UserBundle\Entity\Role:
   type: entity
+  table: role
   fields:
     id:
       id: true

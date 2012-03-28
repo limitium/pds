@@ -1,5 +1,6 @@
 PDS\StoryBundle\Entity\Status:
   type: entity
+  table: status
   fields:
     id:
       id: true

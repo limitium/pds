@@ -20,6 +20,7 @@
       <column name="meta_place" type="text"/>
       <orm-properties>
         <attribute name="repository-class">PDS\StoryBundle\Entity\StoryRepository</attribute>
+        <attribute name="table">story</attribute>
       </orm-properties>
     </table>
     <table name="Vote" visPositionX="373" visPositionY="358" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="73">
@@ -31,6 +32,9 @@
         <index-column name="user_id"/>
         <index-column name="story_id"/>
       </index>
+      <orm-properties>
+        <attribute name="table">vote</attribute>
+      </orm-properties>
     </table>
     <table name="Comment" visPositionX="81" visPositionY="14" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
@@ -38,39 +42,63 @@
       <column name="created_at" required="true" type="datetime"/>
       <column name="story_id" type="integer"/>
       <column name="user_id" type="integer"/>
+      <orm-properties>
+        <attribute name="table">comment</attribute>
+      </orm-properties>
     </table>
     <table name="Country" visPositionX="213" visPositionY="393" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
+      <orm-properties>
+        <attribute name="table">country</attribute>
+      </orm-properties>
     </table>
-    <table name="Time" visPositionX="113" visPositionY="136" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+    <table name="Time" visPositionX="112" visPositionY="136" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string"/>
+      <orm-properties>
+        <attribute name="table">time</attribute>
+      </orm-properties>
     </table>
     <table name="Page" visPositionX="17" visPositionY="222" visSizeX="0" visSizeX2="99" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
       <column name="body" required="true" type="text"/>
       <column name="lineno" type="integer"/>
       <column name="story_id" type="integer"/>
+      <orm-properties>
+        <attribute name="table">page</attribute>
+      </orm-properties>
     </table>
     <table name="Tag" visPositionX="45" visPositionY="425" visSizeX="0" visSizeX2="119" visSizeY="0" visSizeY2="73">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
+      <orm-properties>
+        <attribute name="table">tag</attribute>
+      </orm-properties>
     </table>
     <table name="Tagging" visPositionX="139" visPositionY="312" visSizeX="0" visSizeX2="120" visSizeY="0" visSizeY2="87">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="tag_id" type="integer"/>
+      <orm-properties>
+        <attribute name="table">tagging</attribute>
+      </orm-properties>
     </table>
-    <table name="Video" visPositionX="315" visPositionY="21" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="101">
+    <table name="Video" visPositionX="315" visPositionY="20" visSizeX="0" visSizeX2="101" visSizeY="0" visSizeY2="101">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="vid" required="true" type="string"/>
       <column name="title" required="true" type="string"/>
       <column name="player_url" required="true" type="string"/>
       <column name="watch_url" required="true" type="string"/>
       <column name="User_id" type="integer"/>
+      <orm-properties>
+        <attribute name="table">video</attribute>
+      </orm-properties>
     </table>
-    <table name="Status" visPositionX="314" visPositionY="456" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
+    <table name="Status" visPositionX="313" visPositionY="456" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" required="true" type="integer"/>
       <column name="name" required="true" type="string"/>
+      <orm-properties>
+        <attribute name="table">status</attribute>
+      </orm-properties>
     </table>
     <foreign-key caption="User Story" from="Story" inverse-alias="User" name="FK_Story_User_id" owning-alias="Stories" to="User">
       <foreign-key-column from="user_id" to="id"/>
@@ -84,7 +112,7 @@
     <foreign-key caption="Status Story" from="Story" inverse-alias="Status" name="FK_Story_Status_id" owning-alias="Stories" to="Status">
       <foreign-key-column from="status_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="Story Vote" from="Vote" inverse-alias="Story" name="FK_Vote_Story_id" owning-alias="Votes" to="Story" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="-1">
+    <foreign-key caption="Story Vote" from="Vote" inverse-alias="Story" name="FK_Vote_Story_id" owning-alias="Votes" to="Story" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="1">
       <foreign-key-column from="story_id" to="id"/>
     </foreign-key>
     <foreign-key caption="User Vote" from="Vote" inverse-alias="User" name="FK_Vote_User_id" owning-alias="Votes" to="User">
@@ -125,19 +153,26 @@
       <column name="birth" type="datetime"/>
       <orm-properties>
         <attribute name="repository-class">PDS\UserBundle\Entity\UserRepository</attribute>
+        <attribute name="table">user</attribute>
       </orm-properties>
     </table>
     <table name="Role" visPositionX="94" visPositionY="0" visSizeX="0" visSizeX2="83" visSizeY="0" visSizeY2="45">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="name" required="true" type="string" unique="true"/>
+      <orm-properties>
+        <attribute name="table">role</attribute>
+      </orm-properties>
     </table>
-    <table name="UserRole" visPositionX="-41" visPositionY="0" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="60">
+    <table name="UserRole" visPositionX="-38" visPositionY="-5" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="60">
       <column name="user_id" required="true" type="integer"/>
       <column name="role_id" required="true" type="integer"/>
       <index name="unique_pair" unique="true">
         <index-column name="role_id"/>
         <index-column name="user_id"/>
       </index>
+      <orm-properties>
+        <attribute name="table">user_role</attribute>
+      </orm-properties>
     </table>
     <foreign-key caption="Country User" from="User" inverse-alias="Country" name="FK_User_Country_id" owning-alias="Users" to="Country" visCaption1X="-14" visCaption1Y="-6" visCenterX="0" visCenterY="0">
       <foreign-key-column from="country_id" to="id"/>

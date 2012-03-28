@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Tagging:
+Tagging:
   type: entity
   table: tagging
   fields:
@@ -9,7 +9,7 @@ PDS\StoryBundle\Entity\Tagging:
         strategy: AUTO
   manyToOne:
     tag:
-      targetEntity: PDS\StoryBundle\Entity\Tag
+      targetEntity: Tag
       inversedBy: tagging
       joinColumns:
         tag_id:

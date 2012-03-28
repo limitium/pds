@@ -1,4 +1,4 @@
-PDS\StoryBundle\Entity\Tag:
+Tag:
   type: entity
   table: tag
   fields:
@@ -9,5 +9,5 @@ PDS\StoryBundle\Entity\Tag:
         strategy: AUTO
   oneToMany:
     tagging:
-      targetEntity: PDS\StoryBundle\Entity\Tagging
+      targetEntity: Tagging
       mappedBy: tag

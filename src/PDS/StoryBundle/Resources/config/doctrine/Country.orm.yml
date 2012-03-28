@@ -1,5 +1,6 @@
 PDS\StoryBundle\Entity\Country:
   type: entity
+  table: country
   fields:
     id:
       id: true

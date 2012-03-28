@@ -1,4 +1,4 @@
-PDS\UserBundle\Entity\User:
+User:
   type: entity
   table: user
   repositoryClass: PDS\UserBundle\Entity\UserRepository
@@ -47,20 +47,20 @@ PDS\UserBundle\Entity\User:
       nullable: true
   oneToMany:
     Stories:
-      targetEntity: PDS\StoryBundle\Entity\Story
+      targetEntity: Story
       mappedBy: User
     Votes:
-      targetEntity: PDS\StoryBundle\Entity\Vote
+      targetEntity: Vote
       mappedBy: User
     Comments:
-      targetEntity: PDS\StoryBundle\Entity\Comment
+      targetEntity: Comment
       mappedBy: User
     Videos:
-      targetEntity: PDS\StoryBundle\Entity\Video
+      targetEntity: Video
       mappedBy: User
   manyToOne:
     Country:
-      targetEntity: PDS\StoryBundle\Entity\Country
+      targetEntity: Country
       inversedBy: Users
       joinColumns:
         country_id:

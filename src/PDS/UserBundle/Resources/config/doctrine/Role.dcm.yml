@@ -1,6 +1,6 @@
-PDS\StoryBundle\Entity\Time:
+Role:
   type: entity
-  table: time
+  table: role
   fields:
     id:
       id: true
@@ -9,8 +9,9 @@ PDS\StoryBundle\Entity\Time:
         strategy: AUTO
     name:
       type: string
+      unique: true
       nullable: false
-  oneToMany:
-    Stories:
-      targetEntity: PDS\StoryBundle\Entity\Story
-      mappedBy: Time
+  manyToMany:
+    Users:
+      targetEntity: User
+      mappedBy: Roles
