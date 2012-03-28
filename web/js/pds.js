@@ -14,7 +14,7 @@ $(document).ready(function() {
                 return values[field.name] = field.value;
             });
             loader.css("visibility", "visible");
-            return $.post(form.attr("action"), values, function(html) {
+            $.post(form.attr("action"), values, function(html) {
                 commenting = false;
                 button.removeClass("disabled");
                 $("#comment_message").val("");
@@ -22,6 +22,7 @@ $(document).ready(function() {
                 return form.before(html);
             });
         }
+        return false;
     });
     showStar = function() {
         return $(".meta .icon-star").css({
@@ -43,7 +44,7 @@ $(document).ready(function() {
                     return values[field.name] = field.value;
                 });
                 values["vote[value]"] = $(this).html();
-                return $.post(form.attr("action"), values, function(rating) {
+                $.post(form.attr("action"), values, function(rating) {
                     voting = false;
                     loader.css("visibility", "hidden");
                     $(".rating-value").html(rating);
@@ -51,20 +52,23 @@ $(document).ready(function() {
                     return showStar();
                 });
             }
+            return false;
         });
     } else {
         showStar();
     }
     setLineno = function(page, lineno) {
-        var buttons;
+        var buttons, title;
         page.attr("data-page", lineno);
         buttons = $("button", page);
-        if (lineno > 2) {
-            buttons.show();
-        } else {
+        if (lineno <= 2) {
+            title = lineno === 1 ? "Write summary" : "Create Story";
             buttons.hide();
+        } else {
+            title = "Create story " + (lineno - 1);
+            buttons.show();
         }
-        $(".page-number", page).html(lineno > 1 ? "Page " + (lineno - 1) : "Story summary");
+        $(".page-number", page).html(title);
         return $($("input", page)[0]).val(lineno);
     };
     refreshLineno = function() {
@@ -199,8 +203,19 @@ $(document).ready(function() {
     $("#story_Pages textarea").each(function() {
         return addEditor(this.id);
     });
+    $(".publish-request").click(function() {
+        var button;
+        button = $(this);
+        button.hide().siblings().removeClass("status-blocked").removeClass("status-unpublished").addClass("status-moderated").html("Moderated");
+        $.post(button.attr("data-url"), function(ok) {
+            if (ok) {
+                return console.log(ok);
+            }
+        });
+        return false;
+    });
     $("#myCarousel").carousel({
-        interval: 10000
+        interval: $(".tags-cloud").length > 0 ? 10000 : 32600000
     }).carousel("next");
     return $("#story_date").datepicker({
         changeMonth: true,

@@ -172,7 +172,7 @@ $(document).ready ->
         console.log ok
     false
 
-  $("#myCarousel").carousel(interval:10000).carousel "next"
+  $("#myCarousel").carousel(interval: if $(".tags-cloud").length>0 then 10000 else 32600000).carousel "next"
 
   $("#story_date").datepicker(changeMonth:true, changeYear:true)
 
