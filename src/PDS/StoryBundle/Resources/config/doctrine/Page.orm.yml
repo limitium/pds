@@ -9,7 +9,7 @@ PDS\StoryBundle\Entity\Page:
         strategy: AUTO
     body:
       type: text
-      nullable: false
+      nullable: true
     lineno:
       type: integer
       nullable: true

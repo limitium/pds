@@ -11,16 +11,19 @@ PDS\StoryBundle\Entity\Story:
     title:
       type: string
       nullable: false
-    meta:
-      type: text
-      nullable: false
     created_at:
       type: datetime
       nullable: false
-    date:
-      type: date
+    meta:
+      type: text
       nullable: true
     meta_place:
+      type: text
+      nullable: true
+    meta_storyteller:
+      type: text
+      nullable: true
+    meta_time:
       type: text
       nullable: true
   oneToMany:

@@ -10,7 +10,7 @@ class PageType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('body','textarea')
+            ->add('body','textarea',array('required'=>false))
             ->add('lineno','hidden')
             ->add('Story', 'entity_id', array(
             'class' => 'PDS\StoryBundle\Entity\Story',

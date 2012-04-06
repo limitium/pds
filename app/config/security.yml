@@ -17,26 +17,32 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        free:
-            pattern:  ^/(story/)$
-            security: false
-
         login:
-            pattern:  ^/(login|signup|user/new)$
+            pattern:  ^/(login|signup)$
             security: false
 
+        anonymous:
+            anonymous: true
+            pattern:    ^/(story/|story/[0-9]+/show|login_check|login|logout)$
+            form_login:
+              check_path: /login_check
+              login_path: /login
+              username_parameter: username
+              password_parameter: password
+            logout:
+              path: /logout
+              target: /
 
-
-        secured_area:
+        users_only:
             pattern:    ^/
             form_login:
-                check_path: /login_check
-                login_path: /login
-                username_parameter: username
-                password_parameter: password
+              check_path: /login_check
+              login_path: /login
+              username_parameter: username
+              password_parameter: password
             logout:
-                path:   /logout
-                target: /login
+              path: /logout
+              target: /
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

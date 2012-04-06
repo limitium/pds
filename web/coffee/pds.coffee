@@ -108,7 +108,7 @@ $(document).ready ->
     textarea = $("#"+id)
     placeholder = textarea.attr "placeholder"
 
-    new nicEditor().panelInstance id
+    new nicEditor(fullPanel : true).panelInstance id
 
     if placeholder
       edEl = textarea.siblings().children(".niceditor-elm").focus ->
@@ -151,14 +151,16 @@ $(document).ready ->
           progress.removeClass("progress-success").addClass "progress-info"
         bar.css width: percent + "%"
       success: (data)->
-        console.log arguments
         progress.css display: "none"
         progressHelp.css display: "none"
-
-        data = $.parseJSON data
-        console.log data
-        $(".videos").append '<li data-player="'+data.player+'"><a href="'+data.url+'"><img src="'+data.thumbnail+'"/></a></li>'
-        $("#video-upload").modal "hide"
+        try
+          data = $.parseJSON data
+          $(".videos").append '<li data-player="'+data.player+'"><a href="'+data.url+'"><img src="'+data.thumbnail+'"/></a></li>'
+          $("#video-upload").modal "hide"
+        catch error
+          alert("Upload error!");
+          console.log data
+          console.log error
     false
 
   $("#story_Pages textarea").each ->

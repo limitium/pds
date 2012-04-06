@@ -79,9 +79,11 @@ Create a new story
             <h1 class="title-meta">Information about the story</h1>
             {{ form_row(form.Country)}}
             {{ form_row(form.meta_place)}}
-            {{ form_row(form.date)}}
+            {{ form_row(form.Time)}}
+            {{ form_row(form.meta_time)}}
             {{ form_row(form.Topics)}}
             {{ form_row(form.meta)}}
+            {{ form_row(form.meta_storyteller)}}
             <button class="btn btn-small add-video" type="button"><i class="icon-upload"></i> Add video</button>
             <ul class="videos">
             </ul>
@@ -101,4 +103,4 @@ Create a new story
     </form>
 
 </div>
-        {% endblock %}
+{% endblock %}

@@ -86,7 +86,12 @@ Create a new story
             </ul>
         </div>
         <div class="span9">
-            <label for="story_title" class="title required">Title of the story <span class="label status-{{ story.status.name|lower }}">{{ story.getStatus().name }}</span> {% if story.status.id == 1 or story.status.id == 4 %}<button class="btn btn-small publish-request" type="button" data-url="{{ path('story_publish', { 'id': story.id }) }}"><i class="icon-share-alt"></i> Publish</button>{% endif %}</label>
+            <label for="story_title" class="title required">Title of the story
+                <span class="label status-{{ story.status.name|lower }}">{{ story.getStatus().name }}</span> {% if story.status.id == 1 or story.status.id == 4 %}
+                <button class="btn btn-small publish-request" type="button" data-url="{{ path('story_publish', { 'id': story.id }) }}">
+                    <i class="icon-share-alt"></i> Publish
+                </button>
+                {% endif %}</label>
             {{ form_widget(form.title)}}
             {{ form_widget(form.Pages)}}
 

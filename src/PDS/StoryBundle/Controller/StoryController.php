@@ -168,6 +168,7 @@ class StoryController extends Controller
             ->getResult());
 
 
+
         $images = array();
         foreach ($stories as $story) {
             foreach ($story->getPages() as $page) {
@@ -240,8 +241,6 @@ class StoryController extends Controller
             throw $this->createNotFoundException('Unable to find Story entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         $comment = new Comment();
         $comment->setStory($story);
         $formComment = $this->createForm(new CommentType(), $comment);
@@ -256,8 +255,8 @@ class StoryController extends Controller
             'related' => $related,
             'story' => $story,
             'form_comment' => $formComment->createView(),
-            'form_vote' => $formVote->createView(),
-            'delete_form' => $deleteForm->createView(),);
+            'form_vote' => $formVote->createView()
+        );
     }
 
     /**
@@ -278,6 +277,8 @@ class StoryController extends Controller
         $formView = $form->createView();
         $formView['meta']->setAttribute('placeholder', 'Meta information about story, keywords, dates etc.');
         $formView['meta_place']->setAttribute('placeholder', 'Meta information about story place, City, Area, Place etc.');
+        $formView['meta_time']->setAttribute('placeholder', 'Meta about story time');
+        $formView['meta_storyteller']->setAttribute('placeholder', 'Meta information about storyteller');
         $formView['Pages'][0]['body']->setAttribute('placeholder', 'Write here summary of the sotry. This page will show your summary and some information about your story.');
         $formView['Pages'][1]['body']->setAttribute('placeholder', 'Add your story here. If you want to have more pages, just click + Page button below this box.');
         return array(
@@ -310,7 +311,7 @@ class StoryController extends Controller
             $user = $this->container->get('security.context')->getToken()->getUser();
             $story->setUser($user);
 
-            $this->updateTime($story, $em);
+//            $this->updateTime($story, $em);
 
             //Unpublished by default
             $story->setStatus($em->getRepository('PDSStoryBundle:Status')->find(1));
@@ -325,7 +326,8 @@ class StoryController extends Controller
 
         return array(
             'source' => $story,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formUpload' => $this->createUploadForm()->createView()
         );
     }
 
@@ -481,7 +483,7 @@ class StoryController extends Controller
                 $page->setStory($story);
                 $em->persist($page);
             }
-            $this->updateTime($story, $em);
+//            $this->updateTime($story, $em);
             $em->flush();
 
             $this->updateTopics($story);

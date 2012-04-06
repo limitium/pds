@@ -87,6 +87,7 @@ class Uploader
 
         // create a new Zend_Gdata_App_MediaFileSource object
         $filesource = $this->yt->newMediaFileSource($yf->getPathname());
+
         $filesource->setContentType($yf->getContentType());
         // set slug header
         $filesource->setSlug("slug");

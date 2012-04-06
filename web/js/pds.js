@@ -185,17 +185,21 @@ $(document).ready(function() {
                 });
             },
             success: function(data) {
-                console.log(arguments);
                 progress.css({
                     display: "none"
                 });
                 progressHelp.css({
                     display: "none"
                 });
-                data = $.parseJSON(data);
-                console.log(data);
-                $(".videos").append('<li data-player="' + data.player + '"><a href="' + data.url + '"><img src="' + data.thumbnail + '"/></a></li>');
-                return $("#video-upload").modal("hide");
+                try {
+                    data = $.parseJSON(data);
+                    $(".videos").append('<li data-player="' + data.player + '"><a href="' + data.url + '"><img src="' + data.thumbnail + '"/></a></li>');
+                    return $("#video-upload").modal("hide");
+                } catch (error) {
+                    alert("Upload error!");
+                    console.log(data);
+                    return console.log(error);
+                }
             }
         });
         return false;

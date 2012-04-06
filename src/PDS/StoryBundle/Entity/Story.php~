@@ -416,4 +416,24 @@ class Story     implements Taggable
     {
         return $this->meta_place;
     }
+
+    /**
+     * Set Status
+     *
+     * @param PDS\StoryBundle\Entity\Status $status
+     */
+    public function setStatus(\PDS\StoryBundle\Entity\Status $status)
+    {
+        $this->Status = $status;
+    }
+
+    /**
+     * Get Status
+     *
+     * @return PDS\StoryBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->Status;
+    }
 }
