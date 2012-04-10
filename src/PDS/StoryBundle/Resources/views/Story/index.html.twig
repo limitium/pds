@@ -2,38 +2,39 @@
 {% block content %}
 <div class="story">
     <div class="main row">
-        <div class="span4 box-container">
-            <div class="box-header">
-                Location
+            <div class="span12 help-text">Click any word to see stories</div>
+            <div class="span4 box-container">
+                <div class="box-header">
+                    Location
+                </div>
+                <div class="box-body tags-cloud">
+                    {% for location in locations %}
+                    <a href="{{ path('story_location', { 'id': location.getId() }) }}"
+                       class="size{{ location.weight }}">{{ location }}</a>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="box-body tags-cloud">
-                {% for location in locations %}
-                <a href="{{ path('story_location', { 'id': location.getId() }) }}"
-                   class="size{{ location.weight }}">{{ location }}</a>
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="span4 box-container">
-            <div class="box-header">
-                Time
+            <div class="span4 box-container">
+                <div class="box-header">
+                    Time
+                </div>
+                <div class="box-body tags-cloud">
+                    {% for time in times %}
+                    <a href="{{ path('story_time', { 'id': time.getId() }) }}"
+                       class="size{{ time.weight }}">{{ time }}</a>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="box-body tags-cloud">
-                {% for time in times %}
-                <a href="{{ path('story_time', { 'id': time.getId() }) }}"
-                   class="size{{ time.weight }}">{{ time }}</a>
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="span4 box-container">
-            <div class="box-header">
-                Preview
+            <div class="span4 box-container">
+                <div class="box-header">
+                    Preview
+                </div>
+                <div class="box-body tags-cloud">
+                    {% include 'PDSStoryBundle:Story:short_list.html.twig' with {'stories': stories} %}
+                </div>
             </div>
-            <div class="box-body tags-cloud">
-                {% include 'PDSStoryBundle:Story:short_list.html.twig' with {'stories': stories} %}
-            </div>
-        </div>
     </div>
     <div class="row">
         <div class="span4 box-container">
