@@ -1,0 +1,18 @@
+{% extends '::content.html.twig' %}
+
+{% block stylesheets %}
+{{parent()}}
+{% endblock%}
+
+{% block header %}
+Time
+{% endblock %}
+
+{% block body %}
+<div class="box-body tags-cloud">
+    {% for time in times %}
+    <a href="{{ path('story_time', { 'id': time.getId() }) }}"
+       class="size{{ time.weight }}">{{ time }}</a>
+    {% endfor %}
+</div>
+{% endblock %}

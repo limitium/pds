@@ -1,6 +1,6 @@
 homepage:
     pattern:  /
-    defaults: { _controller: PDSStoryBundle:Story:index}
+    defaults: { _controller: PDSStoryBundle:Tag:index}
 
 login:
     pattern:  /login

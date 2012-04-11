@@ -1,0 +1,18 @@
+{% extends '::content.html.twig' %}
+
+{% block stylesheets %}
+{{parent()}}
+{% endblock%}
+
+{% block header %}
+Location
+{% endblock %}
+
+{% block body %}
+<div class="box-body tags-cloud">
+    {% for location in locations %}
+    <a href="{{ path('story_location', { 'id': location.getId() }) }}"
+       class="size{{ location.weight }}">{{ location }}</a>
+    {% endfor %}
+</div>
+{% endblock %}

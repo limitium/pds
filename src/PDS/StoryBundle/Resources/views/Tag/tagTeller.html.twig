@@ -1,0 +1,18 @@
+{% extends '::content.html.twig' %}
+
+{% block stylesheets %}
+{{parent()}}
+{% endblock%}
+
+{% block header %}
+Story teller
+{% endblock %}
+
+{% block body %}
+<div class="box-body tags-cloud">
+    {% for teller in tellers%}
+    <a href="{{ path('story_teller', { 'id': teller.getId() }) }}"
+       class="size{{ teller.weight }}">{{ teller }}</a>
+    {% endfor %}
+</div>
+{% endblock %}

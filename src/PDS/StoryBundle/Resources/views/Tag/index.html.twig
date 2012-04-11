@@ -5,7 +5,7 @@
             <div class="span12 help-text">Click any word to see stories</div>
             <div class="span4 box-container">
                 <div class="box-header">
-                    Location
+                    <a href="{{ path('story_tag_location') }}">Location</a>
                 </div>
                 <div class="box-body tags-cloud">
                     {% for location in locations %}
@@ -17,7 +17,7 @@
 
             <div class="span4 box-container">
                 <div class="box-header">
-                    Time
+                    <a href="{{ path('story_tag_time') }}">Time</a>
                 </div>
                 <div class="box-body tags-cloud">
                     {% for time in times %}
@@ -39,7 +39,7 @@
     <div class="row">
         <div class="span4 box-container">
             <div class="box-header">
-                Topic
+                <a href="{{ path('story_tag_topic') }}">Topic</a>
             </div>
             <div class="box-body tags-cloud">
                 {% for topic in topics%}
@@ -51,7 +51,7 @@
 
         <div class="span4 box-container">
             <div class="box-header">
-                Story teller
+                <a href="{{ path('story_tag_teller') }}">Story teller</a>
             </div>
             <div class="box-body tags-cloud">
                 {% for teller in tellers%}

@@ -23,7 +23,7 @@ security:
 
         anonymous:
             anonymous: true
-            pattern:    ^/(story/|story/[0-9]+/show|login_check|login|logout)$
+            pattern:    ^/(story/tag/.+|story/|story/[0-9]+/show|login_check|login|logout)$
             form_login:
               check_path: /login_check
               login_path: /login

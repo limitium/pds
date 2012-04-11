@@ -1,0 +1,18 @@
+{% extends '::content.html.twig' %}
+
+{% block stylesheets %}
+{{parent()}}
+{% endblock%}
+
+{% block header %}
+Topics
+{% endblock %}
+
+{% block body %}
+<div class="box-body tags-cloud">
+    {% for topic in topics%}
+    <a href="{{ path('story_topic', { 'id': topic.getId() }) }}"
+       class="size{{ topic.weight }}">{{ topic}}</a>
+    {% endfor %}
+</div>
+{% endblock %}
