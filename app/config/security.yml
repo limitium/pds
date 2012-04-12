@@ -21,17 +21,17 @@ security:
             pattern:  ^/(login|signup)$
             security: false
 
-        anonymous:
-            anonymous: true
-            pattern:    ^/(story/tag/.+|story/|story/[0-9]+/show|login_check|login|logout)$
-            form_login:
-              check_path: /login_check
-              login_path: /login
-              username_parameter: username
-              password_parameter: password
-            logout:
-              path: /logout
-              target: /
+#        anonymous:
+#            anonymous: true
+#            pattern:    ^/(story/time/[0-9]+|story/location/[0-9]+|story/topic/[0-9]+|story/teller/[0-9]+|story/tag/.+|story/|story/[0-9]+/show|login_check|login|logout)$
+#            form_login:
+#              check_path: /login_check
+#              login_path: /login
+#              username_parameter: username
+#              password_parameter: password
+#            logout:
+#              path: /logout
+#              target: /
 
         users_only:
             pattern:    ^/
