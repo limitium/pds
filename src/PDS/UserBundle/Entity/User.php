@@ -222,7 +222,7 @@ class User implements UserInterface {
      * @return Role[] The user roles
      */
     function getRoles() {
-        return array('master');
+        return array('ROLE_USER');
     }
 
     /**

@@ -4,8 +4,9 @@ security:
             id: pds_encoder
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_MODERATOR:   ROLE_USER
+        ROLE_CONTRIBUTOR: [ROLE_USER, ROLE_MODERATOR, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN:       [ROLE_USER,ROLE_MODERATOR,ROLE_CONTRIBUTOR,ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         main:
@@ -17,23 +18,10 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/(login|signup)$
-            security: false
 
-#        anonymous:
-#            anonymous: true
-#            pattern:    ^/(story/time/[0-9]+|story/location/[0-9]+|story/topic/[0-9]+|story/teller/[0-9]+|story/tag/.+|story/|story/[0-9]+/show|login_check|login|logout)$
-#            form_login:
-#              check_path: /login_check
-#              login_path: /login
-#              username_parameter: username
-#              password_parameter: password
-#            logout:
-#              path: /logout
-#              target: /
 
-        users_only:
+        users:
+            anonymous: ~
             pattern:    ^/
             form_login:
               check_path: /login_check
@@ -44,6 +32,7 @@ security:
               path: /logout
               target: /
 
+
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        - { path: ^/(story/time/[0-9]+|story/location/[0-9]+|story/topic/[0-9]+|story/teller/[0-9]+|story/tag/.+|story/|story/[0-9]+/show|login_check|login|signup)$, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/, roles: ROLE_USER}
