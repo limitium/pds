@@ -130,7 +130,9 @@ $(document).ready(function() {
         var edEl, placeholder, textarea;
         textarea = $("#" + id);
         placeholder = textarea.attr("placeholder");
-        new nicEditor().panelInstance(id);
+        new nicEditor({
+            fullPanel: true
+        }).panelInstance(id);
         if (placeholder) {
             return edEl = textarea.siblings().children(".niceditor-elm").focus(function() {
                 var text;

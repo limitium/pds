@@ -631,6 +631,7 @@ footer .f2{padding:10px;background-color:white;}
 .tags-cloud a.size10{font-weight:900;font-size:1.7em;color:#00569a;font-size:1.7em;color:#00569a;}
 .tags-cloud a.size11{font-weight:900;font-size:1.8em;color:#005195;font-size:1.8em;color:#005195;}
 .tags-cloud a.size12{font-weight:900;font-size:1.9em;color:#004c90;font-size:1.9em;color:#004c90;}
+.story .main .help-text{text-align:center;color:white;font-weight:bold;font-size:24px;}
 .story .show .projector{padding:20px 73px 0 73px;}.story .show .projector .carousel .carousel-inner{min-height:500px;}
 .story .show .projector .carousel .carousel-control{left:-70px;}.story .show .projector .carousel .carousel-control.right{left:auto;right:-70px;}
 .story .show .meta li{display:inline-block;padding-right:20px;}
@@ -662,13 +663,13 @@ footer .f2{padding:10px;background-color:white;}
 .story .edit .meta{padding:10px 0 10px 10px;margin-right:-10px;}.story .edit .meta .videos{margin:10px 0 0 0;list-style:none;}
 .story .edit .create-story{margin-left:10px;}
 .story .edit .buttons{padding-bottom:10px;}.story .edit .buttons .create-story{margin-right:10px;}
-.story .box-container{background-color:#366638;background-image:-moz-linear-gradient(top, #427648, #244e20);background-image:-ms-linear-gradient(top, #427648, #244e20);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#427648), to(#244e20));background-image:-webkit-linear-gradient(top, #427648, #244e20);background-image:-o-linear-gradient(top, #427648, #244e20);background-image:linear-gradient(top, #427648, #244e20);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#427648', endColorstr='#244e20', GradientType=0);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;margin-top:20px;}.story .box-container .box-header{padding-top:5px;color:white;font-size:24px;font-weight:900;text-align:center;}
+.story .box-container{background-color:#366638;background-image:-moz-linear-gradient(top, #427648, #244e20);background-image:-ms-linear-gradient(top, #427648, #244e20);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#427648), to(#244e20));background-image:-webkit-linear-gradient(top, #427648, #244e20);background-image:-o-linear-gradient(top, #427648, #244e20);background-image:linear-gradient(top, #427648, #244e20);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#427648', endColorstr='#244e20', GradientType=0);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;margin-top:20px;}.story .box-container .box-header{padding-top:5px;color:white;font-size:24px;font-weight:900;text-align:center;}.story .box-container .box-header a{color:white;}
 .story .box-container .box-body{margin:10px 7px 7px 7px;background-color:#f9f9f9;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}.story .box-container .box-body #myCarousel .item a{margin:0px;padding:0px;}.story .box-container .box-body #myCarousel .item a img{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;height:250px;width:286px;}
 .story .short-list{padding:3px;margin:0;list-style:none;text-align:left;font-size:16px;font-weight:bold;}.story .short-list li a{height:24px;display:inline-block;width:160px;overflow:hidden;}
 .story .short-list .star-rating{padding-top:2px;background:url(../img/star_rating.png) bottom left repeat-x;display:inline-block;}
-#comments{padding-top:30px;display:table;}
+#comments{padding:30px 0;display:table;}
 .comment{padding-top:20px;margin-top:30px;border-top:1px solid #DDD;}
-.form-actions{background-color:#F9F9F9;}
+.form-actions{background-color:#F9F9F9;margin-bottom:0px;padding-bottom:0px;}
 #comments textarea{height:150px;width:540px;}
 @media (max-width:480px){}@media (max-width:768px){}@media (min-width:768px) and (max-width:980px){#comments textarea{width:414px;}}@media (max-width:980px){}@media (min-width:980px){}@media (min-width:1200px){#comments textarea{width:670px;}}.user{padding:7px;}.user .show .userpic{width:150px;height:150px;}
 .user .show ul.meta{list-style:none;margin-left:-25px;}.user .show ul.meta li{line-height:20px;}.user .show ul.meta li .mark{display:inline-block;font-weight:bold;width:100px;}

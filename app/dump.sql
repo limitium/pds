@@ -13,6 +13,7 @@ MySQL - 5.1.40-community : Database - pds
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+-- CREATE DATABASE /*!32312 IF NOT EXISTS*/`pds` /*!40100 DEFAULT CHARACTER SET cp1251 */;
 
 /*Table structure for table `comment` */
 
@@ -29,9 +30,11 @@ CREATE TABLE `comment` (
   KEY `IDX_5BC96BF0A76ED395` (`user_id`),
   CONSTRAINT `FK_5BC96BF0A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_5BC96BF0AA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `comment` */
+
+insert  into `comment`(`id`,`story_id`,`message`,`created_at`,`user_id`) values (36,29,'This is a nice story!','2012-03-29 18:51:16',9),(37,34,'This is quite boring story. Please imporove it soon!','2012-03-30 16:35:25',9);
 
 /*Table structure for table `country` */
 
@@ -54,14 +57,16 @@ DROP TABLE IF EXISTS `page`;
 CREATE TABLE `page` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `story_id` int(11) DEFAULT NULL,
-  `body` longtext NOT NULL,
+  `body` longtext,
   `lineno` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_B438191EAA5D4036` (`story_id`),
   CONSTRAINT `FK_B438191EAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 /*Data for the table `page` */
+
+insert  into `page`(`id`,`story_id`,`body`,`lineno`) values (7,29,'<h4>MyStory presentation from Romania shown idea of the project.</h4>',1),(8,29,'<center><iframe width=\"630\" height=\"473\" src=\"http://www.youtube.com/embed/U_CJZGUTDCg\" frameborder=\"0\" allowfullscreen=\"\"></iframe></center>',2),(9,30,'<h3>A story from Romania.</h3>',1),(10,30,'<center><iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/YMz0eycs4xA?wmode=opaque\" frameborder=\"0\" allowfullscreen=\"\"></iframe></center>',2),(11,31,'<h4>Summary will be here.</h4>',1),(12,31,'<div style=\"text-align: center;\"><centerr><br></centerr></div><centerr><iframe width=\"560\" height=\"315\" src=\"http://www.youtube.com/embed/MKzky9P9Uo4?wmode=opaque\" frameborder=\"0\" allowfullscreen=\"\"></iframe></centerr>',2),(13,32,'<h4>About the story...</h4>',1),(14,32,'<center><br></center><center>\r\n<iframe width=\"640\" height=\"480\" src=\"http://www.youtube.com/embed/kQxKRVGRdCA\" frameborder=\"0\" allowfullscreen=\"\"></iframe>\r\n</center>',2),(15,33,'<img src=\"http://mystories.eu/storymedia/marjatta_karjaa.jpg\" alt=\"\" align=\"right\"><h4>Marjattta talks about her childhood in Finland. More description will be added here later.</h4>',1),(16,33,'<center><iframe width=\"853\" height=\"480\" src=\"http://www.youtube.com/embed/aXrYL_4TcYQ\" frameborder=\"0\" allowfullscreen=\"\"></iframe></center>',2),(17,34,'<h3>Bucharest meeting.....</h3><ul><li data-page=\"2\">end of March 2012</li><li data-page=\"3\">weather is nice</li><li data-page=\"4\">meeting goes well<br></li></ul>',1),(18,34,'STORY HERE<br>',5),(19,34,'MORE STUFF HERE<br>',6),(20,34,'EVEN MORE......<br>',7);
 
 /*Table structure for table `role` */
 
@@ -76,7 +81,7 @@ CREATE TABLE `role` (
 
 /*Data for the table `role` */
 
-insert  into `role`(`id`,`name`) values (1,'admin'),(3,'contributor'),(2,'moderator'),(4,'user');
+insert  into `role`(`id`,`name`) values (1,'ROLE_ADMIN'),(3,'ROLE_CONTRIBUTOR'),(2,'ROLE_MODERATOR'),(4,'ROLE_USER');
 
 /*Table structure for table `status` */
 
@@ -98,15 +103,16 @@ DROP TABLE IF EXISTS `story`;
 
 CREATE TABLE `story` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `meta` longtext NOT NULL,
+  `meta` longtext,
   `created_at` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `country_id` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL,
   `time_id` int(11) DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `meta_place` longtext,
+  `meta_storyteller` longtext,
+  `meta_time` longtext,
   PRIMARY KEY (`id`),
   KEY `IDX_2A972B3CA76ED395` (`user_id`),
   KEY `IDX_2A972B3CF92F3E70` (`country_id`),
@@ -116,10 +122,11 @@ CREATE TABLE `story` (
   CONSTRAINT `FK_2A972B3C6BF700BD` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`),
   CONSTRAINT `FK_2A972B3CA76ED3951` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_2A972B3CF92F3E70` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `story` */
 
+insert  into `story`(`id`,`meta`,`created_at`,`user_id`,`title`,`country_id`,`time_id`,`status_id`,`meta_place`,`meta_storyteller`,`meta_time`) values (29,'People','2012-03-28 21:22:30',9,'MyStory presentation',22,12,3,NULL,NULL,NULL),(30,'Old man and woman talking.','2012-03-28 21:50:28',9,'Colaj My Story',22,12,1,NULL,NULL,NULL),(31,'Rodica Bernicu','2012-03-28 21:54:24',9,'From Palanca to Kledering and Back',22,12,3,NULL,NULL,NULL),(32,'People, deeds and memories','2012-03-28 22:06:30',9,'Tacu',22,12,1,NULL,NULL,NULL),(33,'Marjatta','2012-03-28 22:52:38',9,'Marjatta from Karjaa',8,12,1,'Karjaa',NULL,NULL),(34,'jhjh','2012-03-30 16:30:57',9,'Example story from our meeting',13,12,1,NULL,NULL,NULL);
 
 /*Table structure for table `tag` */
 
@@ -134,9 +141,11 @@ CREATE TABLE `tag` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_3BC4F1635E237E06` (`name`),
   UNIQUE KEY `UNIQ_3BC4F163989D9B62` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tag` */
+
+insert  into `tag`(`id`,`name`,`slug`,`created_at`,`updated_at`) values (15,'q','q','2012-03-28 21:08:40','2012-03-28 21:08:40'),(16,'topic','topic','2012-03-28 21:12:50','2012-03-28 21:12:50'),(17,'Project','project','2012-03-28 21:22:30','2012-03-28 21:22:30'),(18,'MyStory','mystory','2012-03-28 21:22:30','2012-03-28 21:22:30'),(19,'People','people','2012-03-28 21:50:28','2012-03-28 21:50:28'),(20,'Travel','travel','2012-03-28 21:54:24','2012-03-28 21:54:24'),(21,'Life','life','2012-03-28 22:52:38','2012-03-28 22:52:38'),(22,'Meeting','meeting','2012-03-30 16:30:58','2012-03-30 16:30:58');
 
 /*Table structure for table `tagging` */
 
@@ -152,9 +161,11 @@ CREATE TABLE `tagging` (
   PRIMARY KEY (`id`),
   KEY `IDX_6B13E8BFBAD26311` (`tag_id`),
   CONSTRAINT `FK_6B13E8BFBAD26311` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 /*Data for the table `tagging` */
+
+insert  into `tagging`(`id`,`tag_id`,`resource_type`,`resource_id`,`created_at`,`updated_at`) values (27,17,'story','29','2012-03-28 21:22:30','2012-03-28 21:22:30'),(28,18,'story','29','2012-03-28 21:22:30','2012-03-28 21:22:30'),(29,19,'story','30','2012-03-28 21:50:28','2012-03-28 21:50:28'),(30,20,'story','31','2012-03-28 21:54:24','2012-03-28 21:54:24'),(31,20,'story','32','2012-03-28 22:06:30','2012-03-28 22:06:30'),(32,21,'story','33','2012-03-28 22:52:38','2012-03-28 22:52:38'),(33,22,'story','34','2012-03-30 16:30:58','2012-03-30 16:30:58');
 
 /*Table structure for table `time` */
 
@@ -164,11 +175,11 @@ CREATE TABLE `time` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `time` */
 
-insert  into `time`(`id`,`name`) values (1,'1900'),(2,'1910'),(3,'1920'),(4,'1930'),(5,'1940'),(6,'1950'),(7,'1960'),(8,'1970'),(9,'1980'),(10,'1990'),(11,'2000'),(12,'2010');
+insert  into `time`(`id`,`name`) values (1,'2010'),(2,'2000-2009'),(3,'1990-1999'),(4,'1980-1989'),(5,'1970-1979'),(6,'1960-1969'),(7,'1950-1959'),(8,'1940-1949'),(9,'1930-1939'),(10,'1920-1929'),(11,'1910-1919'),(12,'1900-1909'),(13,'1890-1899'),(14,'1880-1889');
 
 /*Table structure for table `topic` */
 
@@ -207,11 +218,11 @@ CREATE TABLE `user` (
   UNIQUE KEY `UNIQ_2DA17977F85E0677` (`username`),
   KEY `IDX_2DA17977F92F3E70` (`country_id`),
   CONSTRAINT `FK_2DA17977F92F3E70` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`password`,`salt`,`created_at`,`email`,`first_name`,`last_name`,`country_id`,`biography`,`city`,`photo`,`institution`,`birth`) values (1,'user','userpass','1','2012-02-03 16:57:36','kak222ac2a@mail.ru','Albinas','Bagdonas',1,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(2,'qwe','qwe','2','2012-02-03 16:57:36','kaka23a@mail.ru','Sergey','Belov',5,'Built as a sprite\r\nInstead of making every icon an extra request, we\'ve compiled them into a sprite—a bunch of images in one file that uses CSS to position the images with background-position. This is the same method we use on Twitter.com and it has worked well for us.\r\n\r\nAll icons classes are prefixed with .icon- for proper namespacing and scoping, much like our other components. This will help avoid conflicts with other tools.\r\n\r\nGlyphicons has granted us use of the Halflings set in our open-source toolkit so long as we provide a link and credit here in the docs. Please consider doing the same in your projects.','Obninsk','2.jpg','I.A.T.E.','2012-02-06 00:00:00'),(3,'asdasd','asdasd','123','2012-02-03 16:57:36','kakac442a@mail.ru','Irena','Levi?nik',3,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.',NULL,NULL,NULL,'2012-02-06 15:04:16'),(4,'qweqwe','qweqwe','123','2012-02-03 17:05:30','kakaca@mail.ru','Iva','Pust',4,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(5,'zzz','zzz','123','2012-02-03 17:21:43','qweqwe@zzz.ru','Marija','Povil?nait?',7,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(6,'ssss','ssss','123','2012-02-08 11:35:04','kakac2a@mail.ru','Milan','Pavliha',11,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(7,'ggggg','ggggg','123','2012-02-08 11:35:23','ggggg@mail.ru','Rodica','Bernicus',5,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(8,'qweasdzxc','qweqwe','123','2012-02-08 13:08:08','qweqwe@mail.ru',NULL,NULL,8,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16');
+insert  into `user`(`id`,`username`,`password`,`salt`,`created_at`,`email`,`first_name`,`last_name`,`country_id`,`biography`,`city`,`photo`,`institution`,`birth`) values (1,'user','userpass','1','2012-02-03 16:57:36','kak222ac2a@mail.ru','Albinas','Bagdonas',1,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(2,'qwe','qwe','2','2012-02-03 16:57:36','kaka23a@mail.ru','Sergey','Belov',5,'Built as a sprite\r\nInstead of making every icon an extra request, we\'ve compiled them into a sprite—a bunch of images in one file that uses CSS to position the images with background-position. This is the same method we use on Twitter.com and it has worked well for us.\r\n\r\nAll icons classes are prefixed with .icon- for proper namespacing and scoping, much like our other components. This will help avoid conflicts with other tools.\r\n\r\nGlyphicons has granted us use of the Halflings set in our open-source toolkit so long as we provide a link and credit here in the docs. Please consider doing the same in your projects.','Obninsk','2.jpg','I.A.T.E.','2012-02-06 00:00:00'),(4,'qweqwe','qweqwe','123','2012-02-03 17:05:30','kakaca@mail.ru','Iva','Pust',4,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(6,'ssss','ssss','123','2012-02-08 11:35:04','kakac2a@mail.ru','Milan','Pavliha',11,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(7,'ggggg','ggggg','123','2012-02-08 11:35:23','ggggg@mail.ru','Rodica','Bernicus',5,'Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.','Obninsk',NULL,'I.A.T.E.','2012-02-06 15:04:16'),(9,'Ari','kakka','123','2012-03-28 11:01:07','ari.ketola@context.fi','Ari','Ketola',8,NULL,NULL,'9.jpg','Context Learning',NULL);
 
 /*Table structure for table `user_role` */
 
@@ -223,8 +234,8 @@ CREATE TABLE `user_role` (
   PRIMARY KEY (`user_id`,`role_id`),
   KEY `IDX_2DE8C6A3A76ED395` (`user_id`),
   KEY `IDX_2DE8C6A3D60322AC` (`role_id`),
-  CONSTRAINT `FK_2DE8C6A3D60322AC` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
-  CONSTRAINT `FK_2DE8C6A3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `FK_2DE8C6A3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_2DE8C6A3D60322AC` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `user_role` */
@@ -262,9 +273,11 @@ CREATE TABLE `vote` (
   KEY `IDX_FA222A5AA76ED395` (`user_id`),
   CONSTRAINT `FK_FA222A5AA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `FK_FA222A5AAA5D4036` FOREIGN KEY (`story_id`) REFERENCES `story` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `vote` */
+
+insert  into `vote`(`id`,`story_id`,`value`,`user_id`) values (34,29,4,9),(35,30,3,9),(36,32,4,9),(37,34,2,9);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
