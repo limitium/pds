@@ -412,6 +412,7 @@ class StoryController extends Controller
             'story' => $story,
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'formUpload' => $this->createUploadForm()->createView()
         );
 
     }
@@ -431,13 +432,25 @@ class StoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('PDSStoryBundle:Story')->find($id);
+            $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
 
-            if (!$entity) {
+            if (!$story) {
                 throw $this->createNotFoundException('Unable to find Story entity.');
             }
 
-            $em->remove($entity);
+            foreach ($story->getVotes() as $vote) {
+                $em->remove($vote);
+            }
+            foreach ($story->getComments() as $comment) {
+                $em->remove($comment);
+            }
+            foreach ($story->getPages() as $page) {
+                $em->remove($page);
+            }
+
+            $this->get('fpn_tag.tag_manager')->deleteTagging($story);
+
+            $em->remove($story);
             $em->flush();
         }
 

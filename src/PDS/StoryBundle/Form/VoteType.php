@@ -13,6 +13,7 @@ class VoteType extends AbstractType {
             'class' => 'PDS\StoryBundle\Entity\Story',
             'hidden' => true,
             'property' => 'id',
+            'required' => 'true'
         ));
     }
 

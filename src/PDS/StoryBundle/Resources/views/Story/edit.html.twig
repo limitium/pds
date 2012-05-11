@@ -9,6 +9,7 @@
 {% block javascripts %}
 {{parent()}}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{{ asset('js/libs/jquery.form.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/libs/nicEdit.js') }}"></script>
 
 {% endblock%}
@@ -31,9 +32,10 @@
 
 
 {% block header %}
-Create a new story
+Edit a story
 {% endblock %}
 {% block story %}
+
 <div class="edit row">
     <div class="modal fade" id="video-upload">
         <form class="form-horizontal" action="{{ path('story_upload_video') }}"
@@ -77,12 +79,13 @@ Create a new story
             <h1 class="title-meta">Information about the story</h1>
             {{ form_row(form.Country)}}
             {{ form_row(form.meta_place)}}
-            {{ form_row(form.date)}}
+            {{ form_row(form.Time)}}
+            {{ form_row(form.meta_time)}}
             {{ form_row(form.Topics)}}
             {{ form_row(form.meta)}}
+            {{ form_row(form.meta_storyteller)}}
             <button class="btn btn-small add-video" type="button"><i class="icon-upload"></i> Add video</button>
             <ul class="videos">
-
             </ul>
         </div>
         <div class="span9">
@@ -103,6 +106,9 @@ Create a new story
             </button>
         </div>
     </form>
-
+    <form  method="post" action="{{ path('story_delete',{ 'id': story.id }) }}">
+                    {{ form_widget(delete_form) }}
+                    <input type="submit" class="delete btn btn-danger" value="Delete" />
+    </form>
 </div>
 {% endblock %}
