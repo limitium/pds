@@ -1,0 +1,11 @@
+{% extends 'PDSStoryBundle:Admin:admin.html.twig' %}
+{% block header %}
+Publish requests
+{% endblock %}
+{% block admin %}
+{% if stories %}
+{% include 'PDSStoryBundle:Admin:publish_list.html.twig' with {'stories': stories} %}
+{% else %}
+There isn't any story to moderate
+{% endif %}
+{% endblock %}

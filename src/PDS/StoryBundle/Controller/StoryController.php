@@ -229,8 +229,6 @@ class StoryController extends Controller
             $user = $this->container->get('security.context')->getToken()->getUser();
             $story->setUser($user);
 
-//            $this->updateTime($story, $em);
-
             //Unpublished by default
             $story->setStatus($em->getRepository('PDSStoryBundle:Status')->find(1));
             $em->persist($story);
@@ -270,58 +268,6 @@ class StoryController extends Controller
 
         return new Response("ok");
 
-    }
-
-    /**
-     * Lists all request Story entities.
-     *
-     * @Route("/publish/request", name="story_publish_requests")
-     * @Template()
-     */
-    public function publishlistAction()
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $stories = $em->getRepository('PDSStoryBundle:Story')->publishRequest();
-
-
-        return array('stories' => $stories);
-    }
-
-    /**
-     *  Moderate publish request for story.
-     *
-     * @Route("/{id}/moderate", name="story_moderate")
-     * @Method("post")
-     */
-    public function moderateAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $story = $em->getRepository('PDSStoryBundle:Story')->find($id);
-
-        if (!$story) {
-            throw $this->createNotFoundException('Unable to find Story entity.');
-        }
-
-        $story->setStatus($em->getRepository('PDSStoryBundle:Status')->find(3));
-
-        return new Response("ok");
-
-    }
-
-    private function updateTime($story, $em)
-    {
-        $years = floor($story->getDate()->format("Y") / 10) * 10;
-        $time = $em->getRepository('PDSStoryBundle:Time')->findByName($years);
-        if (sizeof($time) == 0) {
-            $time = new Time();
-            $time->setName($years);
-            $em->persist($time);
-        } else {
-            $time = $time[0];
-        }
-        $story->setTime($time);
     }
 
     private function updateTopics(Story $story)
@@ -401,7 +347,6 @@ class StoryController extends Controller
                 $page->setStory($story);
                 $em->persist($page);
             }
-//            $this->updateTime($story, $em);
             $em->flush();
 
             $this->updateTopics($story);

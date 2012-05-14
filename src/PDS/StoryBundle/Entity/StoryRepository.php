@@ -20,7 +20,7 @@ class StoryRepository extends EntityRepository
         return $this
             ->createQueryBuilder('s')
             ->select('s')
-            ->leftJoin('s.Status','st')
+            ->leftJoin('s.Status', 'st')
             ->where('st.id = 3')
             ->getQuery()
             ->getResult();
@@ -48,12 +48,25 @@ class StoryRepository extends EntityRepository
 
     public function byTopic(Tag $tag)
     {
-        $storiesWithTag = $this->getEntityManager()
+        $publishedStories = $this->getEntityManager()
+            ->getRepository('PDSStoryBundle:Story')
+            ->createQueryBuilder("str")
+            ->select("str.id")
+            ->leftJoin("str.Status", "sta")
+            ->where("sta.id= 2")
+            ->getDQL();
+
+        $queryBuilder = $this->getEntityManager()
             ->getRepository('PDSStoryBundle:Tag')
-            ->createQueryBuilder("t")
+            ->createQueryBuilder("t");
+
+        $storiesWithTag = $queryBuilder
             ->select("tg.resourceId")
             ->leftJoin("t.tagging", "tg")
             ->where("tg.resourceType = 'story'")
+            ->andWhere(
+                $queryBuilder->expr()->in("tg.resourceId", $publishedStories)
+            )
             ->andWhere("t.id = ?1")
             ->setParameter(1, $tag->getId())
             ->getDQL();
@@ -104,6 +117,8 @@ class StoryRepository extends EntityRepository
             ->select('s')
             ->addSelect("SUM(v.value)/COUNT(v.id) as rat")
             ->leftJoin("s.Votes", "v")
+            ->leftJoin("s.Status", "st")
+            ->where("st.id = 2")
             ->groupBy("s.id")
             ->orderBy("rat", "desc");
     }

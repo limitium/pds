@@ -66,23 +66,40 @@ class TagController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-
-        $topics = $this->calculateWeight($em
-            ->getRepository('PDSStoryBundle:Tag')
-            ->createQueryBuilder("t")
-            ->select("t")
-            ->addSelect("COUNT(t.id) as weight")
-            ->leftJoin("t.tagging", "tg")
-            ->where("tg.resourceType = 'story'")
-            ->groupBy("t.id")
-            ->getQuery()
-            ->getResult());
+        $topics = $this->getTopics($em);
 
         shuffle($topics);
 
         return array(
             'topics' => $topics
         );
+    }
+
+    private function getTopics($em)
+    {
+        $publishedStories = $em
+            ->getRepository('PDSStoryBundle:Story')
+            ->createQueryBuilder("s")
+            ->select("s.id")
+            ->leftJoin("s.Status", "st")
+            ->where("st.id= 2")
+            ->getDQL();
+
+        $queryBuilder = $em
+            ->getRepository('PDSStoryBundle:Tag')
+            ->createQueryBuilder("t");
+
+        return $this->calculateWeight($queryBuilder
+            ->select("t")
+            ->addSelect("COUNT(t.id) as weight")
+            ->leftJoin("t.tagging", "tg")
+            ->where("tg.resourceType = 'story'")
+            ->andWhere(
+                $queryBuilder->expr()->in("tg.resourceId", $publishedStories)
+            )
+            ->groupBy("t.id")
+            ->getQuery()
+            ->getResult());
     }
 
     /**
@@ -120,17 +137,7 @@ class TagController extends Controller
         $locations = $this->getWeight($em->getRepository('PDSStoryBundle:Country'));
         $times = $this->getWeight($em->getRepository('PDSStoryBundle:Time'));
         $tellers = $this->getWeight($em->getRepository('PDSUserBundle:User'));
-
-        $topics = $this->calculateWeight($em
-            ->getRepository('PDSStoryBundle:Tag')
-            ->createQueryBuilder("t")
-            ->select("t")
-            ->addSelect("COUNT(t.id) as weight")
-            ->leftJoin("t.tagging", "tg")
-            ->where("tg.resourceType = 'story'")
-            ->groupBy("t.id")
-            ->getQuery()
-            ->getResult());
+        $topics = $this->getTopics($em);
 
 
         $images = array();
@@ -166,6 +173,8 @@ class TagController extends Controller
             ->select("c")
             ->addSelect("COUNT(c.id) as weight")
             ->leftJoin("c.Stories", "s")
+            ->leftJoin("s.Status", "st")
+            ->where("st.id = 2")
             ->groupBy("c.id")
             ->getQuery()
             ->getResult());

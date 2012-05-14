@@ -20,8 +20,8 @@
             <a href="{{ path('story_teller', { 'id': story.getUser().getId() }) }}">{{ story.getUser() }}</a>
         </td>
         <td>
-            <button class="btn btn-small btn-primary"><i class="icon-ok-sign icon-white"></i> Publish</button>
-            <button class="btn btn-small"><i class="icon-remove-sign"></i> Block</button>
+            <button class="btn btn-small btn-primary publish" data-url="{{ path('story_moderate',{'id': story.id, 'statusId':2}) }}"><i class="icon-ok-sign icon-white"></i> Publish</button>
+            <button class="btn btn-small block" data-url="{{ path('story_moderate',{'id': story.id, 'statusId':4}) }}"><i class="icon-remove-sign"></i> Block</button>
         </td>
     </tr>
     {% endfor %}

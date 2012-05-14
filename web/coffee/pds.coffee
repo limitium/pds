@@ -174,6 +174,21 @@ $(document).ready ->
         console.log ok
     false
 
+  storyModerate = (button, status) ->
+    button.addClass("disabled").attr("disabled","disabled")
+    $.post button.attr("data-url"), (ok) ->
+      if ok
+        console.log ok
+        button.parents("tr").remove()
+      false
+
+
+  $("button.block").click ->
+    storyModerate $(this), 4
+
+  $("button.publish").click ->
+    storyModerate $(this), 2
+
   $("#myCarousel").carousel(interval: if $(".tags-cloud").length>0 then 10000 else 32600000).carousel "next"
 
   $("#story_date").datepicker(changeMonth:true, changeYear:true)
