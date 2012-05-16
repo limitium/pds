@@ -222,7 +222,7 @@ class User implements UserInterface {
      * @return Role[] The user roles
      */
     function getRoles() {
-        return array('ROLE_USER');
+        return array($this->getRole()->getName());
     }
 
     /**
@@ -262,27 +262,14 @@ class User implements UserInterface {
     /**
      * Get email
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getEmail()
     {
         return $this->email;
     }
-    /**
-     * @var PDS\UserBundle\Entity\Role
-     */
-    private $Roles;
 
 
-    /**
-     * Add Roles
-     *
-     * @param PDS\UserBundle\Entity\Role $roles
-     */
-    public function addRole(\PDS\UserBundle\Entity\Role $roles)
-    {
-        $this->Roles[] = $roles;
-    }
     /**
      * @var string $first_name
      */
@@ -307,7 +294,7 @@ class User implements UserInterface {
     /**
      * Get first_name
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -327,7 +314,7 @@ class User implements UserInterface {
     /**
      * Get last_name
      *
-     * @return string 
+     * @return string
      */
     public function getLastName()
     {
@@ -379,7 +366,7 @@ class User implements UserInterface {
     /**
      * Get biography
      *
-     * @return text 
+     * @return text
      */
     public function getBiography()
     {
@@ -399,7 +386,7 @@ class User implements UserInterface {
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -419,7 +406,7 @@ class User implements UserInterface {
     /**
      * Get photo
      *
-     * @return string 
+     * @return string
      */
     public function getPhoto()
     {
@@ -439,7 +426,7 @@ class User implements UserInterface {
     /**
      * Get institution
      *
-     * @return string 
+     * @return string
      */
     public function getInstitution()
     {
@@ -459,7 +446,7 @@ class User implements UserInterface {
     /**
      * Get birth
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getBirth()
     {
@@ -479,7 +466,7 @@ class User implements UserInterface {
     /**
      * Get Country
      *
-     * @return PDS\StoryBundle\Entity\Country 
+     * @return PDS\StoryBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -551,10 +538,60 @@ class User implements UserInterface {
     /**
      * Get Videos
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getVideos()
     {
         return $this->Videos;
+    }
+    /**
+     * @var PDS\UserBundle\Entity\Role
+     */
+    private $Role;
+
+
+    /**
+     * Set Role
+     *
+     * @param PDS\UserBundle\Entity\Role $role
+     */
+    public function setRole(\PDS\UserBundle\Entity\Role $role)
+    {
+        $this->Role = $role;
+    }
+
+    /**
+     * Get Role
+     *
+     * @return PDS\UserBundle\Entity\Role 
+     */
+    public function getRole()
+    {
+        return $this->Role;
+    }
+    /**
+     * @var boolean $teller_request
+     */
+    private $teller_request;
+
+
+    /**
+     * Set teller_request
+     *
+     * @param boolean $tellerRequest
+     */
+    public function setTellerRequest($tellerRequest)
+    {
+        $this->teller_request = $tellerRequest;
+    }
+
+    /**
+     * Get teller_request
+     *
+     * @return boolean 
+     */
+    public function getTellerRequest()
+    {
+        return $this->teller_request;
     }
 }

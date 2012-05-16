@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users%}
+    <tr>
+        <td>
+            <a href="{{ path('story_teller', { 'id': user.getId() }) }}">{{ user.getId() }}</a>
+        </td>
+        <td>
+            <a href="{{ path('story_teller', { 'id': user.getId() }) }}">{{ user }}</a>
+        </td>
+        <td>
+            <button class="btn btn-small btn-primary promote" data-url="{{ path('user_moderate',{'id': user.id, 'promote':1}) }}"><i class="icon-ok-sign icon-white"></i> Promote</button>
+            <button class="btn btn-small decline" data-url="{{ path('user_moderate',{'id': user.id, 'promote':0}) }}"><i class="icon-remove-sign"></i> Decline</button>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>

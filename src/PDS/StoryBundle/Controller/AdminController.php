@@ -27,7 +27,7 @@ use Buzz\Browser;
 /**
  * Story controller.
  *
- * @Route("/admin")
+ * @Route("/admin/story")
  */
 class AdminController extends Controller
 {

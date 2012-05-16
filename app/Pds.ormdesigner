@@ -137,7 +137,7 @@
   </module>
 
   <module import-format="Doctrine2Yml" import-path="..\src\PDS\UserBundle\Resources\config\doctrine\" name="UserBundle" visBkColor="13353215" visSizeX="278" visSizeX2="197" visSizeY="20" visSizeY2="507">
-    <table name="User" visPositionX="-243" visPositionY="11" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="129">
+    <table name="User" visPositionX="-244" visPositionY="11" visSizeX="0" visSizeX2="117" visSizeY="0" visSizeY2="227">
       <column auto-increment="true" name="id" primary="true" type="integer"/>
       <column name="username" required="true" type="string" unique="true"/>
       <column name="email" required="true" type="string"/>
@@ -152,6 +152,8 @@
       <column name="photo" type="string"/>
       <column name="institution" type="string"/>
       <column name="birth" type="datetime"/>
+      <column name="role_id" required="true" type="integer"/>
+      <column name="teller_request" type="boolean"/>
       <orm-properties>
         <attribute name="repository-class">PDS\UserBundle\Entity\UserRepository</attribute>
         <attribute name="table">user</attribute>
@@ -164,30 +166,12 @@
         <attribute name="table">role</attribute>
       </orm-properties>
     </table>
-    <table name="UserRole" visPositionX="-38" visPositionY="-5" visSizeX="0" visSizeX2="95" visSizeY="0" visSizeY2="60">
-      <column name="user_id" required="true" type="integer"/>
-      <column name="role_id" required="true" type="integer"/>
-      <index name="unique_pair" unique="true">
-        <index-column name="role_id"/>
-        <index-column name="user_id"/>
-      </index>
-      <orm-properties>
-        <attribute name="table">user_role</attribute>
-      </orm-properties>
-    </table>
     <foreign-key caption="Country User" from="User" inverse-alias="Country" name="FK_User_Country_id" owning-alias="Users" to="Country" visCaption1X="-14" visCaption1Y="-6" visCenterX="0" visCenterY="0">
       <foreign-key-column from="country_id" to="id"/>
     </foreign-key>
-    <foreign-key caption="User UserRole" from="UserRole" name="FK_UserRole_User_id" to="User">
-      <foreign-key-column from="user_id" to="id"/>
-    </foreign-key>
-    <foreign-key caption="Role UserRole" from="UserRole" name="FK_UserRole_Role_id" to="Role" visCaption1X="0" visCaption1Y="0" visCenterX="0" visCenterY="0">
+    <foreign-key caption="Role User" from="User" inverse-alias="Role" name="FK_User_Role_id" owning-alias="User" to="Role" visCaption1X="-1" visCaption1Y="0" visCenterX="0" visCenterY="0">
       <foreign-key-column from="role_id" to="id"/>
     </foreign-key>
-    <many-to-many-relation mn-table="UserRole">
-      <many-to-many-foreign-key foreign-key="FK_UserRole_User_id" relation-alias="Users"/>
-      <many-to-many-foreign-key foreign-key="FK_UserRole_Role_id" relation-alias="Roles"/>
-    </many-to-many-relation>
   </module>
 
 </orm-designer>

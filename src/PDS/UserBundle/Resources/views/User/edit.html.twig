@@ -21,6 +21,10 @@ Edit profile “{{ entity.username }}”
             {{ form_row(form.first_name) }}
             {{ form_row(form.last_name) }}
             {{ form_row(form.birth) }}
+            {% if entity.getRole().name == "ROLE_USER" %}
+                    <span class="label label-info {% if not entity.getTellerRequest() %}hide {% endif %}">Request in process</span>
+                    <button data-url="{{ path("user_teller_request", {'id': entity.id})}}" class="btn btn-small teller-request {% if entity.getTellerRequest() %}hide {% endif %}"><i class="icon-pencil"></i> Storyteller request</button>
+            {% endif %}
         </div>
         <div class="span10">
             {{ form_row(form.biography) }}
@@ -33,4 +37,4 @@ Edit profile “{{ entity.username }}”
     </a>
 </form>
 
-        {% endblock %}
+{% endblock %}

@@ -3,12 +3,13 @@
 namespace PDS\StoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use DoctrineExtensions\Taggable\Taggable;
 
 /**
  * PDS\StoryBundle\Entity\Story
  */
-class Story     implements Taggable
+class Story implements Taggable
 {
    
     /**
@@ -52,6 +53,10 @@ class Story     implements Taggable
     private $Country;
 
     /**
+     * @Assert\MaxLength(
+     *     limit=30,
+     *     message="Maximum topics size is {{ limit }} characters."
+     * )
      * @var PDS\StoryBundle\Entity\Topic
      */
     private $Topics;
@@ -435,5 +440,55 @@ class Story     implements Taggable
     public function getStatus()
     {
         return $this->Status;
+    }
+    /**
+     * @var text $meta_storyteller
+     */
+    private $meta_storyteller;
+
+    /**
+     * @var text $meta_time
+     */
+    private $meta_time;
+
+
+    /**
+     * Set meta_storyteller
+     *
+     * @param text $metaStoryteller
+     */
+    public function setMetaStoryteller($metaStoryteller)
+    {
+        $this->meta_storyteller = $metaStoryteller;
+    }
+
+    /**
+     * Get meta_storyteller
+     *
+     * @return text 
+     */
+    public function getMetaStoryteller()
+    {
+        return $this->meta_storyteller;
+    }
+
+    /**
+     * Set meta_time
+     *
+     * @param text $metaTime
+     */
+    public function setMetaTime($metaTime)
+    {
+        $this->meta_time = $metaTime;
+    }
+
+    /**
+     * Get meta_time
+     *
+     * @return text 
+     */
+    public function getMetaTime()
+    {
+        return $this->meta_time;
     }
 }

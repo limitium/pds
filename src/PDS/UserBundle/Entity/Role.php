@@ -20,10 +20,6 @@ class Role implements RoleInterface
      */
     private $name;
 
-    /**
-     * @var PDS\UserBundle\Entity\User
-     */
-    private $Users;
 
     public function __construct()
     {
@@ -60,25 +56,7 @@ class Role implements RoleInterface
         return $this->name;
     }
 
-    /**
-     * Add Users
-     *
-     * @param PDS\UserBundle\Entity\User $users
-     */
-    public function addUser(\PDS\UserBundle\Entity\User $users)
-    {
-        $this->Users[] = $users;
-    }
 
-    /**
-     * Get Users
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getUsers()
-    {
-        return $this->Users;
-    }
 
 
     /**
@@ -97,4 +75,39 @@ class Role implements RoleInterface
 
 
 
+    /**
+     * @var PDS\UserBundle\Entity\User
+     */
+    private $User;
+
+
+    /**
+     * Set User
+     *
+     * @param PDS\UserBundle\Entity\User $user
+     */
+    public function setUser(\PDS\UserBundle\Entity\User $user)
+    {
+        $this->User = $user;
+    }
+
+    /**
+     * Get User
+     *
+     * @return PDS\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->User;
+    }
+
+    /**
+     * Add User
+     *
+     * @param PDS\UserBundle\Entity\User $user
+     */
+    public function addUser(\PDS\UserBundle\Entity\User $user)
+    {
+        $this->User[] = $user;
+    }
 }

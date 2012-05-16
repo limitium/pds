@@ -1,0 +1,11 @@
+{% extends 'PDSUserBundle:Admin:admin.html.twig' %}
+{% block header %}
+Storytellers requests
+{% endblock %}
+{% block admin %}
+{% if users %}
+{% include 'PDSUserBundle:Admin:request_list.html.twig' with {'users': users} %}
+{% else %}
+There isn't any users to moderate
+{% endif %}
+{% endblock %}

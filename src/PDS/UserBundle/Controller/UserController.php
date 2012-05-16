@@ -75,8 +75,12 @@ class UserController extends Controller
             $user->setCreatedAt(new \DateTime("now"));
 
             $em = $this->getDoctrine()->getEntityManager();
+
+            $user->addRole($em->getRepository('PDSUserBundle:Role')->find(4));
+
             $em->persist($user);
             $em->flush();
+
 
             $upToken = new UsernamePasswordToken($user->getUsername(),$user->getPassword(),"main",array());
             $this->get('security.context')->setToken($upToken);
@@ -172,5 +176,28 @@ class UserController extends Controller
             'entity' => $entity,
             'form' => $editForm->createView(),
         );
+    }
+
+    /**
+     *  Publish request for story.
+     *
+     * @Route("/{id}/request", name="user_teller_request")
+     * @Method("post")
+     */
+    public function requestAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $user = $em->getRepository('PDSUserBundle:User')->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+
+        $user->setTellerRequest(1);
+        $em->flush();
+
+        return new Response("ok");
+
     }
 }

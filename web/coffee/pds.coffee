@@ -168,13 +168,23 @@ $(document).ready ->
 
   $(".publish-request").click ->
     button = $(@)
+    button.addClass("disabled").attr("disabled","disabled")
     button.hide().siblings().removeClass("status-blocked").removeClass("status-unpublished").addClass("status-moderated").html("Moderated")
     $.post button.attr("data-url"), (ok) ->
       if ok
         console.log ok
     false
 
-  storyModerate = (button, status) ->
+  $(".teller-request").click ->
+    button = $(@)
+    button.addClass("disabled").attr("disabled","disabled")
+    button.hide().siblings().removeClass("hide")
+    $.post button.attr("data-url"), (ok) ->
+      if ok
+        console.log ok
+    false
+
+  moderate = (button, status) ->
     button.addClass("disabled").attr("disabled","disabled")
     $.post button.attr("data-url"), (ok) ->
       if ok
@@ -182,12 +192,17 @@ $(document).ready ->
         button.parents("tr").remove()
       false
 
-
   $("button.block").click ->
-    storyModerate $(this), 4
+    moderate $(this), 4
 
   $("button.publish").click ->
-    storyModerate $(this), 2
+    moderate $(this), 2
+
+  $("button.promote").click ->
+    moderate $(this), 1
+
+  $("button.decline").click ->
+    moderate $(this), 0
 
   $("#myCarousel").carousel(interval: if $(".tags-cloud").length>0 then 10000 else 32600000).carousel "next"
 

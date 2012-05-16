@@ -14,7 +14,7 @@
     <div class="span7">
         <ul class="meta">
             <li>
-                <span class="mark">Storyteller:</span><span class="data">{{ user.firstName }} <i>{{ user.username }}</i> {{ user.lastName }}</span>
+                <span class="mark">{{ user.getRole().name}}:</span><span class="data">{{ user.firstName }} <i>{{ user.username }}</i> {{ user.lastName }}</span>
             </li>
             <li>
                 <span class="mark">From:</span><span class="data">{{ user.country.name }} {% if user.city %}({{ user.city }}){% endif %}</span>

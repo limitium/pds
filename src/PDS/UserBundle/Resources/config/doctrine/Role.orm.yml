@@ -11,7 +11,7 @@ PDS\UserBundle\Entity\Role:
       type: string
       unique: true
       nullable: false
-  manyToMany:
-    Users:
-      targetEntity: User
-      mappedBy: Roles
+  oneToMany:
+    User:
+      targetEntity: PDS\UserBundle\Entity\User
+      mappedBy: Role
