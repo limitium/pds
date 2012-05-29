@@ -76,7 +76,7 @@ class UserController extends Controller
 
             $em = $this->getDoctrine()->getEntityManager();
 
-            $user->addRole($em->getRepository('PDSUserBundle:Role')->find(4));
+            $user->setRole($em->getRepository('PDSUserBundle:Role')->find(4));
 
             $em->persist($user);
             $em->flush();
