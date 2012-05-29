@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var addEditor, changePosition, commenting, refreshLineno, reorderPages, setLineno, showStar, stars, voting;
+    var addEditor, changePosition, commenting, moderate, refreshLineno, reorderPages, setLineno, showStar, stars, voting;
     commenting = false;
     $("#form_comment").submit(function() {
         var button, form, loader, values;
@@ -212,6 +212,7 @@ $(document).ready(function() {
     $(".publish-request").click(function() {
         var button;
         button = $(this);
+        button.addClass("disabled").attr("disabled", "disabled");
         button.hide().siblings().removeClass("status-blocked").removeClass("status-unpublished").addClass("status-moderated").html("Moderated");
         $.post(button.attr("data-url"), function(ok) {
             if (ok) {
@@ -219,6 +220,40 @@ $(document).ready(function() {
             }
         });
         return false;
+    });
+    $(".teller-request").click(function() {
+        var button;
+        button = $(this);
+        button.addClass("disabled").attr("disabled", "disabled");
+        button.hide().siblings().removeClass("hide");
+        $.post(button.attr("data-url"), function(ok) {
+            if (ok) {
+                return console.log(ok);
+            }
+        });
+        return false;
+    });
+    moderate = function(button, status) {
+        button.addClass("disabled").attr("disabled", "disabled");
+        return $.post(button.attr("data-url"), function(ok) {
+            if (ok) {
+                console.log(ok);
+                button.parents("tr").remove();
+            }
+            return false;
+        });
+    };
+    $("button.block").click(function() {
+        return moderate($(this), 4);
+    });
+    $("button.publish").click(function() {
+        return moderate($(this), 2);
+    });
+    $("button.promote").click(function() {
+        return moderate($(this), 1);
+    });
+    $("button.decline").click(function() {
+        return moderate($(this), 0);
     });
     $("#myCarousel").carousel({
         interval: $(".tags-cloud").length > 0 ? 10000 : 32600000
