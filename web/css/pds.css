@@ -1,3 +1,4 @@
+/* CSS crunched with Crunch - http://crunchapp.net/ */
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block;}
 audio,canvas,video{display:inline-block;*display:inline;*zoom:1;}
 audio:not([controls]){display:none;}
@@ -212,8 +213,8 @@ table .span9{float:none;width:684px;margin-left:0;}
 table .span10{float:none;width:764px;margin-left:0;}
 table .span11{float:none;width:844px;margin-left:0;}
 table .span12{float:none;width:924px;margin-left:0;}
-[class^="icon-"]{display:inline-block;width:14px;height:14px;vertical-align:text-top;background-image:url(bs/bs/../img/glyphicons-halflings.png);background-position:14px 14px;background-repeat:no-repeat;*margin-right:.3em;}[class^="icon-"]:last-child{*margin-left:0;}
-.icon-white{background-image:url(bs/bs/../img/glyphicons-halflings-white.png);}
+[class^="icon-"]{display:inline-block;width:14px;height:14px;vertical-align:text-top;background-image:url(../img/glyphicons-halflings.png);background-position:14px 14px;background-repeat:no-repeat;*margin-right:.3em;}[class^="icon-"]:last-child{*margin-left:0;}
+.icon-white{background-image:url(../img/glyphicons-halflings-white.png);}
 .icon-glass{background-position:0 0;}
 .icon-music{background-position:-24px 0;}
 .icon-search{background-position:-48px 0;}
@@ -674,8 +675,8 @@ footer .f2{padding:10px;background-color:white;}
 .story footer .f2{padding:10px;background-color:white;}
 .story .box-container{background-color:#366638;background-image:-moz-linear-gradient(top, #427648, #244e20);background-image:-ms-linear-gradient(top, #427648, #244e20);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#427648), to(#244e20));background-image:-webkit-linear-gradient(top, #427648, #244e20);background-image:-o-linear-gradient(top, #427648, #244e20);background-image:linear-gradient(top, #427648, #244e20);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#427648', endColorstr='#244e20', GradientType=0);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;margin-top:20px;}.story .box-container .box-header{padding-top:5px;color:white;font-size:24px;font-weight:900;text-align:center;}.story .box-container .box-header a{color:white;}
 .story .box-container .box-body{margin:10px 7px 7px 7px;background-color:#f9f9f9;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}.story .box-container .box-body #myCarousel .item a{margin:0px;padding:0px;}.story .box-container .box-body #myCarousel .item a img{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;height:250px;width:286px;}
-.story .short-list{padding:3px;margin:0;list-style:none;text-align:left;font-size:16px;font-weight:bold;}.story .short-list li a{height:24px;display:inline-block;width:160px;overflow:hidden;}
-.story .short-list .star-rating{padding-top:2px;background:url(../img/star_rating.png) bottom left repeat-x;display:inline-block;}
+.story .short-list{padding:3px;margin:0;list-style:none;text-align:left;font-size:16px;font-weight:bold;}.story .short-list li span{width:105px;display:inline-block;vertical-align:super;}.story .short-list li span .star-rating{padding-top:2px;background:url(../img/star_rating.png) bottom left repeat-x;display:inline-block;float:right;}
+.story .short-list li a{height:24px;display:inline-block;overflow:hidden;}
 #comments{padding:30px 0;display:table;}
 .comment{padding-top:20px;margin-top:30px;border-top:1px solid #DDD;}
 .form-actions{background-color:#F9F9F9;margin-bottom:0px;padding-bottom:0px;}

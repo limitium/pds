@@ -1,0 +1,28 @@
+Video:
+  type: entity
+  table: video
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    vid:
+      type: string
+      nullable: false
+    title:
+      type: string
+      nullable: false
+    player_url:
+      type: string
+      nullable: false
+    watch_url:
+      type: string
+      nullable: false
+  manyToOne:
+    User:
+      targetEntity: User
+      inversedBy: Videos
+      joinColumns:
+        User_id:
+          referencedColumnName: id

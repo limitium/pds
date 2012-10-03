@@ -1,0 +1,63 @@
+Story:
+  type: entity
+  table: story
+  repositoryClass: PDS\StoryBundle\Entity\StoryRepository
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    title:
+      type: string
+      nullable: false
+    created_at:
+      type: datetime
+      nullable: false
+    meta:
+      type: text
+      nullable: true
+    meta_place:
+      type: text
+      nullable: true
+    meta_storyteller:
+      type: text
+      nullable: true
+    meta_time:
+      type: text
+      nullable: true
+  oneToMany:
+    Votes:
+      targetEntity: Vote
+      mappedBy: Story
+    Comments:
+      targetEntity: Comment
+      mappedBy: Story
+    Pages:
+      targetEntity: Page
+      mappedBy: Story
+  manyToOne:
+    User:
+      targetEntity: User
+      inversedBy: Stories
+      joinColumns:
+        user_id:
+          referencedColumnName: id
+    Country:
+      targetEntity: Country
+      inversedBy: Stories
+      joinColumns:
+        country_id:
+          referencedColumnName: id
+    Time:
+      targetEntity: Time
+      inversedBy: Stories
+      joinColumns:
+        time_id:
+          referencedColumnName: id
+    Status:
+      targetEntity: Status
+      inversedBy: Stories
+      joinColumns:
+        status_id:
+          referencedColumnName: id

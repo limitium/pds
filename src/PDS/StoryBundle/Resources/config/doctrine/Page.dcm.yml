@@ -1,0 +1,22 @@
+Page:
+  type: entity
+  table: page
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    body:
+      type: text
+      nullable: true
+    lineno:
+      type: integer
+      nullable: true
+  manyToOne:
+    Story:
+      targetEntity: Story
+      inversedBy: Pages
+      joinColumns:
+        story_id:
+          referencedColumnName: id

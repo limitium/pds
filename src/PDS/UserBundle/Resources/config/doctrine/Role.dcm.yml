@@ -1,0 +1,17 @@
+Role:
+  type: entity
+  table: role
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      unique: true
+      nullable: false
+  oneToMany:
+    User:
+      targetEntity: User
+      mappedBy: Role
