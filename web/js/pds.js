@@ -259,8 +259,9 @@ $(document).ready(function() {
   $("#myCarousel").carousel({
     interval: $(".tags-cloud").length > 0 ? 10000 : 32600000
   }).carousel("next");
-  return $("#story_date").datepicker({
-    changeMonth: true,
-    changeYear: true
-  });
+//  $("#story_date").datepicker({
+//    changeMonth: true,
+//    changeYear: true
+//  });
+  return true
 });
