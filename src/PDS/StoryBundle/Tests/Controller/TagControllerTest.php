@@ -55,7 +55,7 @@ class TagControllerTest extends WebTestCase
         $this->assertEquals(1, $client->click($tagLinks->eq(0)->link())->filter('.content-header:contains("In ")')->count(), "Time In header");
 
         $boxBody = $boxes->eq(2);
-        $this->assertEquals(1, $boxBody->filter('.box-header:contains("Preview")')->count(), "3d box is preview");
+        $this->assertEquals(1, $boxBody->filter('.box-header:contains("Top stories")')->count(), "3d box is to stories");
         $tagLinks = $boxBody->filter('.box-body a');
         $this->assertGreaterThan(0, $tagLinks->count(), "Show story links");
 
@@ -68,12 +68,12 @@ class TagControllerTest extends WebTestCase
         $this->assertEquals(1, $client->click($link)->filter('.content-header:contains("' . $link->getNode()->textContent . '")')->count(), "Topic same as link");
 
         $boxBody = $boxes->eq(4);
-        $this->assertEquals(1, $boxBody->filter('a:contains("Story teller")')->count(), "5th box is story teller");
+        $this->assertEquals(1, $boxBody->filter('a:contains("Story collector")')->count(), "5th box is story collector");
         $tagLinks = $boxBody->filter('.box-body a');
         $this->assertGreaterThan(0, $tagLinks->count(), "Story teller links");
         $this->assertEquals(1, $client->click($tagLinks->eq(0)->link())->filter('.content-header:contains("By ")')->count(), "Story teller by header");
 
         $boxBody = $boxes->eq(5);
-        $this->assertEquals(1, $boxBody->filter('.box-header:contains("Story collector")')->count(), "6th box is collector");
+        $this->assertEquals(1, $boxBody->filter('.box-header:contains("Preview")')->count(), "6th box is preview");
     }
 }
