@@ -29,7 +29,7 @@
 
             <div class="span4 box-container">
                 <div class="box-header">
-                    Preview
+                    Top stories
                 </div>
                 <div class="box-body tags-cloud">
                     {% include 'PDSStoryBundle:Story:short_list.html.twig' with {'stories': stories} %}
@@ -51,7 +51,7 @@
 
         <div class="span4 box-container">
             <div class="box-header">
-                <a href="{{ path('story_tag_teller') }}">Story teller</a>
+                <a href="{{ path('story_tag_teller') }}">Story collector</a>
             </div>
             <div class="box-body tags-cloud">
                 {% for teller in tellers%}
@@ -63,7 +63,7 @@
 
         <div class="span4 box-container">
             <div class="box-header">
-                Story collector
+                Preview
             </div>
             <div class="box-body tags-cloud">
                 <div class="projector">
