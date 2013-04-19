@@ -12,7 +12,7 @@ class TagControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertEquals(1, $crawler->filter('html:contains("Click any word to see stories")')->count(), "Click any word in title");
+        $this->assertEquals(1, $crawler->filter('html:contains("Gallery of stories")')->count(), "Click any word in title");
 
         $crawler = $client->click($crawler->selectLink('Location')->link());
         $this->assertEquals(1, $crawler->filter('.content-header:contains("Location")')->count(), "Location tags page");

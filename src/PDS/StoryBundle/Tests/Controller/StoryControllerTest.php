@@ -124,7 +124,7 @@ class StoryControllerTest extends WebTestCase
         $client->submit($crawler->selectButton('Delete')->form());
         $crawler = $client->followRedirect();
 
-        $this->assertEquals(1, $crawler->filter('html:contains("Click any word to see stories")')->count(), "Click any word in title on main page");
+        $this->assertEquals(1, $crawler->filter('html:contains("Gallery of stories")')->count(), "Click any word in title on main page");
     }
 
     private function searchStory($client, $title)
