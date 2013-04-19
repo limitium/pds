@@ -95,10 +95,10 @@ class StoryRepository extends EntityRepository
         );
     }
 
-    private function getStories(QueryBuilder $queryBuilder, $limit = 10)
+    private function getStories(QueryBuilder $queryBuilder, $limit = false)
     {
         $query = $queryBuilder->getQuery();
-        $query->setMaxResults($limit);
+        $limit && $query->setMaxResults($limit);
         $r = $query->getResult();
         $res = array();
         foreach ($r as $rr) {
