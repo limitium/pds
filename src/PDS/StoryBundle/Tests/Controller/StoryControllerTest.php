@@ -16,7 +16,7 @@ class StoryControllerTest extends WebTestCase
 
         $crawler = $client->click($link);
         $this->assertEquals(1, $crawler->filter('.content-header:contains("' . $link->getNode()->textContent . '")')->count(), "Story name same as link title");
-        $this->assertEquals(1, $crawler->filter('#comments')->count(), "Has comments block");
+        $this->assertEquals(0, $crawler->filter('#comments')->count(), "Has no comments block");
         $this->assertEquals(1, $crawler->filter('.projector')->count(), "Has story projector");
         $this->assertEquals(0, $crawler->filter('#form_comment')->count(), "Hasn't comments form");
     }
@@ -76,11 +76,11 @@ class StoryControllerTest extends WebTestCase
 
     private function writeComment($client, $crawler)
     {
-        $this->assertEquals(1, $crawler->filter('#form_comment')->count(), "Has a comment form");
+        $this->assertEquals(0, $crawler->filter('#form_comment')->count(), "Has no a comment form");
+        return $crawler;
         $form = $crawler->selectButton('Add')->form();
         $form['comment[message]'] = 'Test comment msg';
         $this->assertEquals(1, $client->submit($form)->filter('div.span7:contains("' . $form['comment[message]']->getValue() . '")')->count(), "Comment created");
-        return $crawler;
     }
 
     private function vote($client, $crawler)
