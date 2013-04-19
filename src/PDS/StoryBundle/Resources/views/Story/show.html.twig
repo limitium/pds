@@ -77,23 +77,5 @@
         </ul>
     </div>
 </div>
-<div id="comments">
-    <span class="span10 offset1"><i class="icon-comment"></i>Comments:</span>
-    {% for comment in story.getComments() %}
-    {% include 'PDSStoryBundle:Comment:show.html.twig' with {'comment': comment} %}
-    {% endfor %}
-    {% if app.user %}
-        <form id="form_comment" class="span10 offset1" action="{{ path('comment_create') }}" method="post">
-            <div class="form-actions">
-                {{ form_widget(form_comment.message) }}
-                {{ form_rest(form_comment) }}
-                <div>
-                    <button class="btn btn-small" type="submit"><i class="icon-comment"></i>Add</button>
-                    <i class="ajax-loader"></i>
-                </div>
-            </div>
-        </form>
-    {% endif %}
-</div>
 
         {% endblock %}
