@@ -31,6 +31,22 @@ use Buzz\Browser;
  */
 class StoryController extends Controller
 {
+
+    /**
+     * Lists all Story entities.
+     *
+     * @Route("/all", name="story_all")
+     * @Template()
+     */
+    public function allListAction()
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+
+        $stories = $em->getRepository('PDSStoryBundle:Story')->all();
+
+        return array('stories' => $stories);
+    }
     /**
      * Lists all Story entities.
      *

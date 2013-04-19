@@ -29,6 +29,10 @@ class TagControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Story collector')->link());
         $this->assertEquals(1, $crawler->filter('.content-header:contains("Story collector")')->count(), "Story teller tags page");
         $crawler = $client->back();
+
+        $crawler = $client->click($crawler->selectLink('All stories')->link());
+        $this->assertEquals(1, $crawler->filter('.content-header:contains("All stories")')->count(), "All stories page exists");
+        $crawler = $client->back();
     }
 
     public function testTag()

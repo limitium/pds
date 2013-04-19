@@ -1,0 +1,7 @@
+{% extends 'PDSStoryBundle:Story:story.html.twig' %}
+{% block header %}
+   All stories
+{% endblock %}
+{% block story %}
+      {% include 'PDSStoryBundle:Story:list.html.twig' with {'stories': stories} %}
+{% endblock %}

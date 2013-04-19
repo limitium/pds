@@ -86,6 +86,11 @@ class StoryRepository extends EntityRepository
         return $this->top();
     }
 
+    public function all()
+    {
+        return $this->getStories($this->generateTopQueryBuilder());
+    }
+
     public function search($q)
     {
         $queryBuilder = $this->generateTopQueryBuilder();
