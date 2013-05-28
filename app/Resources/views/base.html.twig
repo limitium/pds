@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/rating.css') }}" type="text/css" media="all"/>
-    {% if app.environment == 'prod' %}
+    {% if app.environment == 'prod' or true %}
 
     {# compiled css #}
 
@@ -125,7 +125,7 @@
     var baseUrl = "{{ asset(' ') }}".slice(0, -1);
 </script>
 
-{% if app.environment == 'dev' %}
+{% if app.environment == 'dev' and false %}
 
 {# less #}
 
