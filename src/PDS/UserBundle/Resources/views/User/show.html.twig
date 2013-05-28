@@ -14,23 +14,10 @@
     <div class="span7">
         <ul class="meta">
             <li>
-                <span class="mark">{{ user.getRole().name}}:</span><span class="data">{{ user.firstName }} <i>{{ user.username }}</i> {{ user.lastName }}</span>
+                <span class="mark">Name:</span><span class="data">{{ user.firstName }} <i>{{ user.username }}</i> {{ user.lastName }}</span>
             </li>
             <li>
-                <span class="mark">From:</span><span class="data">{{ user.country.name }} {% if user.city %}({{ user.city }}){% endif %}</span>
-            </li>
-            {% if user.institution %}
-            <li>
-                <span class="mark">Graduated:</span><span class="data">{{ user.institution }}</span>
-            </li>
-            {% endif %}
-            {% if user.birth %}
-            <li>
-                <span class="mark">Born in:</span><span class="data">{{ user.birth | date('Y.m.d')}}</span>
-            </li>
-            {% endif %}
-            <li>
-                <span class="mark">Join:</span><span class="data">{{ user.createdAt| date('Y.m.d')}}</span>
+                <span class="mark">From:</span><span class="data">{{ user.country.name }}</span>
             </li>
         </ul>
     </div>
@@ -43,7 +30,7 @@
         {#<button class="btn btn-small" type="button"><i class="icon-ok-circle"></i> Enable</button>#}
     </div>
     <div class="span12">
-        <h4>Biography:</h4>
+        <h4>Profile:</h4>
         <div class="biography">{{ user.biography }}</div>
     </div>
 
