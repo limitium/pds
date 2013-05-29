@@ -1,247 +1,250 @@
-.header-text(){
-    font-weight: 900;
-    font-size: 200%;
-    line-height: 28px;
-    display: table;
-    width: 100%;
-    margin-left: 5px;
-    color: @linkColor;
+.header-text() {
+  font-weight: 900;
+  font-size: 200%;
+  line-height: 28px;
+  display: table;
+  width: 100%;
+  margin-left: 5px;
+  color: @linkColor;
 }
 
 .story {
-    .main{
-        .help-text{
-            text-align: center;
-            color:white;
-            font-weight: bold;
-            font-size: 24px;
-        }
+  .main {
+    .help-text {
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      font-size: 24px;
     }
-    .show {
-        .projector {
-            padding: 20px 73px 0 73px;
-            .carousel {
-                .carousel-inner {
-                    min-height: 500px;
-                }
-                .carousel-control {
-                    left: -70px;
-                    &.right {
-                        left: auto;
-                        right: -70px;
-                    }
-                }
-            }
+  }
+  .show {
+    .projector {
+      padding: 20px 73px 0 73px;
+      .carousel {
+        .carousel-inner {
+          min-height: 500px;
         }
-
-        .meta {
-
-            li {
-                display: inline-block;
-                padding-right: 20px;
-            }
-            #form_vote {
-                display: none;
-            }
-            .info {
-                margin-left: 120px;
-                .star-rating {
-                    height: 16px !important;
-                    display: inline-block;
-                }
-                .rating-value {
-                    margin-left: -20px !important;
-                }
-            }
-            .tags {
-
-            }
-            .icon-star {
-                height: 20px;
-                margin-left: 86px;
-                margin-bottom: -3px;
-                display: none;
-            }
+        .carousel-control {
+          left: -70px;
+          &.right {
+            left: auto;
+            right: -70px;
+          }
         }
-
+      }
     }
-    .edit {
-        .title-meta {
-            font-size: 22px;
-            line-height: 19px;
-        }
-        .title {
-            .header-text();
-            .status-unpublished {
 
-            }
-            .status-published {
-                background-color: @successText;
-            }
-            .status-moderated {
-                background-color: @orange;
-            }
-            .status-blocked {
-                background-color: @errorText;
-            }
-            button {
-                display: inline-block;
-            }
-        }
-        #story_title {
-            width: 680px;
-        }
-        #video-upload {
-            display: none;
-            form {
-                margin: 0px;
-            }
-            .progress {
-                display: none;
-            }
-            .progress-help {
-                display: none
-            }
-        }
-        #story_date_year {
-            width: 65px;
-        }
+    .meta {
 
-        #story_date_month {
-            width: 48px;
+      li {
+        display: inline-block;
+        padding-right: 20px;
+      }
+      #form_vote {
+        display: none;
+      }
+      .info {
+        margin-left: 120px;
+        .star-rating {
+          height: 16px !important;
+          display: inline-block;
         }
+        .rating-value {
+          margin-left: -20px !important;
+        }
+      }
+      .tags {
 
-        #story_date_day {
-            width: 48px;
-        }
-        .pages-label {
-            margin-top: 9px;
-        }
-        #story_Pages {
-            list-style: none;
-            width: 690px;
-            margin: 0px;
-            li {
-                .border-radius(5px);
-                border: 1px solid @pds-green;
-                margin-bottom: 10px;
-            }
-            .story-page-header {
-                .header-text();
-                &:hover {
-                    color: @linkColorHover;
-                    text-decoration: none;
-                    cursor: pointer;
-                }
-                .page-number {
-                    display: inline-block;
-                    width: 82%;
-                }
-                button {
-                    margin-right: 5px;
-                    z-index: 1000;
-                }
-            }
-            .story-page-data {
-                .niceditor-container {
-                    .border-radius(0 0 5px 5px);
-                }
-                textarea {
-                    height: 250px;
-                /* 6 added for editor bug*/
-                    width: 686px;
-                    border: none;
-                    margin: 0px;
-                    padding: 4px;
-                }
-            }
-        }
-        .add-page {
-            margin-right: 10px;
-        }
-        .meta {
-            padding: 10px 0 10px 10px;
-            margin-right: -10px;
-            .videos {
-                margin: 10px 0 0 0;
-                list-style: none;
-            }
-        }
-        .create-story {
-            margin-left: 10px;
-        }
-        .buttons {
-            padding-bottom: 10px;
-            .create-story {
-                margin-right: 10px;
-            }
-        }
+      }
+      .icon-star {
+        height: 20px;
+        margin-left: 86px;
+        margin-bottom: -3px;
+        display: none;
+      }
     }
-    .delete {
-        margin-left: 30px;
-        margin-top: -60px;
+
+  }
+  .edit {
+    .title-meta {
+      font-size: 22px;
+      line-height: 19px;
     }
+    .title {
+      .header-text();
+      .status-unpublished {
+
+      }
+      .status-published {
+        background-color: @successText;
+      }
+      .status-moderated {
+        background-color: @orange;
+      }
+      .status-blocked {
+        background-color: @errorText;
+      }
+      button {
+        display: inline-block;
+      }
+    }
+    #story_title {
+      width: 680px;
+    }
+    #video-upload {
+      display: none;
+      form {
+        margin: 0px;
+      }
+      .progress {
+        display: none;
+      }
+      .progress-help {
+        display: none
+      }
+    }
+    #story_date_year {
+      width: 65px;
+    }
+
+    #story_date_month {
+      width: 48px;
+    }
+
+    #story_date_day {
+      width: 48px;
+    }
+    .pages-label {
+      margin-top: 9px;
+    }
+    #story_Pages {
+      list-style: none;
+      width: 690px;
+      margin: 0px;
+      li {
+        .border-radius(5px);
+        border: 1px solid @pds-green;
+        margin-bottom: 10px;
+      }
+      .story-page-header {
+        .header-text();
+        &:hover {
+          color: @linkColorHover;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        .page-number {
+          display: inline-block;
+          width: 82%;
+        }
+        button {
+          margin-right: 5px;
+          z-index: 1000;
+        }
+      }
+      .story-page-data {
+        .niceditor-container {
+          .border-radius(0 0 5px 5px);
+        }
+        textarea {
+          height: 250px;
+          /* 6 added for editor bug*/
+          width: 686px;
+          border: none;
+          margin: 0px;
+          padding: 4px;
+        }
+      }
+    }
+    .add-page {
+      margin-right: 10px;
+    }
+    .meta {
+      padding: 10px 0 10px 10px;
+      margin-right: -10px;
+      .videos {
+        margin: 10px 0 0 0;
+        list-style: none;
+      }
+    }
+    .create-story {
+      margin-left: 10px;
+    }
+    .buttons {
+      padding-bottom: 10px;
+      .create-story {
+        margin-right: 10px;
+      }
+    }
+  }
+  .delete {
+    margin-left: 30px;
+    margin-top: -60px;
+  }
 
 @import "main.less";
-    .box-container {
-        #gradient > .vertical(@barStartColor,@barEndColor);
-        .border-radius(5px);
-        margin-top: 20px;
-        .box-header {
-            padding-top: 5px;
-            color: white;
-            font-size: 24px;
-            font-weight: 900;
-            text-align: center;
-            a{
-                color :white;
-            }
-        }
-        .box-body {
-            margin: 10px 7px 7px 7px;
-            background-color: @pds-grey;
-            .border-radius(5px);
-            #myCarousel {
-                .item {
-                    a {
-                        margin: 0px;
-                        padding: 0px;
-                        img {
-                            .border-radius(5px);
-                            height: 250px;
-                            width: 286px;
-                        }
-                    }
-                }
-            }
-        }
+  .box-container {
+    #gradient > .vertical(@barStartColor,@barEndColor);
+    .border-radius(5px);
+    margin-top: 20px;
+    .box-header {
+      padding-top: 5px;
+      color: white;
+      font-size: 24px;
+      font-weight: 900;
+      text-align: center;
+      a {
+        color: white;
+      }
     }
-    .short-list {
-        padding: 3px;
+    .box-body {
+      margin: 10px 7px 7px 7px;
+      background-color: @pds-grey;
+      .border-radius(5px);
+      #myCarousel {
+        .item {
+          a {
+            margin: 0px;
+            padding: 0px;
+            img {
+              .border-radius(5px);
+              height: 250px;
+              width: 286px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .short-list {
+    padding: 3px;
+    margin: 0;
+    list-style: none;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    li {
+      span {
+        width: 105px;
+        display: inline-block;
+        vertical-align: super;
+        .star-rating {
+          background: url(../img/star_rating.png) bottom left repeat-x;
+          display: inline-block;
+          float: right;
+        }
+      }
+      a {
+        height: 24px;
+        display: inline-block;
+        overflow: hidden;
+        width: 150px;
         margin: 0;
-        list-style: none;
-        text-align: left;
-        font-size: 16px;
-        font-weight: bold;
-        li {
-            span {
-                width: 105px;
-                display: inline-block;
-                vertical-align: super;
-                .star-rating {
-                    padding-top: 2px;
-                    background: url(../img/star_rating.png) bottom left repeat-x;
-                    display: inline-block;
-                    float:right;
-                }
-            }
-            a {
-                height: 24px;
-                display: inline-block;                
-                overflow: hidden;
-            }
-        }        
+        padding: 0;
+        line-height: 20px;
+      }
     }
+  }
 }
 
 

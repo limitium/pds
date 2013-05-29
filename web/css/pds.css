@@ -5783,7 +5783,6 @@ footer .f2 {
   vertical-align: super;
 }
 .story .short-list li span .star-rating {
-  padding-top: 2px;
   background: url(../img/star_rating.png) bottom left repeat-x;
   display: inline-block;
   float: right;
@@ -5792,6 +5791,10 @@ footer .f2 {
   height: 24px;
   display: inline-block;
   overflow: hidden;
+  width: 150px;
+  margin: 0;
+  padding: 0;
+  line-height: 20px;
 }
 #comments {
   padding: 30px 0;
