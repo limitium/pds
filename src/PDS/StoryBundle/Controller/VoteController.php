@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PDS\StoryBundle\Entity\Vote;
 use PDS\StoryBundle\Form\VoteType;
+use Symfony\Component\BrowserKit\Request;
 
 /**
  * Vote controller.
@@ -30,9 +31,7 @@ class VoteController extends Controller {
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            $entity->setUser($user);
-
+            $request->getSession()->set("voted_"+$entity->getStory()->getId(),1);
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
