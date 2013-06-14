@@ -5769,6 +5769,18 @@ footer .f2 {
   height: 250px;
   width: 286px;
 }
+.story .box-container .box-body .short-list a {
+  display: inline-block;
+  height: 24px;
+  line-height: 24px;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  vertical-align: top;
+  white-space: pre;
+  width: 160px;
+  word-wrap: break-word;
+}
 .story .short-list {
   padding: 3px;
   margin: 0;
@@ -5787,14 +5799,30 @@ footer .f2 {
   display: inline-block;
   float: right;
 }
-.story .short-list li a {
+.story .short-list li .title {
+  display: inline-block;
+  font-size: 120%;
   height: 24px;
+}
+.story .short-list li .title a {
   display: inline-block;
   overflow: hidden;
-  width: 150px;
-  margin: 0;
-  padding: 0;
-  line-height: 20px;
+  width: 250px;
+}
+.story .short-list li .meta {
+  height: 24px;
+  display: inline-block;
+  font-weight: normal;
+  vertical-align: top;
+  line-height: 24px;
+}
+.story .short-list li .meta a {
+  display: inline-block;
+  min-width: 90px;
+}
+.story .short-list li .meta a.author {
+  width: auto;
+  text-align: right;
 }
 #comments {
   padding: 30px 0;

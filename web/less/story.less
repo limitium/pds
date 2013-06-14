@@ -214,6 +214,20 @@
           }
         }
       }
+      .short-list {
+        a {
+          display: inline-block;
+          height: 24px;
+          line-height: 24px;
+          margin: 0;
+          overflow: hidden;
+          padding: 0;
+          vertical-align: top;
+          white-space: pre;
+          width: 160px;
+          word-wrap: break-word;
+        }
+      }
     }
   }
   .short-list {
@@ -234,14 +248,31 @@
           float: right;
         }
       }
-      a {
+
+      .title {
+        display: inline-block;
+        font-size: 120%;
+        height: 24px;
+        a {
+          display: inline-block;
+          overflow: hidden;
+          width: 250px;
+        }
+      }
+      .meta {
         height: 24px;
         display: inline-block;
-        overflow: hidden;
-        width: 150px;
-        margin: 0;
-        padding: 0;
-        line-height: 20px;
+        font-weight: normal;
+        vertical-align: top;
+        line-height: 24px;
+        a {
+          display: inline-block;
+          min-width: 90px;
+          &.author {
+            width: auto;
+            text-align: right;
+          }
+        }
       }
     }
   }
