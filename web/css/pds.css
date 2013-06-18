@@ -5802,7 +5802,6 @@ footer .f2 {
 .story .short-list li .title {
   display: inline-block;
   font-size: 120%;
-  height: 24px;
 }
 .story .short-list li .title a {
   display: inline-block;
@@ -5810,11 +5809,10 @@ footer .f2 {
   width: 250px;
 }
 .story .short-list li .meta {
-  height: 24px;
   display: inline-block;
   font-weight: normal;
   vertical-align: top;
-  line-height: 24px;
+  line-height: 22px;
 }
 .story .short-list li .meta a {
   display: inline-block;
