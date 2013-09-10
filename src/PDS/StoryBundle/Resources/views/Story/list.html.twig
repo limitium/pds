@@ -5,8 +5,9 @@
                 <a href="{{ path('story_show', { 'id': story.id }) }}">{{ story.getTitle() }}</a>
                 <i class="star-rating" style="width:{{ 20 * story.getRating() }}px"></i>
             </div>
-            <div class="meta">(<a href="{{ path('story_location', { 'id': story.getCountry().getId() }) }}"><i class="icon-globe"></i> {{ story.getCountry() }}</a>
-                <a class="author" href="{{ path('user_show', { 'id': story.getUser().getId() }) }}"><i class="icon-pencil"></i>{{ story.getUser() }}</a>)
+            <div class="meta">
+                <a class="author" href="{{ path('user_show', { 'id': story.getUser().getId() }) }}"><i class="icon-pencil"></i>{{ story.getUser() }}</a>
+                (<a href="{{ path('story_location', { 'id': story.getCountry().getId() }) }}"><i class="icon-globe"></i> {{ story.getCountry().getCode() }}</a>)
             </div>
         </li>
     {% endfor %}

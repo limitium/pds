@@ -29,10 +29,12 @@
 
             <div class="span4 box-container">
                 <div class="box-header">
-                    Top stories
+                    Instructions
                 </div>
                 <div class="box-body tags-cloud">
-                    {% include 'PDSStoryBundle:Story:short_list.html.twig' with {'stories': stories} %}
+                    <div class="text">
+                        {% include 'PDSStoryBundle:Tag:instructions.html.twig' %}
+                    </div>
                 </div>
             </div>
     </div>

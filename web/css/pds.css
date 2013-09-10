@@ -5376,9 +5376,14 @@ footer .f2 {
 }
 .tags-cloud {
   height: 250px;
+  overflow: hidden;
   line-height: 3em;
   text-align: justify;
-  overflow: hidden;
+}
+.tags-cloud .text {
+  line-height: normal;
+  text-align: left;
+  padding: 5px;
 }
 .tags-cloud a {
   white-space: nowrap;
@@ -5806,7 +5811,7 @@ footer .f2 {
 .story .short-list li .title a {
   display: inline-block;
   overflow: hidden;
-  width: 250px;
+  width: 400px;
 }
 .story .short-list li .meta {
   display: inline-block;
@@ -5816,7 +5821,6 @@ footer .f2 {
 }
 .story .short-list li .meta a {
   display: inline-block;
-  min-width: 90px;
 }
 .story .short-list li .meta a.author {
   width: auto;
