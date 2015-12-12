@@ -1,6 +1,11 @@
-PDS
-========================
+#Booklike stories
 
-Story oriented project
+* Book like UI
+* Video stories
+* Text stories
+* Date ranges
+* Different tags categories
+* Comments
+* Related story metasearch
 
   
